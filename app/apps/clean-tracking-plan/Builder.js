@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { track } from "../../lib/analytics";
 import { CLASSES, LEAKS, MARKETS, NEVER, STACK, TAGS, TYPES } from "./data";
 import { codeTabs, counts, has, isPush, isServer, mpSnippet, planCSV, planJSON, pushSnippet, visibleStages } from "./codegen";
 
 const EMAIL = "meghakarnwal13@gmail.com";
 const DEFAULT = { type: "b2b", mkt: "us", stack: { ads: true, meta: false, crm: true, cmp: true } };
 
-const track = (event, p) => { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event, ...p }); };
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 function highlight(src) {
@@ -182,7 +182,7 @@ export default function Builder() {
   const [codeTab, setCodeTab] = useState(0);
   const [copy, label] = useCopy();
 
-  useEffect(() => { setS(readURL()); setReady(true); track("builder_open"); }, []);
+  useEffect(() => { setS(readURL()); setReady(true); track("builder_open", { app_name: "clean_tracking_plan" }); }, []);
   useEffect(() => { if (ready) writeURL(S); }, [S, ready]);
 
   const stages = useMemo(() => visibleStages(S), [S]);
@@ -384,8 +384,8 @@ export default function Builder() {
           </div>
           <div className="ctp-cta-actions">
             <a className="ctp-btn" href={`mailto:${EMAIL}?subject=${encodeURIComponent(`Tracking plan for my ${TYPES[S.type].label} site`)}&body=${encodeURIComponent(`Hi Megha,\n\nI used The Clean Tracking Plan and would like help implementing it.\n\nMy plan: ${shareURL()}\n`)}`}
-              onClick={() => track("builder_cta_click", { site_type: S.type, market: S.mkt })}>Book a 20-min call</a>
-            <div className="ctp-mail">or email <code>{EMAIL}</code> <button type="button" className="ctp-mini" onClick={() => { track("email_copy"); copy("mail", EMAIL); }}>{label("mail")}</button></div>
+              onClick={() => track("contact_click", { contact_method: "email", link_location: "builder_cta", site_type: S.type, market: S.mkt })}>Book a 20-min call</a>
+            <div className="ctp-mail">or email <code>{EMAIL}</code> <button type="button" className="ctp-mini" onClick={() => { track("contact_click", { contact_method: "email_copy", link_location: "builder_cta" }); copy("mail", EMAIL); }}>{label("mail")}</button></div>
           </div>
         </section>
 

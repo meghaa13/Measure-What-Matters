@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { track } from "./lib/analytics";
 
 const WORK = [
   { kind: "IMPLEMENTATION", name: "AvePoint", body: "GA4 and MS Clarity setup, UX analysis, and daily data-driven recommendations.", tags: ["GA4", "MS Clarity", "UX analysis"] },
@@ -15,7 +16,7 @@ export default function WorkAccordion() {
         const open = openIdx === i;
         return (
           <div key={w.name} className={`acc-item${open ? " open" : ""}`}>
-            <button className="acc-btn" aria-expanded={open} onClick={() => setOpenIdx(open ? -1 : i)}>
+            <button className="acc-btn" aria-expanded={open} onClick={() => { setOpenIdx(open ? -1 : i); track("case_study_toggle", { case_name: w.name, action: open ? "close" : "open" }); }}>
               <span><span className="kind">{w.kind}</span><span className="name">{w.name}</span></span>
               <span className="plus">+</span>
             </button>

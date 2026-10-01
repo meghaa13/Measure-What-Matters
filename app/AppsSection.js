@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { track } from "./lib/analytics";
 
 const DOWNLOAD = "/downloads/Comment-Co-Pilot.zip";
 
@@ -34,6 +35,8 @@ const CTP_FIELDS = [
   ["form_id", "#E3F4EC", "#1F7A55"], ["lead_source", "#E3F4EC", "#1F7A55"], ["request_id", "#FBF0D9", "#8A5A00"],
   ["sha256_email_address", "#ECE6FB", "#5B43B5"], ["email", "#FBE6E9", "#B42335"],
 ];
+
+const APP_KEYS = ["comment_co_pilot", "clean_tracking_plan"];
 
 const PIN_TOP = 84;
 
@@ -125,9 +128,13 @@ export default function AppsSection() {
     return () => cancelAnimationFrame(raf);
   }, [counting]);
 
+  const selectApp = (i, method) => {
+    if (i !== app) track("app_select", { app_name: APP_KEYS[i], method });
+    setApp(i);
+  };
   const openApp = (i, e) => {
     e?.preventDefault();
-    setApp(i);
+    selectApp(i, "card");
     const tr = trackRef.current;
     if (tr) window.scrollTo({ top: tr.getBoundingClientRect().top + window.scrollY - 150, behavior: "smooth" });
   };
@@ -154,7 +161,7 @@ export default function AppsSection() {
     <>
       <div data-reveal="140" role="tablist" aria-label="Apps" className="app-tabs">
         {APPS.map(([num, name], i) => (
-          <button key={name} role="tab" aria-selected={app === i} className={`tab${app === i ? " on" : ""}`} onClick={() => setApp(i)}>
+          <button key={name} role="tab" aria-selected={app === i} className={`tab${app === i ? " on" : ""}`} onClick={() => selectApp(i, "tab")}>
             <span className="num">{num}</span>{name}
           </button>
         ))}
@@ -354,10 +361,10 @@ export default function AppsSection() {
         <div key="co" className="app-bar-in" style={{ maxWidth: 720 }}>
           <div className="co-install">
             <div className="row">
-              <a href={DOWNLOAD} download="Comment-Co-Pilot.zip" onClick={() => setInstallOpen(true)} className="co-dl">
+              <a href={DOWNLOAD} download="Comment-Co-Pilot.zip" onClick={() => { setInstallOpen(true); track("app_download", { app_name: "comment_co_pilot", file_name: "Comment-Co-Pilot.zip" }); }} className="co-dl">
                 <span className="ico">↓</span>Download .zip
               </a>
-              <button className="co-how" aria-expanded={installOpen} onClick={() => setInstallOpen((o) => !o)}>
+              <button className="co-how" aria-expanded={installOpen} onClick={() => { setInstallOpen((o) => !o); track("install_guide_toggle", { app_name: "comment_co_pilot", action: installOpen ? "close" : "open" }); }}>
                 How to install<span style={{ transform: `rotate(${installOpen ? 45 : 0}deg)` }}>+</span>
               </button>
               <span className="meta">Chrome extension · about 2 minutes to set up</span>
@@ -381,7 +388,7 @@ export default function AppsSection() {
         </div>
       ) : (
         <div key="ctp" className="app-bar-in tp-bar">
-          <Link href="/apps/clean-tracking-plan" className="co-dl tp-open">Open the builder <span aria-hidden="true">→</span></Link>
+          <Link href="/apps/clean-tracking-plan" className="co-dl tp-open" data-track="app_open" data-ev-app-name="clean_tracking_plan" data-ev-link-location="apps_section">Open the builder <span aria-hidden="true">→</span></Link>
           <span className="meta">Free · runs in your browser · nothing you type is sent</span>
         </div>
       )}
