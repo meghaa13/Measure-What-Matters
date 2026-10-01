@@ -61,9 +61,9 @@ export default function Home() {
         <div style={{ position: "relative", zIndex: 2 }}>
           <div data-reveal="0" className="hero-kicker">Web &amp; Data Analyst · Analytics, Automation, AI</div>
           <h1>
-            <span data-reveal="80">Every paid click</span>
-            <span data-reveal="180">should leave a trail</span>
-            <span data-reveal="280" className="accent">you can read.</span>
+            <span data-reveal="80">Everyone wants AI</span>
+            <span data-reveal="180">Few have data</span>
+            <span data-reveal="280" className="accent">it can trust.</span>
           </h1>
           <p data-reveal="420">I&apos;m Megha. For two years I&apos;ve set up tracking, read user behavior and automated reporting on live client websites handling sensitive data, so marketing teams know which spend is working.</p>
           <div data-reveal="520" className="hero-ctas">
