@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { track } from "./lib/analytics";
 
 const STEPS = [
   { label: "Traffic arrives", title: "Your ads bring people in.", body: "Clicks are easy to buy. The expensive part is not knowing what happens after them." },
@@ -17,9 +18,10 @@ export default function FunnelStory() {
   const [count, setCount] = useState(0);
   const raf = useRef();
 
-  const setTab = (i) => {
+  const setTab = (i, method) => {
     const n = (i + 4) % 4;
     setTabState(n);
+    if (method) track("funnel_step_view", { step_number: n + 1, step_name: STEPS[n].label, method });
     cancelAnimationFrame(raf.current);
     if (n === 3) {
       setCount(0);
@@ -39,7 +41,7 @@ export default function FunnelStory() {
     <>
       <div data-reveal="60" role="tablist" className="tabs">
         {STEPS.map((s, i) => (
-          <button key={s.label} role="tab" aria-selected={i === tab} className={`tab${i === tab ? " on" : ""}`} onClick={() => setTab(i)}>
+          <button key={s.label} role="tab" aria-selected={i === tab} className={`tab${i === tab ? " on" : ""}`} onClick={() => setTab(i, "tab")}>
             <span className="num">0{i + 1}</span>{s.label}
           </button>
         ))}
@@ -56,8 +58,8 @@ export default function FunnelStory() {
             ))}
           </div>
           <div className="arrows">
-            <button className="arrow prev" aria-label="Previous" onClick={() => setTab(tab - 1)}>←</button>
-            <button className="arrow next" aria-label="Next" onClick={() => setTab(tab + 1)}>→</button>
+            <button className="arrow prev" aria-label="Previous" onClick={() => setTab(tab - 1, "prev")}>←</button>
+            <button className="arrow next" aria-label="Next" onClick={() => setTab(tab + 1, "next")}>→</button>
           </div>
         </div>
         <div data-reveal="200" className="funnel">

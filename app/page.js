@@ -49,15 +49,15 @@ export default function Home() {
           <span className="logo"><span>mk</span><span className="dot" /></span>
         </a>
         <div className="nav-links">
-          <a href="#method">Method</a>
-          <a href="#work">Work</a>
-          <a href="#apps">Apps</a>
-          <a href="#contact" className="nav-cta">{CTA}</a>
+          <a href="#method" data-track="navigation_click" data-ev-link-text="Method">Method</a>
+          <a href="#work" data-track="navigation_click" data-ev-link-text="Work">Work</a>
+          <a href="#apps" data-track="navigation_click" data-ev-link-text="Apps">Apps</a>
+          <a href="#contact" className="nav-cta" data-track="cta_click" data-ev-cta-location="nav" data-ev-cta-text={CTA}>{CTA}</a>
         </div>
       </nav>
 
       {/* HERO */}
-      <header id="top" className="wrap hero">
+      <header id="top" className="wrap hero" data-section="hero">
         <div style={{ position: "relative", zIndex: 2 }}>
           <div data-reveal="0" className="hero-kicker">Web &amp; Data Analyst · Analytics, Automation, AI</div>
           <h1>
@@ -67,8 +67,8 @@ export default function Home() {
           </h1>
           <p data-reveal="420">I&apos;m Megha. For two years I&apos;ve set up tracking, read user behavior and automated reporting on live client websites handling sensitive data, so marketing teams know which spend is working.</p>
           <div data-reveal="520" className="hero-ctas">
-            <a href="#contact" className="btn btn-primary">{CTA}</a>
-            <a href="#story" className="btn btn-ghost">See how I work ↓</a>
+            <a href="#contact" className="btn btn-primary" data-track="cta_click" data-ev-cta-location="hero" data-ev-cta-text={CTA}>{CTA}</a>
+            <a href="#story" className="btn btn-ghost" data-track="cta_click" data-ev-cta-location="hero" data-ev-cta-text="See how I work">See how I work ↓</a>
           </div>
         </div>
         <div className="hero-art">
@@ -86,13 +86,13 @@ export default function Home() {
       </header>
 
       {/* STORY */}
-      <section id="story" className="wrap story">
+      <section id="story" className="wrap story" data-section="story">
         <Prompt>We&apos;re spending on ads. Why isn&apos;t it converting?</Prompt>
         <FunnelStory />
       </section>
 
       {/* METHOD */}
-      <section id="method" className="wrap grid2 method">
+      <section id="method" className="wrap grid2 method" data-section="method">
         <div style={{ position: "relative" }}>
           <div className="sticky">
             <Prompt>Okay. How do you actually work?</Prompt>
@@ -118,7 +118,7 @@ export default function Home() {
       </section>
 
       {/* WORK */}
-      <section id="work" className="work">
+      <section id="work" className="work" data-section="work">
         <div className="wrap">
           <Prompt white>Where has this been done for real?</Prompt>
           <div className="work-head">
@@ -152,7 +152,7 @@ export default function Home() {
       </section>
 
       {/* APPS */}
-      <section id="apps" className="apps">
+      <section id="apps" className="apps" data-section="apps">
         <div className="apps-wrap">
           <Prompt>Do you build things too?</Prompt>
           <div className="work-head">
@@ -164,7 +164,7 @@ export default function Home() {
       </section>
 
       {/* TRUST */}
-      <section className="wrap grid2 trust">
+      <section className="wrap grid2 trust" data-section="trust">
         <div>
           <Prompt>Can we trust you with our data?</Prompt>
           <h2 data-reveal="80" className="h2">Sensitive data, handled like it&apos;s <em>sensitive</em>.</h2>
@@ -194,7 +194,7 @@ export default function Home() {
       </div>
 
       {/* POV */}
-      <section className="pov">
+      <section className="pov" data-section="point_of_view">
         <div data-view="1" className="pov-img">
           <img data-par="-0.12" src="/uploads/img4.png" alt="Megha at a café" />
           <div className="wash" />
@@ -211,7 +211,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="contact">
+      <section id="contact" className="contact" data-section="contact">
         <div className="contact-box">
           <div data-par="0.1" className="ring par" />
           <Prompt white>So, what&apos;s next?</Prompt>
@@ -222,12 +222,12 @@ export default function Home() {
             ))}
           </div>
           <div data-reveal="320" className="contact-ctas">
-            <a href="mailto:meghakarnwal13@gmail.com?subject=Let's%20talk%20analytics" className="btn btn-primary">{CTA}</a>
-            <a href="https://linkedin.com/in/megha-karnwal-453889251" target="_blank" rel="noopener" className="btn btn-white">LinkedIn</a>
-            <a href="/uploads/MeghaKarnwal-%20web%20analytics%20resume.pdf" download="Megha-Karnwal-Resume.pdf" className="btn btn-ghost">Download résumé</a>
+            <a href="mailto:meghakarnwal13@gmail.com?subject=Let's%20talk%20analytics" className="btn btn-primary" data-track="contact_click" data-ev-contact-method="email" data-ev-link-location="contact_cta" data-ev-cta-text={CTA}>{CTA}</a>
+            <a href="https://linkedin.com/in/megha-karnwal-453889251" target="_blank" rel="noopener" className="btn btn-white" data-track="contact_click" data-ev-contact-method="linkedin" data-ev-link-location="contact_cta">LinkedIn</a>
+            <a href="/uploads/MeghaKarnwal-%20web%20analytics%20resume.pdf" download="Megha-Karnwal-Resume.pdf" className="btn btn-ghost" data-track="resume_download" data-ev-link-location="contact_cta">Download résumé</a>
           </div>
           <div data-reveal="380" style={{ marginTop: 22, fontSize: 15, color: "var(--muted)" }}>
-            or write directly to <a href="mailto:meghakarnwal13@gmail.com">meghakarnwal13@gmail.com</a>
+            or write directly to <a href="mailto:meghakarnwal13@gmail.com" data-track="contact_click" data-ev-contact-method="email" data-ev-link-location="contact_text">meghakarnwal13@gmail.com</a>
           </div>
         </div>
         <footer className="footer"><span>© 2026 Megha Karnwal</span><span>Analytics · Automation · AI</span></footer>
