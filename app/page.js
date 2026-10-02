@@ -76,7 +76,7 @@ export default function Home() {
           <div data-par="0.08" className="halo par" />
           <div data-par="-0.05" className="halo-ring par" />
           <div data-reveal="200" className="portrait">
-            <img data-par="-0.14" className="par" src="/uploads/img1.png" alt="Megha Karnwal, analyst working across analytics, automation and AI" />
+            <img data-par="-0.14" className="par" src="/uploads/img1.webp" alt="Megha Karnwal, analyst working across analytics, automation and AI" />
             <div className="shade" />
             <div className="cap">MEGHA KARNWAL — ANALYTICS · AUTOMATION · AI</div>
           </div>
@@ -100,7 +100,7 @@ export default function Home() {
             <h2 data-reveal="80" className="h2">Analytics, then automation, then <em>AI</em>, in that order.</h2>
             <p data-reveal="160" className="lead" style={{ maxWidth: 440, margin: "20px 0 0" }}>AI multiplies whatever you feed it, including bad tracking. So I build from the bottom up: measure honestly, automate the repetitive work, then add AI where it saves real hours or finds real signal.</p>
             <div data-view="1" data-reveal="220" className="duo">
-              <img data-par="-0.1" src="/uploads/img2.png" alt="" />
+              <img loading="lazy" data-par="-0.1" src="/uploads/img2.webp" alt="" />
             </div>
           </div>
         </div>
@@ -168,7 +168,7 @@ export default function Home() {
           </div>
         </div>
         <div data-view="1" className="reveal-circle">
-          <div className="clip"><img data-par="-0.08" className="par" src="/uploads/img3.png" alt="Megha Karnwal" /></div>
+          <div className="clip"><img loading="lazy" data-par="-0.08" className="par" src="/uploads/img3.webp" alt="Megha Karnwal" /></div>
           <div className="orbit"><span /></div>
         </div>
       </section>
@@ -207,7 +207,7 @@ export default function Home() {
       {/* POV */}
       <section className="pov" data-section="point_of_view">
         <div data-view="1" className="pov-img">
-          <img data-par="-0.12" src="/uploads/img4.png" alt="Megha at a café" />
+          <img loading="lazy" data-par="-0.12" src="/uploads/img5.webp" alt="Megha at a café with a coffee" />
           <div className="wash" />
         </div>
         <div className="wrap pov-body">
@@ -250,10 +250,6 @@ export default function Home() {
             {" · "}<a href={RESUME} download="Megha-Karnwal-Resume.pdf" data-track="resume_download" data-loc="contact">Résumé (PDF)</a>
           </div>
         </div>
-        <footer className="footer">
-          <span>© 2026 Megha Karnwal</span><span>Analytics · Automation · AI</span>
-          <a href={LINKEDIN} target="_blank" rel="noopener" data-track="outbound_click" data-loc="footer">LinkedIn ↗</a>
-        </footer>
       </section>
     </div>
   );

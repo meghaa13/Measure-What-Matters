@@ -5,6 +5,8 @@ import { describePage, findSite, parseInput } from "../../apps/tag-scanner/engin
 import { fetchContainer } from "../../apps/tag-scanner/engine/parse";
 import { mergeFindings, rank, readGtag, readGtm, runRules, score, SCORE_NOTE } from "../../apps/tag-scanner/engine/rules";
 import { aiSummary, templateSummary } from "../../apps/tag-scanner/engine/summary";
+import { gtagInventory, gtmInventory } from "../../apps/tag-scanner/engine/inventory";
+import { coverage } from "../../apps/tag-scanner/engine/coverage";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -15,8 +17,14 @@ const hits = new Map();
 function limited(ip) {
   const now = Date.now(), list = (hits.get(ip) || []).filter((t) => now - t < 60_000);
   list.push(now); hits.set(ip, list);
+  if (hits.size > 5000) hits.clear(); // keep memory bounded on a warm instance
   return list.length > 8;
 }
+
+// Finished reports, cached per input for an hour so repeat or viral scans of the
+// same site cost nothing.
+const results = new Map();
+const HOUR = 3_600_000;
 
 export async function POST(req) {
   const ip = req.headers.get("x-nf-client-connection-ip") || req.headers.get("x-forwarded-for")?.split(",")[0] || "local";
@@ -25,6 +33,9 @@ export async function POST(req) {
   let body = {};
   try { body = await req.json(); } catch { /* empty */ }
   const input = parseInput(body.input);
+  const cacheKey = input.kind === "url" ? input.host : JSON.stringify(input.ids || null);
+  const hit = results.get(cacheKey);
+  if (hit && Date.now() - hit.at < HOUR) return NextResponse.json(hit.value);
   if (input.kind === "invalid") return NextResponse.json({ error: "Enter a website address (like example.com) or a tag ID (like GTM-XXXXXXX)." }, { status: 400 });
 
   // 1. Find IDs
@@ -36,7 +47,10 @@ export async function POST(req) {
     site = await findSite(input.url);
     if (site.error === "blocked_host") return NextResponse.json({ error: "That address can't be scanned." }, { status: 400 });
     if (site.source === "none") {
-      return NextResponse.json({ needIds: true, host, reason: site.liveBlocked ? "The site blocks automated visits, and no archived copy with tags was found." : "No Google tag or GTM container was found on the homepage." });
+      const reason = site.archiveTimeout
+        ? "The site blocks automated visits, and archive.org (the fallback) didn't respond in time. This is usually temporary."
+        : site.liveBlocked ? "The site blocks automated visits, and no archived copy with tags was found." : "No Google tag or GTM container was found on the homepage.";
+      return NextResponse.json({ needIds: true, retry: !!site.archiveTimeout, host, reason });
     }
   }
   const page = { ...describePage(site.html || ""), ids: site.ids };
@@ -44,12 +58,16 @@ export async function POST(req) {
   // 2–3. Fetch every container live from Google and parse it as data
   const ids = [...site.ids.gtm, ...site.ids.ga4, ...site.ids.ads];
   const first = await Promise.all(ids.map(fetchContainer));
-  const gtms = first.filter((c) => c.id.startsWith("GTM-") && c.resource).map(readGtm);
+  const gtmContainers = first.filter((c) => c.id.startsWith("GTM-") && c.resource);
+  const gtms = gtmContainers.map(readGtm);
+  const gtmInv = gtmContainers.map(gtmInventory);
   // GA4 IDs that only appear inside GTM get fetched too.
-  const extra = [...new Set(gtms.flatMap((m) => m.ga4Ids))].filter((id) => !ids.includes(id));
+  const extra = [...new Set([...gtms.flatMap((m) => m.ga4Ids), ...gtmInv.flatMap((m) => m.ga4Ids)])].filter((id) => !ids.includes(id));
   const second = await Promise.all(extra.map(fetchContainer));
   const containers = [...first, ...second];
   const gtags = containers.filter((c) => c.id.startsWith("G-") && c.resource).map(readGtag);
+  const ga4Inv = gtags.map(gtagInventory);
+  const cov = coverage({ page: { ...page, html: site.html || "" }, gtmInv, ga4Inv, scope: site.source === "pasted" ? "none" : "homepage", statuses: containers });
 
   // 5. Rules
   const findings = rank(mergeFindings(runRules({ gtags, gtms, statuses: containers, page })));
@@ -73,5 +91,12 @@ export async function POST(req) {
   // Anonymous aggregate for the annual report: rule hits only, no site or IDs.
   console.log(JSON.stringify({ evt: "tag_scan", source: site.source, score: total, rules: findings.map((f) => f.rule) }));
 
-  return NextResponse.json({ host, score: total, scoreNote: SCORE_NOTE, snapshot, summary, findings });
+  const value = {
+    host, score: total, scoreNote: SCORE_NOTE, snapshot, summary, findings,
+    inventory: { gtm: gtmInv, ga4: ga4Inv },
+    coverage: site.source === "pasted" ? [] : cov.rows,
+  };
+  if (results.size > 500) results.clear();
+  results.set(cacheKey, { at: Date.now(), value });
+  return NextResponse.json(value);
 }

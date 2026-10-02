@@ -58,7 +58,11 @@ export default function Analytics() {
       const name = en.target.dataset.section;
       if (en.isIntersecting && !seen.has(name)) { seen.add(name); track("section_view", { section_name: name }); io.unobserve(en.target); }
     }), { threshold: 0.4 });
-    const t = setTimeout(() => document.querySelectorAll("[data-section]").forEach((el) => io.observe(el)), 600);
+    // Sections can appear later (tool reports), so keep picking up new ones.
+    const watched = new WeakSet();
+    const scan = () => document.querySelectorAll("[data-section]").forEach((el) => { if (!watched.has(el)) { watched.add(el); io.observe(el); } });
+    const t = setTimeout(scan, 600);
+    const iv = setInterval(scan, 1500);
 
     const hit = new Set();
     const onScroll = () => {
@@ -67,7 +71,7 @@ export default function Analytics() {
       for (const d of [25, 50, 75, 90]) if (pc >= d && !hit.has(d)) { hit.add(d); track("scroll_depth", { percent_scrolled: d }); }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => { clearTimeout(t); io.disconnect(); window.removeEventListener("scroll", onScroll); };
+    return () => { clearTimeout(t); clearInterval(iv); io.disconnect(); window.removeEventListener("scroll", onScroll); };
   }, [pathname]);
 
   if (!GTM_ID) return null;

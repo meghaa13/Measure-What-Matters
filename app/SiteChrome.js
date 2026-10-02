@@ -10,25 +10,24 @@ const scrollToId = (id) => {
   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 76, behavior: "smooth" });
 };
 
-// Fixed nav (scroll-spy, hides on scroll down) and the floating "Book" button,
+// Fixed nav, always visible (scroll-spy on the landing page), and the floating "Book" button,
 // which appears once the hero is gone and hides inside the inline CTA zones.
-export default function SiteChrome() {
-  const [active, setActive] = useState(null);
-  const [hidden, setHidden] = useState(false);
+// On app pages (home={false}) the links go back to the landing page sections and
+// `current` marks which nav item the page belongs to.
+export default function SiteChrome({ home = true, current = null }) {
+  const [active, setActive] = useState(home ? null : current);
   const [fab, setFab] = useState(false);
 
   useEffect(() => {
-    let lastY = window.scrollY, lock = 0, raf = 0;
+    let lock = 0, raf = 0;
     const update = () => {
       raf = 0;
       const vh = window.innerHeight, y = window.scrollY;
-      if (Date.now() > lock) {
+      if (home && Date.now() > lock) {
         let cur = null;
         for (const id of SPY) { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top < vh * 0.4) cur = id; }
         setActive(cur);
       }
-      setHidden((h) => (y < 160 ? false : y > lastY + 6 ? true : y < lastY - 6 ? false : h));
-      lastY = y;
       const inZone = [...document.querySelectorAll("[data-cta-zone]")].some((z) => { const r = z.getBoundingClientRect(); return r.top < vh * 0.9 && r.bottom > vh * 0.1; });
       setFab(y > vh * 0.7 && !inZone);
     };
@@ -40,29 +39,32 @@ export default function SiteChrome() {
     return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); cancelAnimationFrame(raf); };
   }, []);
 
-  const go = (id) => (e) => { e.preventDefault(); window.__navLock?.(900); setActive(id); scrollToId(id); };
+  // On the landing page, smooth-scroll in place; elsewhere, a normal link to "/#id".
+  const go = (id) => (e) => { if (!home) return; e.preventDefault(); window.__navLock?.(900); setActive(id); scrollToId(id); };
   const book = (e) => { if (!bookTarget) go("contact")(e); };
+  const href = (id) => (home ? `#${id}` : `/#${id}`);
+  const bookLink = bookTarget ? bookHref : href("contact");
 
   return (
     <>
       <div className="progress"><div data-progress="1" /></div>
-      <nav className={`nav${hidden ? " hidden" : ""}`}>
-        <a href="#top" aria-label="Megha Karnwal — home" onClick={go("top")}>
+      <nav className="nav">
+        <a href={home ? "#top" : "/"} aria-label="Megha Karnwal — home" onClick={go("top")}>
           <span className="logo"><span>mk</span><span className="dot" /></span>
         </a>
         <div className="nav-links">
           {NAV.map(([id, label]) => (
-            <a key={id} href={`#${id}`} onClick={go(id)} aria-current={active === id ? "true" : undefined}
+            <a key={id} href={href(id)} onClick={go(id)} aria-current={active === id ? "true" : undefined}
               className={`nav-link${active === id ? " on" : ""}`} data-track="anchor_click" data-loc="nav">{label}</a>
           ))}
-          <a href="#contact" onClick={go("contact")} className={`nav-cta${fab ? " away" : ""}`} data-track="cta_click" data-loc="nav">
+          <a href={bookLink} target={bookTarget} rel={bookTarget ? "noopener" : undefined} onClick={go("contact")} className={`nav-cta${fab ? " away" : ""}`} data-track="cta_click" data-loc="nav">
             {CTA}<span aria-hidden="true">→</span>
           </a>
         </div>
       </nav>
-      <a href={bookHref} target={bookTarget} rel={bookTarget ? "noopener" : undefined} onClick={book}
+      <a href={bookLink} target={bookTarget} rel={bookTarget ? "noopener" : undefined} onClick={book}
         className={`fab${fab ? " on" : ""}`} aria-hidden={!fab} tabIndex={fab ? 0 : -1} data-track="cta_click" data-loc="floating">
-        <span className="face"><img src="/uploads/img1.png" alt="" /></span>
+        <span className="face"><img src="/uploads/img1.webp" alt="" /></span>
         {CTA}<span aria-hidden="true">→</span>
       </a>
     </>

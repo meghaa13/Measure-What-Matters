@@ -2,6 +2,8 @@ import { Newsreader, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import "./apps.css";
 import Analytics from "./Analytics";
+import Consent from "./Consent";
+import SiteFooter from "./SiteFooter";
 
 const serif = Newsreader({ subsets: ["latin"], style: ["normal", "italic"], weight: ["400", "500"], variable: "--font-serif" });
 const sans = Hanken_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans" });
@@ -17,7 +19,9 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
       <body>
         {children}
+        <SiteFooter />
         <Analytics />
+        <Consent />
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { track } from "../../lib/analytics";
+import { track, toolEvent, TOOLS } from "../../lib/analytics";
 import { CLASSES, LEAKS, MARKETS, NEVER, STACK, TAGS, TYPES } from "./data";
 import { codeTabs, counts, has, isPush, isServer, mpSnippet, planCSV, planJSON, pushSnippet, visibleStages } from "./codegen";
 
@@ -106,7 +106,7 @@ function HashLab({ S }) {
     return () => { live = false; };
   }, [email, phone, S.stack.meta, S.mkt]);
 
-  const onInput = (fn) => (e) => { if (!used.current) { used.current = true; track("hash_lab_used"); } fn(e.target.value); };
+  const onInput = (fn) => (e) => { if (!used.current) { used.current = true; toolEvent(TOOLS.plan, "action", { action: "use_hash_lab" }); } fn(e.target.value); };
 
   return (
     <div className="ctp-lab">
@@ -160,7 +160,7 @@ function EventRow({ r, st, S, copy, label }) {
             {open && (
               <div className="ctp-codebox small">
                 <div className="ctp-codebar"><span>{r.name}</span>
-                  <button type="button" className="ctp-copy" onClick={() => { track("code_copy", { snippet: r.name, site_type: S.type }); copy(id, snippet); }}>{label(id)}</button>
+                  <button type="button" className="ctp-copy" onClick={() => { toolEvent(TOOLS.plan, "action", { action: "copy_code", snippet: r.name, site_type: S.type }); copy(id, snippet); }}>{label(id)}</button>
                 </div>
                 <pre dangerouslySetInnerHTML={{ __html: highlight(snippet) }} />
               </div>
@@ -182,7 +182,7 @@ export default function Builder() {
   const [codeTab, setCodeTab] = useState(0);
   const [copy, label] = useCopy();
 
-  useEffect(() => { setS(readURL()); setReady(true); track("builder_open", { app_name: "clean_tracking_plan" }); }, []);
+  useEffect(() => { setS(readURL()); setReady(true); toolEvent(TOOLS.plan, "start", { input_source: window.location.search ? "shared_link" : "direct" }); }, []);
   useEffect(() => { if (ready) writeURL(S); }, [S, ready]);
 
   const stages = useMemo(() => visibleStages(S), [S]);
@@ -194,11 +194,11 @@ export default function Builder() {
 
   const set = (key, v) => {
     setS((s) => ({ ...s, [key]: v }));
-    track(key === "type" ? "site_type_select" : "market_select", { selection: v });
+    toolEvent(TOOLS.plan, "action", { action: key === "type" ? "select_site_type" : "select_market", selection: v });
   };
   const toggle = (k) => {
     setS((s) => ({ ...s, stack: { ...s.stack, [k]: !s.stack[k] } }));
-    track("stack_toggle", { tool: k, enabled: !S.stack[k] });
+    toolEvent(TOOLS.plan, "action", { action: "toggle_stack", stack_item: k, enabled: !S.stack[k] });
   };
 
   const alerts = [];
@@ -270,9 +270,9 @@ export default function Builder() {
             ))}
           </div>
           <div className="ctp-exports">
-            <button type="button" className="ctp-btn" onClick={() => { track("plan_export", { format: "csv", site_type: S.type }); download(fileBase + ".csv", planCSV(S), "text/csv"); }}>Download plan (.csv)</button>
-            <button type="button" className="ctp-mini" onClick={() => { track("plan_export", { format: "json", site_type: S.type }); download(fileBase + ".json", planJSON(S), "application/json"); }}>JSON spec</button>
-            <button type="button" className="ctp-mini" onClick={() => { track("plan_share", { site_type: S.type }); copy("share", shareURL()); }}>{label("share", "Copy link to this plan")}</button>
+            <button type="button" className="ctp-btn" onClick={() => { toolEvent(TOOLS.plan, "complete", { format: "csv", site_type: S.type, market: S.mkt }); download(fileBase + ".csv", planCSV(S), "text/csv"); }}>Download plan (.csv)</button>
+            <button type="button" className="ctp-mini" onClick={() => { toolEvent(TOOLS.plan, "complete", { format: "json", site_type: S.type, market: S.mkt }); download(fileBase + ".json", planJSON(S), "application/json"); }}>JSON spec</button>
+            <button type="button" className="ctp-mini" onClick={() => { toolEvent(TOOLS.plan, "action", { action: "share_plan", site_type: S.type }); copy("share", shareURL()); }}>{label("share", "Copy link to this plan")}</button>
           </div>
         </section>
 
@@ -359,7 +359,7 @@ export default function Builder() {
               <span>{tab.f}</span>
               <span className="ctp-codebar-actions">
                 <button type="button" className="ctp-copy" onClick={() => download(tab.f, code, "text/plain")}>Download</button>
-                <button type="button" className="ctp-copy" onClick={() => { track("code_copy", { snippet: tab.f, site_type: S.type }); copy("code", code); }}>{label("code", "Copy code")}</button>
+                <button type="button" className="ctp-copy" onClick={() => { toolEvent(TOOLS.plan, "action", { action: "copy_code", snippet: tab.f, site_type: S.type }); copy("code", code); }}>{label("code", "Copy code")}</button>
               </span>
             </div>
             <pre dangerouslySetInnerHTML={{ __html: highlight(code) }} />
@@ -384,8 +384,8 @@ export default function Builder() {
           </div>
           <div className="ctp-cta-actions">
             <a className="ctp-btn" href={`mailto:${EMAIL}?subject=${encodeURIComponent(`Tracking plan for my ${TYPES[S.type].label} site`)}&body=${encodeURIComponent(`Hi Megha,\n\nI used The Clean Tracking Plan and would like help implementing it.\n\nMy plan: ${shareURL()}\n`)}`}
-              onClick={() => track("contact_click", { contact_method: "email", link_location: "builder_cta", site_type: S.type, market: S.mkt })}>Book a 20-min call</a>
-            <div className="ctp-mail">or email <code>{EMAIL}</code> <button type="button" className="ctp-mini" onClick={() => { track("contact_click", { contact_method: "email_copy", link_location: "builder_cta" }); copy("mail", EMAIL); }}>{label("mail")}</button></div>
+              onClick={() => track("cta_click", { cta_location: "builder_cta", app_name: "clean_tracking_plan" })}>Book a 20-min call</a>
+            <div className="ctp-mail">or email <code>{EMAIL}</code> <button type="button" className="ctp-mini" onClick={() => { track("email_click", { cta_location: "builder_cta", method: "copy" }); copy("mail", EMAIL); }}>{label("mail")}</button></div>
           </div>
         </section>
 
