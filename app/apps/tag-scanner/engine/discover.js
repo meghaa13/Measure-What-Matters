@@ -70,32 +70,73 @@ export function describePage(html) {
   return { tools, cmp, consentDefault, serverSide, hardcodedGa4: [...new Set([...hardcodedGa4, ...gtagScriptIds.filter((i) => i.startsWith("G-"))])] };
 }
 
+const hasIds = (ids) => !!(ids.gtm.length || ids.ga4.length || ids.ads.length || ids.ua.length);
+
+// archive.org is slow and flaky: its availability API sometimes returns nothing.
+// Ask two endpoints for both the www and bare host, in parallel, and take the first answer.
+async function viaAvailability(u) {
+  const r = await safeFetch(`https://archive.org/wayback/available?url=${encodeURIComponent(u)}`, { timeout: 8000, accept: "application/json" });
+  const s = JSON.parse(r.text)?.archived_snapshots?.closest;
+  if (s?.available && s.timestamp) return { u, ts: s.timestamp };
+  throw new Error("none");
+}
+async function viaCdx(u) {
+  const r = await safeFetch(`https://web.archive.org/cdx/search/cdx?url=${encodeURIComponent(u)}&output=json&limit=-5&filter=statuscode:200&fl=timestamp`, { timeout: 8000, accept: "application/json" });
+  const rows = JSON.parse(r.text);
+  if (Array.isArray(rows) && rows.length > 1) return { u, ts: rows[rows.length - 1][0] };
+  throw new Error("none");
+}
+async function fetchSnapshot(u, ts) {
+  // Raw copy (id_) first; some raw snapshots carry a broken content-encoding,
+  // so fall back to the normal archive view (which still contains the tag IDs), then retry once.
+  const raw = () => safeFetch(`https://web.archive.org/web/${ts}id_/${u}`, { timeout: 7000 });
+  const view = () => safeFetch(`https://web.archive.org/web/${ts}/${u}`, { timeout: 7000 });
+  return raw().catch(view).catch(raw);
+}
+async function findArchived(url) {
+  const x = new URL(url);
+  const alt = new URL(url);
+  alt.hostname = x.hostname.startsWith("www.") ? x.hostname.slice(4) : `www.${x.hostname}`;
+  const variants = [x.toString(), alt.toString()];
+  try {
+    const { u, ts } = await Promise.any(variants.flatMap((v) => [viaAvailability(v), viaCdx(v)]));
+    const arch = await fetchSnapshot(u, ts);
+    const ids = extractIds(arch.text);
+    if (hasIds(ids)) return { html: arch.text, ids, archiveDate: `${ts.slice(0, 4)}-${ts.slice(4, 6)}-${ts.slice(6, 8)}` };
+  } catch { /* fall through */ }
+  // Last resort: "latest copy" redirect, without knowing the timestamp up front.
+  try {
+    const arch = await safeFetch(`https://web.archive.org/web/2id_/${variants[0]}`, { timeout: 8000 });
+    const ids = extractIds(arch.text);
+    const ts = (arch.url.match(/\/web\/(\d{8})/) || [])[1];
+    if (hasIds(ids)) return { html: arch.text, ids, archiveDate: ts ? `${ts.slice(0, 4)}-${ts.slice(4, 6)}-${ts.slice(6, 8)}` : "latest" };
+  } catch { /* none */ }
+  return null;
+}
+
+// Successful lookups are cached per host for 30 minutes, so repeat scans are consistent.
+const CACHE_MS = 30 * 60 * 1000;
+const cache = new Map();
+
 // Live HTML first; if blocked or empty, the latest archive.org copy (labelled as such).
 export async function findSite(url) {
+  const host = new URL(url).hostname.replace(/^www\./, "");
+  const hit = cache.get(host);
+  if (hit && Date.now() - hit.at < CACHE_MS) return hit.result;
+  const remember = (result) => { if (result.source === "live" || result.source === "archive") cache.set(host, { at: Date.now(), result }); return result; };
+
   let live = null, liveError = null;
-  // Ask archive.org in parallel, so a blocked live site doesn't cost an extra round trip.
-  const availP = safeFetch(`https://archive.org/wayback/available?url=${encodeURIComponent(url)}`, { accept: "application/json" }).catch(() => null);
+  // Start the archive lookup in parallel, so a blocked live site doesn't cost an extra round trip.
+  // Capped at 14s: archive.org sometimes stops answering, and the scan must finish inside the function limit.
+  const archiveP = Promise.race([findArchived(url), new Promise((r) => setTimeout(() => r("timeout"), 14000))]).catch(() => null);
   try { live = await safeFetch(url); } catch (e) { liveError = e.message; }
   if (liveError === "blocked_host" || liveError === "bad_protocol") return { error: "blocked_host" };
   if (live && !isChallenge(live)) {
     const ids = extractIds(live.text);
-    if (ids.gtm.length || ids.ga4.length || ids.ads.length || ids.ua.length) return { source: "live", html: live.text, finalUrl: live.url, ids };
+    if (hasIds(ids)) return remember({ source: "live", html: live.text, finalUrl: live.url, ids });
   }
-  // archive.org fallback (availability was requested in parallel above)
-  try {
-    const avail = await availP;
-    if (!avail) throw new Error("no_archive");
-    const snap = JSON.parse(avail.text)?.archived_snapshots?.closest;
-    if (snap?.available && snap.timestamp) {
-      // Raw copy (id_) first; some raw snapshots carry a broken content-encoding,
-      // so fall back to the normal archive view, which still contains the tag IDs.
-      const arch = await safeFetch(`https://web.archive.org/web/${snap.timestamp}id_/${url}`, { timeout: 6000 })
-        .catch(() => safeFetch(`https://web.archive.org/web/${snap.timestamp}/${url}`, { timeout: 6000 }));
-      const ids = extractIds(arch.text);
-      const t = snap.timestamp;
-      if (!(ids.gtm.length || ids.ga4.length || ids.ads.length || ids.ua.length)) throw new Error("no_ids_in_archive");
-      return { source: "archive", archiveDate: `${t.slice(0, 4)}-${t.slice(4, 6)}-${t.slice(6, 8)}`, html: arch.text, finalUrl: url, ids, liveBlocked: !!live && isChallenge(live) };
-    }
-  } catch { /* fall through */ }
+  const arch = await archiveP;
+  if (arch === "timeout") return { source: "none", archiveTimeout: true, liveBlocked: !!live && isChallenge(live), liveError, html: "" };
+  if (arch) return remember({ source: "archive", archiveDate: arch.archiveDate, html: arch.html, finalUrl: url, ids: arch.ids, liveBlocked: !!live && isChallenge(live) });
   return { source: "none", liveBlocked: !!live && isChallenge(live), liveError, html: live && !isChallenge(live) ? live.text : "" };
 }

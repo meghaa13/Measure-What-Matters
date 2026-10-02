@@ -19,6 +19,36 @@ const TOOLS = [
     href: "/apps/tag-scanner",
     note: "Free · results in seconds.",
   },
+  {
+    key: "lead_path_xray",
+    kind: "TOOL 02 · ATTRIBUTION",
+    name: "Lead Path X-Ray",
+    desc: "Follows one visit from an ad, email, social or partner link through every redirect, tag and form, and shows exactly where its source gets lost before the CRM.",
+    sample: [
+      ["gclid through 2 redirects", "Lost", "bad"],
+      ["UTMs on the landing page", "Kept", "ok"],
+      ["Contact form: hidden fields", "Missing", "warn"],
+      ["Calendly embed", "Invisible to GA4", "bad"],
+    ],
+    sum: "verdict → source lost at the redirect",
+    href: "/apps/lead-path",
+    note: "Free · bulk mode for whole campaigns.",
+  },
+  {
+    key: "ai_crawler_gate",
+    kind: "TOOL 03 · AI SEARCH",
+    name: "AI Visibility Check",
+    desc: "Can ChatGPT, Perplexity, Claude and Google AI Overviews find and quote your site, and how often do they actually cite you? Plain verdict, live citation sample, copy-paste fix.",
+    sample: [
+      ["ChatGPT search", "Blocked", "bad"],
+      ["Perplexity", "Can find you", "ok"],
+      ["Google AI Overviews", "Can't quote you", "warn"],
+      ["Cited in buyer questions", "2 of 5", "info"],
+    ],
+    sum: "3 of 6 AI assistants can find and quote you",
+    href: "/apps/ai-crawler-gate",
+    note: "Free · copy the fixed robots.txt.",
+  },
 ];
 
 export default function MicroTools() {

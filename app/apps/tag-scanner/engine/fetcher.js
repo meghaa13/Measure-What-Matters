@@ -5,7 +5,7 @@
 import dns from "node:dns/promises";
 import net from "node:net";
 
-const UA = "Mozilla/5.0 (compatible; TagHealthScan/1.0; +https://meghakarnwal.com/apps/tag-scanner)";
+const UA = "Mozilla/5.0 (compatible; MeghaKarnwalTools/1.0; +https://meghakarnwal.com/#tools)";
 
 function isPrivateIp(ip) {
   if (net.isIPv4(ip)) {
@@ -15,10 +15,11 @@ function isPrivateIp(ip) {
   }
   const v = ip.toLowerCase();
   if (v.startsWith("::ffff:")) return isPrivateIp(v.slice(7));
-  return v === "::" || v === "::1" || v.startsWith("fc") || v.startsWith("fd") || v.startsWith("fe80");
+  return v === "::" || v === "::1" || v.startsWith("64:ff9b") || v.startsWith("2002:") || v.startsWith("fc") || v.startsWith("fd") || v.startsWith("fe80");
 }
 
 async function assertPublic(hostname) {
+  hostname = hostname.replace(/^[|]$/g, ""); // IPv6 literals come bracketed
   if (!hostname || /^(localhost|.*\.local|.*\.internal)$/i.test(hostname)) throw new Error("blocked_host");
   const addrs = net.isIP(hostname) ? [{ address: hostname }] : await dns.lookup(hostname, { all: true });
   if (!addrs.length || addrs.some((a) => isPrivateIp(a.address))) throw new Error("blocked_host");
@@ -26,6 +27,7 @@ async function assertPublic(hostname) {
 
 export async function safeFetch(rawUrl, { timeout = 6000, maxBytes = 3_000_000, redirects = 4, accept = "text/html,*/*" } = {}) {
   let url = new URL(rawUrl);
+  const hops = []; // every redirect: { url, status, to }
   for (let hop = 0; hop <= redirects; hop++) {
     if (!/^https?:$/.test(url.protocol)) throw new Error("bad_protocol");
     await assertPublic(url.hostname);
@@ -35,7 +37,9 @@ export async function safeFetch(rawUrl, { timeout = 6000, maxBytes = 3_000_000, 
     try {
       const res = await fetch(url, { redirect: "manual", signal: ctrl.signal, headers: { "user-agent": UA, accept, "accept-language": "en" } });
       if (res.status >= 300 && res.status < 400 && res.headers.get("location")) {
-        url = new URL(res.headers.get("location"), url);
+        const next = new URL(res.headers.get("location"), url);
+        hops.push({ url: url.toString(), status: res.status, to: next.toString() });
+        url = next;
         continue;
       }
       // Read at most maxBytes.
@@ -51,7 +55,7 @@ export async function safeFetch(rawUrl, { timeout = 6000, maxBytes = 3_000_000, 
         }
       }
       const text = new TextDecoder().decode(Buffer.concat(chunks.map((c) => Buffer.from(c))));
-      return { status: res.status, url: url.toString(), text, headers: res.headers };
+      return { status: res.status, url: url.toString(), text, headers: res.headers, hops };
     } finally { clearTimeout(timer); }
   }
   throw new Error("too_many_redirects");

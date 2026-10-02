@@ -28,7 +28,7 @@ export function CtaZone({ loc, children }) {
           <div className="bubble">{children}</div>
           <BookLink loc={loc}>{CTA} <span aria-hidden="true">→</span></BookLink>
         </div>
-        <div className="face"><img src="/uploads/img1.png" alt="Megha" /></div>
+        <div className="face"><img src="/uploads/img1.webp" alt="Megha" /></div>
       </div>
     </div>
   );

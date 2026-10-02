@@ -2,6 +2,7 @@
 // Wording rule: describe configuration ("configured to…"), never "your data is wrong".
 // Anything rated Verify is phrased as a question for the paid audit.
 import { listOf, mapOf } from "./parse";
+import { makeResolver } from "./inventory";
 
 const GENERIC = ["page_view", "click", "scroll", "user_engagement", "form_start", "session_start", "first_visit", "view_search_results"];
 const URL_PARAMS_FULL = ["page_location", "page_referrer", "link_url"];
@@ -63,6 +64,7 @@ export function readGtm(c) {
     }
   }
   const macroAt = (ref) => (Array.isArray(ref) && ref[0] === "macro" ? macros[ref[1]] : null);
+  const res = makeResolver(macros);
   const g = (t) => ({
     fn: t.function, name: t.vtp_eventName || null, raw: t,
     consent: listOf(t.consent || t.vtp_consent),
@@ -73,7 +75,8 @@ export function readGtm(c) {
     id: c.id,
     tags: all,
     ua: all.filter((t) => t.fn === "__ua" || (t.fn === "__googtag" && /^UA-/.test(t.raw.vtp_tagId || ""))),
-    ga4Ids: [...new Set(all.filter((t) => t.fn === "__googtag" || t.fn === "__gaawc").map((t) => t.raw.vtp_tagId || t.raw.vtp_measurementId).filter((x) => /^G-/.test(x || "")))],
+    ga4Ids: [...new Set(all.filter((t) => t.fn === "__googtag" || t.fn === "__gaawc" || t.fn === "__gaawe").map((t) => res.constant(t.raw.vtp_tagId || t.raw.vtp_measurementId || t.raw.vtp_measurementIdOverride)).filter((x) => /^G-/.test(x || "")))],
+    userData: all.some((t) => t.fn === "__awud" || t.raw.vtp_userDataVariable),
     ga4Events: all.filter((t) => t.fn === "__gaawe"),
     adsConv: all.filter((t) => t.fn === "__awct"),
     adsRmkt: all.filter((t) => t.fn === "__sp"),
@@ -97,6 +100,12 @@ export function runRules({ gtags, gtms, statuses, page }) {
     if (generic.length) out.push(F({ rule: "G1", sev: "high", conf: "Likely", title: "Generic events are marked as key events",
       detail: `${g.id} is configured to count ${generic.map((e) => `\`${e}\``).join(", ")} as key events. These fire on most sessions, so conversion totals and anything bidding on them (Google Ads) rise with traffic rather than with real leads.`,
       evidence: generic, fix: "Unmark generic events in GA4 → Admin → Key events. Keep only events that represent a business outcome.", where: g.id }));
+
+    // G9: failure / attempt events counted as key events
+    const failing = g.keyEvents.filter((e) => /attempt|fail|error|abandon/i.test(e));
+    if (failing.length) out.push(F({ rule: "G9", sev: "high", conf: "Confirmed", title: "Failed or attempted actions are marked as key events",
+      detail: `${g.id} counts ${failing.map((e) => `\`${e}\``).join(", ")} as key events. These fire when something didn't succeed, so they inflate conversions and teach ad bidding to chase failures.`,
+      evidence: failing, fix: "Unmark them as key events. Keep them as normal events for diagnosing drop-off.", where: g.id }));
 
     // G2: one finding per container, listing every conversion built from a thank-you page view
     const pvLeads = g.createEvents.map((ce) => {
@@ -195,7 +204,7 @@ export function runRules({ gtags, gtms, statuses, page }) {
     if (m.adsConv.length && !m.linker) out.push(F({ rule: "T7", sev: "medium", conf: "Confirmed", title: "Google Ads conversions run without a Conversion Linker",
       detail: "Without the linker, click IDs aren't stored first-party, so conversions from Safari and other ITP browsers are under-attributed.",
       evidence: [], fix: "Add a Conversion Linker tag firing on all pages.", where: m.id }));
-    else if (m.adsConv.length && !m.adsConv.some((t) => /enhanced|userData|user_data|cssProvided/i.test(JSON.stringify(t.raw)))) out.push(F({ rule: "T7", sev: "low", conf: "Verify", title: "Enhanced conversions may be off for Google Ads",
+    else if (m.adsConv.length && !m.userData && !m.adsConv.some((t) => /enhanced|userData|user_data|cssProvided/i.test(JSON.stringify(t.raw)))) out.push(F({ rule: "T7", sev: "low", conf: "Verify", title: "Enhanced conversions may be off for Google Ads",
       detail: "No user-provided data is mapped on the Ads conversion tags. Is enhanced conversions set up another way (in the Ads UI or server-side)?",
       evidence: [], fix: "Map hashed email/phone through a User-Provided Data variable, gated on ad_user_data consent.", where: m.id }));
 
@@ -215,7 +224,7 @@ export function runRules({ gtags, gtms, statuses, page }) {
 // One finding per rule: when a rule fires in several containers or properties,
 // fold them into a single finding that names every place it was seen.
 const MERGED_TITLE = {
-  G1: "Generic events are marked as key events", G2: "Conversions are counted from thank-you page views",
+  G1: "Generic events are marked as key events", G9: "Failed or attempted actions are marked as key events", G2: "Conversions are counted from thank-you page views",
   G3: "Key events are built on the same condition", G4: "Some create-event rules can never fire",
   G5: "Automatic collection of user-provided data is on, with email redaction off", G8: "No internal-traffic rule is defined",
   N1: "Event names break naming conventions", T3: "Conversions fire on CSS selectors or button text",

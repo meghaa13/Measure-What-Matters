@@ -1,5 +1,6 @@
 import Scanner from "./Scanner";
 import "./scanner.css";
+import "./scanner-layout.css";
 
 export const metadata = {
   title: "Tag Health Scan — Megha Karnwal",
