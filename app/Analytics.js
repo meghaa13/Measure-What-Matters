@@ -2,42 +2,72 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
-import { paramsFromDataset, track } from "./lib/analytics";
+import { track } from "./lib/analytics";
+import { audienceKey } from "./lib/site";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+const LP_VERSION = "v4";
 
 const pageType = (path) => (path.startsWith("/apps/") ? "app" : "home");
 
+// Site-wide measurement. Spec: docs/datalayer-requirements.md
 export default function Analytics() {
   const pathname = usePathname();
   const first = useRef(true);
 
-  // Declarative clicks: any element with data-track="event_name" plus data-ev-* params.
+  // Declarative clicks: data-track="event" data-loc="where" data-app="app_key".
   useEffect(() => {
     const onClick = (e) => {
       const el = e.target.closest?.("[data-track]");
-      if (el) track(el.dataset.track, paramsFromDataset(el));
+      if (!el) return;
+      track(el.dataset.track, {
+        cta_location: el.dataset.loc || null,
+        cta_text: (el.textContent || "").trim().replace(/\s+/g, " ").slice(0, 60),
+        app_name: el.dataset.app || null,
+        link_url: el.getAttribute("href") || null,
+      });
     };
     document.addEventListener("click", onClick, true);
     return () => document.removeEventListener("click", onClick, true);
   }, []);
 
+  // Once per page load: context, booking confirmation, engagement timers.
+  useEffect(() => {
+    const qs = Object.fromEntries(new URLSearchParams(window.location.search));
+    track("lp_context", {
+      lp_audience: audienceKey(), lp_version: LP_VERSION, page_type: pageType(pathname),
+      utm_source: qs.utm_source, utm_medium: qs.utm_medium, utm_campaign: qs.utm_campaign, utm_content: qs.utm_content, utm_term: qs.utm_term,
+      has_gclid: !!qs.gclid,
+    });
+    // The booking tool redirects back with ?booked=1. This is the primary conversion.
+    if (qs.booked === "1") track("call_booked", { lp_audience: audienceKey() });
+    const timers = [30, 60].map((s) => setTimeout(() => { if (document.visibilityState === "visible") track(`engaged_${s}s`); }, s * 1000));
+    return () => timers.forEach(clearTimeout);
+  }, [pathname]);
+
   // Client-side navigation doesn't reload the page, so GA4 needs a virtual page_view.
-  // The first load is covered by the GA4 config tag itself.
   useEffect(() => {
     if (first.current) { first.current = false; return; }
     track("virtual_page_view", { page_path: pathname, page_title: document.title, page_type: pageType(pathname) });
   }, [pathname]);
 
-  // section_view: once per section per page load, when 40% of it is on screen.
+  // section_view (once each, 40% visible) and scroll_depth (25/50/75/90).
   useEffect(() => {
     const seen = new Set();
     const io = new IntersectionObserver((entries) => entries.forEach((en) => {
       const name = en.target.dataset.section;
       if (en.isIntersecting && !seen.has(name)) { seen.add(name); track("section_view", { section_name: name }); io.unobserve(en.target); }
     }), { threshold: 0.4 });
-    document.querySelectorAll("[data-section]").forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    const t = setTimeout(() => document.querySelectorAll("[data-section]").forEach((el) => io.observe(el)), 600);
+
+    const hit = new Set();
+    const onScroll = () => {
+      const H = document.documentElement.scrollHeight - window.innerHeight;
+      const pc = H > 0 ? (window.scrollY / H) * 100 : 0;
+      for (const d of [25, 50, 75, 90]) if (pc >= d && !hit.has(d)) { hit.add(d); track("scroll_depth", { percent_scrolled: d }); }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { clearTimeout(t); io.disconnect(); window.removeEventListener("scroll", onScroll); };
   }, [pathname]);
 
   if (!GTM_ID) return null;

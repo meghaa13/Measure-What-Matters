@@ -73,7 +73,7 @@ export default function AppsSection() {
   // Pin (scroll-driven) on wide screens; autoplay on narrow ones.
   useEffect(() => {
     reduceRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const onResize = () => setPinned(!reduceRef.current && window.innerWidth >= 900);
+    const onResize = () => setPinned(false);  // v4: autoplay everywhere, no scroll-pinning
     onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -131,12 +131,6 @@ export default function AppsSection() {
   const selectApp = (i, method) => {
     if (i !== app) track("app_select", { app_name: APP_KEYS[i], method });
     setApp(i);
-  };
-  const openApp = (i, e) => {
-    e?.preventDefault();
-    selectApp(i, "card");
-    const tr = trackRef.current;
-    if (tr) window.scrollTo({ top: tr.getBoundingClientRect().top + window.scrollY - 150, behavior: "smooth" });
   };
   const pane = (on) => ({
     opacity: on ? 1 : 0,
@@ -388,29 +382,11 @@ export default function AppsSection() {
         </div>
       ) : (
         <div key="ctp" className="app-bar-in tp-bar">
-          <Link href="/apps/clean-tracking-plan" className="co-dl tp-open" data-track="app_open" data-ev-app-name="clean_tracking_plan" data-ev-link-location="apps_section">Open the builder <span aria-hidden="true">→</span></Link>
+          <Link href="/apps/clean-tracking-plan" className="co-dl tp-open" data-track="app_open" data-loc="side_hustle" data-app="clean_tracking_plan">Open the builder <span aria-hidden="true">→</span></Link>
           <span className="meta">Free · runs in your browser · nothing you type is sent</span>
         </div>
       )}
 
-      {/* app index */}
-      <div data-reveal="120" className="co-index">
-        <a href="#apps" onClick={(e) => openApp(0, e)} className="tile live" style={{ borderColor: app === 0 ? "#8E74DD" : undefined }}>
-          <span className="k">APP 01 · LIVE</span>
-          <span className="t">Comment Co-Pilot</span>
-          <span className="d">Reads text, images, video and carousel slides. 3 distinct angles, never 3 rewordings.</span>
-        </a>
-        <a href="#apps" onClick={(e) => openApp(1, e)} className="tile live" style={{ borderColor: app === 1 ? "#8E74DD" : undefined }}>
-          <span className="k">APP 02 · LIVE</span>
-          <span className="t">The Clean Tracking Plan</span>
-          <span className="d">Classifies every field before it&apos;s collected: safe, consent-gated, hash only or never. Consent Mode v2 and code included.</span>
-        </a>
-        <div className="tile soon">
-          <span className="k">APP 03 · COMING SOON</span>
-          <span className="t">In the works</span>
-          <span className="lines"><span style={{ width: "70%" }} /><span style={{ width: "45%" }} /></span>
-        </div>
-      </div>
     </>
   );
 }

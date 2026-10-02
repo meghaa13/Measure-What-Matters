@@ -1,83 +1,84 @@
 import ScrollEffects from "./ScrollEffects";
+import SiteChrome from "./SiteChrome";
 import FunnelStory from "./FunnelStory";
-import WorkAccordion from "./WorkAccordion";
+import MethodCards from "./MethodCards";
+import MicroTools from "./MicroTools";
 import AppsSection from "./AppsSection";
+import Faq from "./Faq";
+import { HeroEyebrow, HeroSub } from "./HeroCopy";
+import { BookLink, CtaZone, Prompt } from "./Bits";
+import { CTA, EMAIL, LINKEDIN, RESUME, bookTarget, contactHref } from "./lib/site";
 
-// Design-time props from the original mock
-const CTA = "Book a 20-min call";
-const SHOW_PROMPTS = true;
-
-const Prompt = ({ children, white }) =>
-  SHOW_PROMPTS ? <div data-reveal="0" className={`prompt${white ? " white" : ""}`}>“{children}”</div> : null;
-
-const METHOD = [
-  { n: "01 — MEASURE", t: "Tracking you can trust.", d: "GA4 properties, GTM event tracking and MS Clarity set up across client websites, so every conversion is counted once and counted right.", chips: ["GA4", "GTM", "MS Clarity"], bg: "#fff", chipBg: "#F3F0FB" },
-  { n: "02 — UNDERSTAND", t: "Behavior, not just totals.", d: "Clickstream mapping, heatmaps and search term analysis, surfaced in Looker Studio dashboards backed by BigQuery and SQL.", chips: ["Looker Studio", "BigQuery", "SQL"], bg: "#F8F6FD", chipBg: "#E8E1F8" },
-  { n: "03 — AUTOMATE", t: "Reports that assemble themselves.", d: "Python for web scraping and daily reporting, so the team spends the morning reading insight instead of building spreadsheets.", chips: ["Python", "Web scraping", "Excel"], bg: "#F1EDFB", chipBg: "#fff" },
-  { n: "04 — APPLY AI", t: "Models where they earn their place.", d: "Trained through the GI Ventures & NVIDIA AI-ML program and IBM Python for AI. Built computer-vision tools for people counting and PPE compliance.", chips: ["AI-ML", "Computer vision"], dark: true },
+const CASES = [
+  { dark: true, top: "#2E2263", kind: "IN-HOUSE · MEASUREMENT + EXPERIMENTS", name: "Intelegencia", tools: "GA4 · BigQuery · Statsig",
+    did: ["Built the GA4 tracking framework from scratch", "Joined form submits to approved and rejected lead outcomes in BigQuery", "Enhanced conversions and Statsig homepage experiments"],
+    kpis: ["Lead approval rate", "Enhanced conversions", "AI-search leads"], out: "Employee of the Quarter, Analytics" },
+  { top: "#E8E1F8", kind: "IMPLEMENTATION · UX", name: "AvePoint", tools: "GA4 · MS Clarity",
+    did: ["GA4 and MS Clarity set up from scratch", "UX analysis of on-site behavior"],
+    kpis: ["Engagement rate", "Scroll depth", "Rage clicks"], out: "Daily data-driven recommendations" },
+  { top: "#DCD3F6", kindColor: "#4A3699", toolsColor: "#4A4363", kind: "DASHBOARDS · CLIENT LEAD", name: "QS", tools: "Looker Studio",
+    did: ["Dashboards for engagement and CTR trends", "Ran client meetings independently"],
+    kpis: ["CTR", "Engagement rate", "Returning users"], out: "Self-serve reporting for the client" },
+  { top: "#EEE9FA", kind: "WEB ANALYTICS", name: "Cordia Energy", tools: "GA4 · GTM · MS Clarity",
+    did: ["GA4, GTM and Clarity implementation", "Event tracking across key site actions"],
+    kpis: ["Form submissions", "Traffic by source", "Event coverage"], out: "Daily performance reporting" },
 ];
 
-const SIDE = [
-  ["People Counting System", "Python tool monitoring room occupancy with image alerts."],
-  ["PPE Violation Detection", "Computer vision for safety compliance."],
-  ["Rainbow Room", "Cloud-based mental health screening for LGBTQIA+ users."],
+const BUILDS = [
+  ["LLM PIPELINE", "BlogAI research pipeline", "15 stages, parallel multi-model drafting, hallucination guards and a Streamlit UI."],
+  ["COMPUTER VISION", "People Counting System", "Live room occupancy with image alerts."],
+  ["COMPUTER VISION", "PPE Violation Detection", "Automated safety-compliance checks."],
+  ["CLOUD", "Rainbow Room", "Mental health screening for LGBTQIA+ users."],
 ];
 
 const FACTS = [
-  ["Two years, live", "Active delivery since June 2024 on client websites where the data is real and the stakes are too."],
-  ["Client-facing", "Ran meetings and communication independently for VPP and QS."],
-  ["Recognized", "Employee of the Quarter in Analytics at Intelegencia."],
-  ["Grounded", "B.Tech in Computer Science with a Data Science minor."],
+  ["Consent first", "Consent Mode configured and debugged so tags fire only when they are allowed to."],
+  ["PII stays out", "Lead outcomes are joined by a request ID, and ad-platform matching uses hashed data. Never raw names or emails in analytics."],
+  ["Clean at the source", "Staging traffic separated from production. Inflated sessions and \"(not set)\" dimensions fixed where they start, not patched in the report."],
+  ["Two years, live", "Production delivery since June 2024, including financial-services lead flows. Client meetings run independently for VPP and QS."],
+  ["Recognized", "Employee of the Quarter in Analytics at Intelegencia. B.Tech in Computer Science, Data Science minor."],
 ];
 
 const CERTS = ["Google Analytics 4", "Google Tag Manager Fundamentals", "GI Ventures & NVIDIA AI-ML", "IBM Python for AI & Data Science", "NPTEL Python for Data Science", "Microsoft Tech-Saksham Full Stack", "Google Analytics 4", "Google Tag Manager Fundamentals"];
 
 const NOTES = [
+  "AI is only as smart as the tracking plan underneath it.",
   "Dashboards stop being the product. Decisions become the product.",
+  "AI search is the newest referral channel, and most teams aren't measuring it yet.",
   "Tracking is a trust contract with the people being tracked.",
-  "Automation and AI should buy analysts time to ask better questions.",
 ];
+
+const NEXT = ["Book 20 minutes and tell me the question.", "We look at what's tracked, what's trusted and what's still manual.", "You leave with the first three fixes, in priority order."];
 
 export default function Home() {
   return (
     <div className="root">
       <ScrollEffects />
-
-      <div className="progress"><div data-progress="1" /></div>
-      <nav className="nav">
-        <a href="#top" aria-label="Megha Karnwal — home">
-          <span className="logo"><span>mk</span><span className="dot" /></span>
-        </a>
-        <div className="nav-links">
-          <a href="#method" data-track="navigation_click" data-ev-link-text="Method">Method</a>
-          <a href="#work" data-track="navigation_click" data-ev-link-text="Work">Work</a>
-          <a href="#apps" data-track="navigation_click" data-ev-link-text="Apps">Apps</a>
-          <a href="#contact" className="nav-cta" data-track="cta_click" data-ev-cta-location="nav" data-ev-cta-text={CTA}>{CTA}</a>
-        </div>
-      </nav>
+      <SiteChrome />
 
       {/* HERO */}
       <header id="top" className="wrap hero" data-section="hero">
         <div style={{ position: "relative", zIndex: 2 }}>
-          <div data-reveal="0" className="hero-kicker">Web &amp; Data Analyst · Analytics, Automation, AI</div>
+          <HeroEyebrow />
           <h1>
-            <span data-reveal="80">Everyone wants AI</span>
+            <span data-reveal="80">Everyone wants AI.</span>
             <span data-reveal="180">Few have data</span>
             <span data-reveal="280" className="accent">it can trust.</span>
           </h1>
-          <p data-reveal="420">I&apos;m Megha. For two years I&apos;ve set up tracking, read user behavior and automated reporting on live client websites handling sensitive data, so marketing teams know which spend is working.</p>
+          <HeroSub />
           <div data-reveal="520" className="hero-ctas">
-            <a href="#contact" className="btn btn-primary" data-track="cta_click" data-ev-cta-location="hero" data-ev-cta-text={CTA}>{CTA}</a>
-            <a href="#story" className="btn btn-ghost" data-track="cta_click" data-ev-cta-location="hero" data-ev-cta-text="See how I work">See how I work ↓</a>
+            <BookLink loc="hero" className="btn btn-primary">{CTA}</BookLink>
+            <a href="#story" className="btn btn-ghost" data-track="anchor_click" data-loc="hero">See how I work ↓</a>
           </div>
+          <div data-reveal="600" className="reassure">Free · 20 minutes · No slides, just your data.</div>
         </div>
         <div className="hero-art">
           <div data-par="0.08" className="halo par" />
           <div data-par="-0.05" className="halo-ring par" />
           <div data-reveal="200" className="portrait">
-            <img data-par="-0.14" className="par" src="/uploads/img1.png" alt="Megha Karnwal" />
+            <img data-par="-0.14" className="par" src="/uploads/img1.png" alt="Megha Karnwal, analyst working across analytics, automation and AI" />
             <div className="shade" />
-            <div className="cap">MEGHA KARNWAL — MEERUT, INDIA</div>
+            <div className="cap">MEGHA KARNWAL — ANALYTICS · AUTOMATION · AI</div>
           </div>
         </div>
         <div data-reveal="700" className="toolbelt">
@@ -87,7 +88,7 @@ export default function Home() {
 
       {/* STORY */}
       <section id="story" className="wrap story" data-section="story">
-        <Prompt>We&apos;re spending on ads. Why isn&apos;t it converting?</Prompt>
+        <Prompt>We have the traffic. Why isn&apos;t it turning into results?</Prompt>
         <FunnelStory />
       </section>
 
@@ -95,26 +96,15 @@ export default function Home() {
       <section id="method" className="wrap grid2 method" data-section="method">
         <div style={{ position: "relative" }}>
           <div className="sticky">
-            <Prompt>Okay. How do you actually work?</Prompt>
+            <Prompt>Okay. So where does AI come in?</Prompt>
             <h2 data-reveal="80" className="h2">Analytics, then automation, then <em>AI</em>, in that order.</h2>
-            <p data-reveal="160" className="lead" style={{ maxWidth: 440, margin: "20px 0 0" }}>Good AI needs clean data, and clean data needs honest tracking. I build from the bottom up.</p>
+            <p data-reveal="160" className="lead" style={{ maxWidth: 440, margin: "20px 0 0" }}>AI multiplies whatever you feed it, including bad tracking. So I build from the bottom up: measure honestly, automate the repetitive work, then add AI where it saves real hours or finds real signal.</p>
             <div data-view="1" data-reveal="220" className="duo">
               <img data-par="-0.1" src="/uploads/img2.png" alt="" />
             </div>
           </div>
         </div>
-        <div className="cards">
-          {METHOD.map((c, i) => (
-            <article key={c.n} className={`card${c.dark ? " dark" : ""}`} style={{ top: 110 + i * 28, background: c.bg }}>
-              <div className="eyebrow">{c.n}</div>
-              <h3>{c.t}</h3>
-              <p>{c.d}</p>
-              <div className="chips">
-                {c.chips.map((x) => <span key={x} className="chip" style={c.chipBg ? { background: c.chipBg } : undefined}>{x}</span>)}
-              </div>
-            </article>
-          ))}
-        </div>
+        <MethodCards />
       </section>
 
       {/* WORK */}
@@ -122,46 +112,51 @@ export default function Home() {
         <div className="wrap">
           <Prompt white>Where has this been done for real?</Prompt>
           <div className="work-head">
-            <h2 data-reveal="60" className="h2">Live client work.</h2>
-            <p data-reveal="120" style={{ fontSize: 16, lineHeight: 1.55, color: "var(--muted)", maxWidth: 360, margin: 0 }}>Delivered at Intelegencia, June 2024 to today, on production websites.</p>
+            <h2 data-reveal="60" className="h2">On live sites, every day.</h2>
+            <div data-reveal="120" className="stats">
+              <div><b>4</b><span>LIVE CLIENT SITES</span></div>
+              <div><b>2 yrs</b><span>SINCE JUNE 2024</span></div>
+              <div><b>Intelegencia</b><span>DELIVERED AT</span></div>
+            </div>
           </div>
-          <div className="work-grid">
-            <article data-reveal="160" className="feature">
-              <div data-par="0.06" className="ring par" />
-              <div className="feature-top"><span>FEATURED CASE · CRO</span><span>VPP</span></div>
-              <div className="feature-stat">
-                <span className="big">+50%</span>
-                <span style={{ fontSize: 17, color: "var(--tint-2)" }}>conversion rate</span>
-              </div>
-              <p>Mapped clickstream behavior on the client website with MS Clarity heatmaps and identified the drop-off points in the purchase funnel.</p>
-              <div className="steps4">
-                {["Clickstream", "Heatmaps", "Drop-offs", "Fix"].map((s, i) => (
-                  <div key={s} className={i === 3 ? "last" : undefined}><div className="n">0{i + 1}</div>{s}</div>
-                ))}
-              </div>
-            </article>
-            <WorkAccordion />
-          </div>
-          <div data-reveal="120" className="side">
-            <div className="mono" style={{ fontSize: 12, letterSpacing: ".06em", color: "var(--muted)", paddingTop: 6 }}>BUILT ON THE SIDE</div>
-            {SIDE.map(([t, d]) => (
-              <div key={t} className="side-card"><div className="t">{t}</div><div className="d">{d}</div></div>
+          <article data-reveal="160" className="vpp">
+            <div className="lead-cell">
+              <span className="case-kind">CRO ANALYSIS · CLIENT LEAD</span>
+              <h3 className="case-name">VPP</h3>
+              <span className="case-tools">MS Clarity · GA4</span>
+              <div className="result"><b>+50%</b><span>conversion rate after fixing funnel drop-offs</span></div>
+            </div>
+            <div>
+              <span className="label">WHAT I DID</span>
+              <ul className="ticks"><li>Mapped clickstream behavior with Clarity heatmaps</li><li>Identified the purchase-funnel drop-off points</li><li>Ran client meetings and communication</li></ul>
+            </div>
+            <div>
+              <span className="label">KPIS OWNED</span>
+              <div className="kpis">{["Conversion rate", "Funnel drop-off", "Checkout completion", "Click paths"].map((k) => <span key={k}>{k}</span>)}</div>
+            </div>
+          </article>
+          <div className="cases">
+            {CASES.map((c) => (
+              <article key={c.name} data-reveal="180" className={`case${c.dark ? " dark" : ""}`}>
+                <div className="case-top" style={{ background: c.top }}>
+                  <span className="case-kind" style={c.kindColor ? { color: c.kindColor } : undefined}>{c.kind}</span>
+                  <h3 className="case-name">{c.name}</h3>
+                  <span className="case-tools" style={c.toolsColor ? { color: c.toolsColor } : undefined}>{c.tools}</span>
+                </div>
+                <ul className="ticks">{c.did.map((d) => <li key={d}>{d}</li>)}</ul>
+                <div className="case-kpis"><span className="label">KPIS OWNED</span><div className="kpis">{c.kpis.map((k) => <span key={k}>{k}</span>)}</div></div>
+                <div className="case-out"><span className="label">DELIVERED</span><span>{c.out}</span></div>
+              </article>
             ))}
+          </div>
+          <div data-reveal="80" className="builds">
+            <div className="intro"><span className="label">AUTOMATION + AI BUILDS</span><b>Where analytics meets AI.</b></div>
+            {BUILDS.map(([k, t, d]) => <div key={t}><span className="k">{k}</span><span className="t">{t}</span><span className="d">{d}</span></div>)}
           </div>
         </div>
       </section>
 
-      {/* APPS */}
-      <section id="apps" className="apps" data-section="apps">
-        <div className="apps-wrap">
-          <Prompt>Do you build things too?</Prompt>
-          <div className="work-head">
-            <h2 data-reveal="60" className="h2">Apps I&apos;ve <em>built</em>.</h2>
-            <p data-reveal="120" style={{ fontSize: 16, lineHeight: 1.55, color: "var(--muted)", maxWidth: 380, margin: 0 }}>Small AI tools that automate the repetitive parts of the job, built and used in my own workflow.</p>
-          </div>
-          <AppsSection />
-        </div>
-      </section>
+      <CtaZone loc="after_work">If this looks like the work your site needs, let’s look at your tracking together.</CtaZone>
 
       {/* TRUST */}
       <section className="wrap grid2 trust" data-section="trust">
@@ -169,29 +164,45 @@ export default function Home() {
           <Prompt>Can we trust you with our data?</Prompt>
           <h2 data-reveal="80" className="h2">Sensitive data, handled like it&apos;s <em>sensitive</em>.</h2>
           <div className="facts">
-            {FACTS.map(([b, s], i) => (
-              <div key={b} data-reveal={120 + i * 60} className="fact"><b>{b}</b><span>{s}</span></div>
-            ))}
+            {FACTS.map(([b, s], i) => <div key={b} data-reveal={120 + i * 60} className="fact"><b>{b}</b><span>{s}</span></div>)}
           </div>
         </div>
         <div data-view="1" className="reveal-circle">
-          <div className="clip">
-            <img data-par="-0.08" className="par" src="/uploads/img3.png" alt="Megha Karnwal" />
-          </div>
+          <div className="clip"><img data-par="-0.08" className="par" src="/uploads/img3.png" alt="Megha Karnwal" /></div>
           <div className="orbit"><span /></div>
         </div>
       </section>
+
+      <CtaZone loc="after_trust">Twenty minutes is enough to tell you what your current setup is missing.</CtaZone>
 
       {/* CERT MARQUEE */}
       <div data-view="1" className="marquee">
         <div>
           {CERTS.map((c, i) => (
-            <span key={i} style={{ display: "contents" }}>
-              <span>{c}</span>{i < CERTS.length - 1 && <span className="star">✦</span>}
-            </span>
+            <span key={i} style={{ display: "contents" }}><span>{c}</span>{i < CERTS.length - 1 && <span className="star">✦</span>}</span>
           ))}
         </div>
       </div>
+
+      {/* MICRO TOOLS */}
+      <section id="tools" className="tools" data-section="micro_tools">
+        <div className="wrap">
+          <Prompt>Anything I can use right now?</Prompt>
+          <MicroTools />
+        </div>
+      </section>
+
+      {/* SIDE HUSTLE */}
+      <section id="apps" className="apps" data-section="side_hustle">
+        <div className="apps-wrap">
+          <Prompt>What do you build for fun?</Prompt>
+          <div className="work-head">
+            <h2 data-reveal="60" className="h2">Side <em>hustle</em>.</h2>
+            <p data-reveal="120" style={{ fontSize: 16, lineHeight: 1.55, color: "var(--muted)", maxWidth: 380, margin: 0 }}>Weekend builds I make for fun, then end up using every day.</p>
+          </div>
+          <AppsSection />
+        </div>
+      </section>
 
       {/* POV */}
       <section className="pov" data-section="point_of_view">
@@ -201,36 +212,48 @@ export default function Home() {
         </div>
         <div className="wrap pov-body">
           <div style={{ maxWidth: 560 }}>
+            <Prompt white>Where do you think this is all heading?</Prompt>
             <div data-reveal="0" className="eyebrow">WORKING NOTES</div>
-            <h2 data-reveal="80" className="h2" style={{ marginTop: 18 }}>Where I think analytics is heading.</h2>
+            <h2 data-reveal="80" className="h2" style={{ marginTop: 18 }}>Where analytics is heading next.</h2>
             <div className="notes">
-              {NOTES.map((n, i) => <div key={n} data-reveal={160 + i * 80} className="note-card">{n}</div>)}
+              {NOTES.map((n, i) => <div key={n} data-reveal={160 + i * 60} className="note-card">{n}</div>)}
             </div>
+            <BookLink loc="pov" className="text-link">Want this thinking on your data? Book 20 minutes →</BookLink>
           </div>
         </div>
       </section>
 
+      {/* FAQ */}
+      <section id="faq" className="wrap grid2 faq" data-section="faq">
+        <div>
+          <Prompt>A few quick questions first.</Prompt>
+          <h2 data-reveal="80" className="h2">Before you book.</h2>
+        </div>
+        <Faq />
+      </section>
+
       {/* CONTACT */}
-      <section id="contact" className="contact" data-section="contact">
+      <section id="contact" className="contact" data-cta-zone="1" data-section="contact">
         <div className="contact-box">
           <div data-par="0.1" className="ring par" />
           <Prompt white>So, what&apos;s next?</Prompt>
-          <h2 data-reveal="80">Paying for clicks? Let&apos;s make each one <em className="accent">count</em>.</h2>
+          <h2 data-reveal="80">Bring one question your data can&apos;t answer <em className="accent">yet</em>.</h2>
           <div className="next-steps">
-            {["Send your website and the goal you're paying to reach.", "We talk for 20 minutes about what's tracked today.", "You get a clear plan for tracking, reporting and the first fix."].map((t, i) => (
-              <div key={i} data-reveal={140 + i * 60}><div className="eyebrow" style={{ letterSpacing: 0 }}>0{i + 1}</div><div className="t">{t}</div></div>
-            ))}
+            {NEXT.map((t, i) => <div key={i} data-reveal={140 + i * 60}><div className="eyebrow" style={{ letterSpacing: 0 }}>0{i + 1}</div><div className="t">{t}</div></div>)}
           </div>
           <div data-reveal="320" className="contact-ctas">
-            <a href="mailto:meghakarnwal13@gmail.com?subject=Let's%20talk%20analytics" className="btn btn-primary" data-track="contact_click" data-ev-contact-method="email" data-ev-link-location="contact_cta" data-ev-cta-text={CTA}>{CTA}</a>
-            <a href="https://linkedin.com/in/megha-karnwal-453889251" target="_blank" rel="noopener" className="btn btn-white" data-track="contact_click" data-ev-contact-method="linkedin" data-ev-link-location="contact_cta">LinkedIn</a>
-            <a href="/uploads/MeghaKarnwal-%20web%20analytics%20resume.pdf" download="Megha-Karnwal-Resume.pdf" className="btn btn-ghost" data-track="resume_download" data-ev-link-location="contact_cta">Download résumé</a>
+            <a href={contactHref} target={bookTarget} rel={bookTarget ? "noopener" : undefined} className="btn btn-primary" data-track="cta_click" data-loc="contact">{CTA}</a>
+            <span className="meta">Free · 20 minutes · No slides, just your data.</span>
           </div>
-          <div data-reveal="380" style={{ marginTop: 22, fontSize: 15, color: "var(--muted)" }}>
-            or write directly to <a href="mailto:meghakarnwal13@gmail.com" data-track="contact_click" data-ev-contact-method="email" data-ev-link-location="contact_text">meghakarnwal13@gmail.com</a>
+          <div data-reveal="380" className="contact-alt">
+            Prefer email? <a href={`mailto:${EMAIL}?subject=Analytics%2C%20automation%20%26%20AI`} data-track="email_click" data-loc="contact">{EMAIL}</a>
+            {" · "}<a href={RESUME} download="Megha-Karnwal-Resume.pdf" data-track="resume_download" data-loc="contact">Résumé (PDF)</a>
           </div>
         </div>
-        <footer className="footer"><span>© 2026 Megha Karnwal</span><span>Analytics · Automation · AI</span></footer>
+        <footer className="footer">
+          <span>© 2026 Megha Karnwal</span><span>Analytics · Automation · AI</span>
+          <a href={LINKEDIN} target="_blank" rel="noopener" data-track="outbound_click" data-loc="footer">LinkedIn ↗</a>
+        </footer>
       </section>
     </div>
   );
