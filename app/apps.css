@@ -1,0 +1,135 @@
+/* apps */
+@keyframes coSweep { from { background-position: 160% 0 } to { background-position: -60% 0 } }
+@keyframes coBlink { 50% { opacity: 0 } }
+@keyframes coPulse { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
+.apps { position: relative; padding: 120px 0 110px }
+.apps-wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px }
+@keyframes fadeUp { from { opacity: 0; transform: translate3d(0,16px,0) } to { opacity: 1; transform: none } }
+.app-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 40px; padding: 6px; border-radius: 28px; background: var(--tint); border: 1px solid var(--line); width: fit-content; max-width: 100% }
+.app-tabs .tab { white-space: nowrap; gap: 10px }
+.app-tabs .soon { display: flex; align-items: center; gap: 8px; padding: 11px 16px; font-size: 14px; color: #9A93AE; white-space: nowrap }
+.app-tabs .soon .num { font-family: var(--mono); font-size: 11px }
+.co-track { position: relative; margin-top: 8px }
+.co-stage { display: grid; padding: 16px 0 }
+.co-pane { grid-area: 1/1; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,360px),1fr)); gap: 44px; align-items: center; transition: opacity .6s var(--ease), transform .7s var(--ease), visibility 0s }
+.co-title .accent { color: var(--brand) }
+.tp-step { align-items: center; padding: 15px 4px 16px }
+.tp-step .t { transition: color .4s, transform .5s var(--ease) }
+.tp-step.on .t { transform: translateX(6px) }
+
+.tp-card { position: relative; padding: 24px; border-radius: 24px; background: #fff; border: 1px solid var(--line); box-shadow: 0 40px 80px -40px rgba(46,34,99,.45); display: flex; flex-direction: column; gap: 16px }
+.tp-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap }
+.tp-card-top .chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 }
+.tp-type { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--lilac); color: var(--muted); font-size: 13px }
+.tp-type.on { background: var(--brand); color: #fff; border-color: var(--brand); font-weight: 500; transition: box-shadow .5s }
+.tp-meta { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: #8E85A3 }
+.tp-classes { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px,1fr)); gap: 8px }
+.tp-class { padding: 10px 10px 10px 12px; border-radius: 10px; background: var(--tint); border-left: 3px solid; transition: opacity .45s, transform .55s var(--ease) }
+.tp-class .num { font-family: var(--serif); font-size: 24px; line-height: 1; font-variant-numeric: tabular-nums }
+.tp-class .lbl { font-size: 12px; font-weight: 600; margin-top: 4px; color: #2B2540 }
+.tp-event { padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; transition: opacity .5s, border-color .5s }
+.tp-event .head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline }
+.tp-event .name { font-family: var(--mono); font-size: 15px; font-weight: 500 }
+.tp-event .consent { font-family: var(--mono); font-size: 11px; padding: 3px 8px; border-radius: 6px; transition: background .4s .2s, color .4s .2s, transform .5s cubic-bezier(.3,1.6,.5,1) .2s }
+.tp-event .fields { display: flex; flex-wrap: wrap; gap: 6px; font-family: var(--mono); font-size: 12px }
+.tp-event .fields span { padding: 4px 9px; border-radius: 7px; text-decoration-thickness: 1.5px; transition: opacity .4s, transform .5s var(--ease) }
+.tp-leak { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 12px; align-items: start; padding: 12px 14px; border-radius: 12px; background: #FBE6E9; font-size: 14px; line-height: 1.45; color: #2B2540; transition: opacity .5s, transform .6s var(--ease) }
+.tp-leak .tag { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: #B42335; padding-top: 2px }
+.tp-leak code { font-family: var(--mono); font-size: 13px }
+.tp-code { position: relative; border-radius: 12px; background: var(--ink); padding: 14px 16px; transition: opacity .5s, transform .6s var(--ease) }
+.tp-code pre { margin: 0; font-family: var(--mono); font-size: 12px; line-height: 1.65; color: var(--tint-2); white-space: pre; overflow: hidden }
+.tp-code .fn { color: var(--lilac-2) }
+.tp-code .s { color: #F3C9A0 }
+.tp-code .copy { position: absolute; top: 10px; right: 10px; display: grid; font-family: var(--mono); font-size: 10px; letter-spacing: .06em }
+.tp-code .copy span { grid-area: 1/1; padding: 4px 9px; border-radius: 6px; border: 1px solid #4A4363; color: var(--lilac); transition: opacity .3s }
+.tp-code .copy .done { background: var(--brand); border-color: var(--brand); color: #fff }
+
+.app-bar-in { animation: fadeUp .6s var(--ease) both }
+.tp-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 8px; padding: 18px 22px 18px 18px; border-radius: 28px; background: var(--tint); border: 1px solid var(--line); width: fit-content; max-width: 100% }
+.tp-bar .meta { font-size: 15px; color: var(--muted) }
+.tp-open { padding: 16px 26px; font-weight: 600; font-size: 17px }
+a.tile { color: var(--ink); transition: transform .4s var(--ease), box-shadow .4s, border-color .4s }
+a.tile:hover { color: var(--ink); transform: translateY(-4px); box-shadow: 0 24px 48px -28px rgba(46,34,99,.4) }
+.co-tags { display: flex; align-items: center; gap: 12px; flex-wrap: wrap }
+.co-badge { padding: 6px 12px; border-radius: 999px; background: var(--brand); color: #fff; font-family: var(--mono); font-size: 11px; letter-spacing: .06em }
+.co-kind { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted) }
+.co-title { font-family: var(--serif); font-weight: 400; font-size: clamp(36px,4vw,52px); line-height: 1.02; letter-spacing: -.015em; margin: 20px 0 0 }
+.co-desc { font-size: 17px; line-height: 1.55; color: var(--muted); margin: 14px 0 0; max-width: 440px; text-wrap: pretty }
+.co-steps { display: flex; flex-direction: column; margin-top: 24px; border-top: 1px solid var(--line) }
+.co-step { position: relative; display: grid; grid-template-columns: 36px minmax(0,1fr); gap: 12px; align-items: start; padding: 13px 4px 14px; background: none; border: none; border-bottom: 1px solid var(--line); cursor: pointer; text-align: left; font-family: var(--sans) }
+.co-step .n { font-family: var(--mono); font-size: 12px; color: #9A93AE; padding-top: 2px; transition: color .4s }
+.co-step .body { display: flex; flex-direction: column; gap: 4px }
+.co-step .t { font-size: 16px; font-weight: 600; color: var(--muted); transition: color .4s }
+.co-step .cap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--ease) }
+.co-step .cap > span { overflow: hidden; font-size: 15px; line-height: 1.5; color: var(--muted); opacity: 0; transition: opacity .4s }
+.co-step.on .n { color: var(--brand) }
+.co-step.on .t { color: var(--ink) }
+.co-step.on .cap { grid-template-rows: 1fr }
+.co-step.on .cap > span { opacity: 1 }
+.co-step .bar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--brand); transform-origin: 0 50%; transition: opacity .4s }
+.co-hint { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted) }
+.co-hint span { width: 22px; height: 1px; background: var(--lilac) }
+
+.co-backdrop { position: absolute; inset: -36px -24px -36px 40px; border-radius: 40px; background: #EEE9FA }
+.co-browser { position: relative; border-radius: 22px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 40px 80px -40px rgba(46,34,99,.45) }
+.co-chrome { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: var(--tint-3); border-bottom: 1px solid var(--line) }
+.co-chrome > span:not(.url) { width: 9px; height: 9px; border-radius: 50%; background: var(--line) }
+.co-chrome .url { margin-left: 10px; flex: 1; max-width: 240px; font-family: var(--mono); font-size: 11px; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 7px; padding: 4px 10px }
+.co-feed { padding: 18px; background: var(--tint-3); min-height: 500px }
+.co-post { position: relative; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px }
+.co-scan { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, transparent 40%, rgba(142,116,221,.18) 50%, transparent 60%); background-size: 220% 100%; background-position: 160% 0; transition: opacity .3s }
+.co-author { display: flex; gap: 11px; align-items: center }
+.co-author .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--tint-2); color: var(--brand); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 13px; font-weight: 500 }
+.co-author .name { font-weight: 600; font-size: 14px }
+.co-author .meta { font-size: 12px; color: var(--muted) }
+.co-text { font-size: 14px; line-height: 1.6; margin: 12px 0 0 }
+.co-actions { display: flex; align-items: center; gap: 2px; margin-top: 14px; padding: 12px 0 8px; border-top: 1px solid var(--line); min-width: 0 }
+.co-actions > span:not(.co-draft-btn) { font-size: 12.5px; color: var(--muted); padding: 6px 7px }
+.co-draft-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--brand-mid); font-weight: 600; font-size: 12.5px; white-space: nowrap; transition: background .35s, color .35s, transform .45s cubic-bezier(.3,1.6,.5,1), box-shadow .45s }
+.co-draft-btn .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor }
+.co-expand { display: grid; transition: grid-template-rows .45s var(--ease) }
+.co-expand.slow { transition-duration: .6s }
+.co-expand > div { overflow: hidden }
+.co-reads { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 12px }
+.co-reads span { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; font-family: var(--mono); font-size: 11px; transition: background .3s, color .3s }
+.co-panel { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden }
+.co-panel .head { padding: 9px 13px; background: var(--brand-dark); color: var(--tint); font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em }
+.co-panel .list { display: flex; flex-direction: column; gap: 8px; padding: 11px }
+.co-draft { border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; transition: opacity .45s, transform .55s var(--ease), border-color .3s, background .3s }
+.co-draft .top { display: flex; justify-content: space-between; align-items: center; gap: 8px }
+.co-draft .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--brand); background: var(--tint); border-radius: 999px; padding: 2px 8px }
+.co-draft .sel { font-family: var(--mono); font-size: 10px; color: var(--brand); transition: opacity .3s }
+.co-draft .txt { font-size: 12.5px; line-height: 1.45; margin-top: 6px }
+.co-box { margin-top: 12px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13px; min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 10px; transition: border-color .3s }
+.co-box > span:first-child { min-width: 0; line-height: 1.45 }
+.co-box .caret { display: inline-block; width: 1px; height: 14px; margin-left: 1px; vertical-align: -2px; background: var(--brand); animation: coBlink 1s steps(1) infinite }
+.co-box .post { flex: none; padding: 6px 14px; border-radius: 7px; font-size: 12px; font-weight: 600; border: 1px solid; transition: all .3s }
+.co-note { font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: right; margin-top: 6px; transition: opacity .4s .3s }
+
+.co-install { margin-top: 8px; border-radius: 22px; background: var(--tint); border: 1px solid var(--line); overflow: hidden }
+.co-install .row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 20px 22px }
+.co-install .meta { font-size: 13px; color: var(--muted); line-height: 1.4 }
+.co-dl { flex: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 500; font-size: 15px; box-shadow: 0 10px 24px -10px rgba(91,67,181,.6); transition: transform .3s, background .2s }
+.co-dl:hover { background: var(--brand-dark); color: #fff; transform: translateY(-2px) }
+.co-dl .ico { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; line-height: 1 }
+.co-how { display: inline-flex; align-items: center; gap: 8px; flex: none; white-space: nowrap; padding: 13px 18px; border-radius: 999px; border: 1px solid var(--lilac); background: #fff; cursor: pointer; font-family: var(--sans); font-size: 15px; color: var(--ink) }
+.co-how:hover { border-color: var(--brand-mid) }
+.co-how span { display: inline-block; color: var(--brand); transition: transform .45s var(--ease) }
+.co-install-list { list-style: none; margin: 0; padding: 4px 22px 24px; display: flex; flex-direction: column; border-top: 1px solid var(--line) }
+.co-install-list li { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 12px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); transition: opacity .45s, transform .55s var(--ease) }
+.co-install-list .n { width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 1px solid var(--lilac); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--brand) }
+.co-install-list .b { display: flex; flex-direction: column; gap: 3px; padding-top: 3px }
+.co-install-list .t { font-size: 15px; font-weight: 600 }
+.co-install-list .d { font-size: 14px; color: var(--muted); line-height: 1.5 }
+
+.co-index { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,260px),1fr)); gap: 16px; margin-top: 64px }
+.co-index .tile { padding: 22px 24px; border-radius: 22px; display: flex; flex-direction: column; gap: 8px }
+.co-index .live { background: #fff; border: 1px solid var(--line) }
+.co-index .soon { border: 1px dashed var(--lilac-2) }
+.co-index .k { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted) }
+.co-index .live .k { color: var(--brand) }
+.co-index .t { font-family: var(--serif); font-size: 24px }
+.co-index .soon .t { color: var(--muted) }
+.co-index .d { font-size: 14px; color: var(--muted); line-height: 1.5 }
+.co-index .lines { display: flex; flex-direction: column; gap: 7px; margin-top: 4px }
+.co-index .lines span { height: 8px; border-radius: 4px; background: var(--tint) }

@@ -20,6 +20,21 @@ export default function ScrollEffects({ motion = 1 }) {
         io.observe(el);
       });
     }
+    // Chat prompts: typing dots until the bubble is in view, then the question fades in.
+    const chatIO = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      chatIO.unobserve(e.target);
+      const dots = e.target.querySelector("[data-dots]"), txt = e.target.querySelector("[data-txt]");
+      setTimeout(() => { dots.style.display = "none"; txt.style.display = "inline"; txt.style.animation = "fadeUp .45s cubic-bezier(.2,.7,.2,1) both"; }, 420);
+    }), { threshold: 0.6 });
+    if (!reduce) {
+      document.querySelectorAll("[data-chat]").forEach((el) => {
+        const dots = el.querySelector("[data-dots]"), txt = el.querySelector("[data-txt]");
+        if (!dots || !txt) return;
+        dots.style.display = "inline-flex"; txt.style.display = "none";
+        chatIO.observe(el);
+      });
+    }
     const views = [...document.querySelectorAll("[data-view]")];
     const pars = [...document.querySelectorAll("[data-par]")];
     const bar = document.querySelector("[data-progress]");
@@ -46,7 +61,7 @@ export default function ScrollEffects({ motion = 1 }) {
       raf = requestAnimationFrame(tick);
     };
     tick();
-    return () => { cancelAnimationFrame(raf); io.disconnect(); };
+    return () => { cancelAnimationFrame(raf); io.disconnect(); chatIO.disconnect(); };
   }, [motion]);
   return null;
 }
