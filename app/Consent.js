@@ -4,17 +4,21 @@ import { usePathname } from "next/navigation";
 import { track } from "./lib/analytics";
 
 // Cookie consent for visitors in consent-required regions (EEA, UK, Switzerland).
-// Region comes from the browser time zone: free, no extra request, no IP lookup.
+// Region comes from the visitor country (mk_cc cookie, set by the Netlify edge
+// function from IP geolocation), with the browser time zone as a fallback.
 // Google's own Consent Mode default (in Analytics.js) already denies storage in
 // these countries by IP, so a missed visitor stays denied, never tracked by mistake.
 // While the banner is up the page is blurred and can't be used.
 const KEY = "mk_consent_v1";
+const CONSENT_COUNTRIES = ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"];
 const EU_ATLANTIC = ["Atlantic/Canary", "Atlantic/Madeira", "Atlantic/Azores", "Atlantic/Reykjavik", "Atlantic/Faroe"];
 const NON_EEA = ["Europe/Moscow", "Europe/Minsk", "Europe/Istanbul", "Europe/Kaliningrad", "Europe/Samara", "Europe/Volgograd", "Europe/Saratov", "Europe/Ulyanovsk", "Europe/Astrakhan", "Europe/Kirov"];
 
 function needsConsent() {
   try {
     if (testMode()) return true; // preview from outside Europe
+    const cc = /(?:^|;\s*)mk_cc=([A-Z]{2})/.exec(document.cookie)?.[1];
+    if (cc) return CONSENT_COUNTRIES.includes(cc);
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
     return (tz.startsWith("Europe/") && !NON_EEA.includes(tz)) || EU_ATLANTIC.includes(tz);
   } catch { return false; }

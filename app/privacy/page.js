@@ -17,7 +17,7 @@ export default function Privacy() {
         <p>This is a personal portfolio run by Megha Karnwal, who is responsible for the data described here. Questions or requests: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p>
 
         <h2>Analytics</h2>
-        <p>Google Analytics (through Google Tag Manager) records anonymous usage: pages viewed, sections reached, buttons clicked and which tools were used. It never receives your name, email or anything you type into a tool. In the EEA, UK and Switzerland it only runs after you agree in the cookie banner; elsewhere it runs by default. Advertising measurement (Google Ads, LinkedIn) only runs if you allow it. Change your choice any time: <ConsentLink />.</p>
+        <p>Google Analytics (through Google Tag Manager) records anonymous usage: pages viewed, sections reached, buttons clicked and which tools were used. It never receives your name, email or anything you type into a tool. In the EEA, UK and Switzerland it only runs after you agree in the cookie banner; elsewhere it runs by default. Advertising measurement (Google Ads, LinkedIn) only runs if you allow it. A small cookie holds only your country code (for one day) so the right consent choice is shown, and your choice itself is kept in your browser. Change your choice any time: <ConsentLink />.</p>
 
         <h2>The free tools</h2>
         <ul>
