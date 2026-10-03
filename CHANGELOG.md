@@ -11,7 +11,9 @@ All notable changes to meghakarnwal.com. Newest first. Branch flow: changes ship
 
 **Site**
 - **Added** a phone menu: a menu button on small screens that lists every section.
-- **Changed** the page to be shorter (about 12 desktop screens down to about 11): FAQ merged into the Contact section, point-of-view notes in a 2×2 grid, trust points in two columns with a smaller photo, one footer row per case card, tighter padding.
+- **Changed** the point-of-view notes to a 2×2 grid and the trust points to two columns (photo unchanged).
+- **Removed** the KPI chips from the four case cards; each card now ends with its outcome.
+- **Reverted** a trial that merged the FAQ into the Contact section; it made the closing section feel cluttered.
 - **Changed** the background: drifting glows removed, dots halved.
 - **Removed** the hero tool strip, the photo beside the Method heading, and the "Coming soon" tab.
 

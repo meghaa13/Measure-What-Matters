@@ -139,7 +139,7 @@ export default function Home() {
                   <span className="case-tools" style={c.toolsColor ? { color: c.toolsColor } : undefined}>{c.tools}</span>
                 </div>
                 <ul className="ticks">{c.did.map((d) => <li key={d}>{d}</li>)}</ul>
-                <div className="case-foot"><span className="out">{c.out}</span><div className="kpis">{c.kpis.map((k) => <span key={k}>{k}</span>)}</div></div>
+                <div className="case-out"><span className="label">DELIVERED</span><span>{c.out}</span></div>
               </article>
             ))}
           </div>
@@ -223,31 +223,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section id="faq" className="wrap grid2 faq" data-section="faq">
+        <div>
+          <Prompt>A few quick questions first.</Prompt>
+          <h2 data-reveal="80" className="h2">Before you book.</h2>
+        </div>
+        <Faq />
+      </section>
+
       {/* CONTACT */}
       <section id="contact" className="contact" data-cta-zone="1" data-section="contact">
         <div className="contact-box">
           <div data-par="0.1" className="ring par" />
           <Prompt white>So, what&apos;s next?</Prompt>
           <h2 data-reveal="80">Bring one question your data can&apos;t answer <em className="accent">yet</em>.</h2>
-          <div className="closing">
-            <div>
-              <ol className="next-steps">
-                {NEXT.map((t, i) => <li key={i} data-reveal={140 + i * 60}><span className="eyebrow" style={{ letterSpacing: 0 }}>0{i + 1}</span><span className="t">{t}</span></li>)}
-              </ol>
-              <div data-reveal="320" className="contact-ctas">
-                <a href={contactHref} target={bookTarget} rel={bookTarget ? "noopener" : undefined} className="btn btn-primary" data-track="cta_click" data-loc="contact">{CTA}</a>
+          <div className="next-steps">
+            {NEXT.map((t, i) => <div key={i} data-reveal={140 + i * 60}><div className="eyebrow" style={{ letterSpacing: 0 }}>0{i + 1}</div><div className="t">{t}</div></div>)}
+          </div>
+          <div data-reveal="320" className="contact-ctas">
+            <a href={contactHref} target={bookTarget} rel={bookTarget ? "noopener" : undefined} className="btn btn-primary" data-track="cta_click" data-loc="contact">{CTA}</a>
             <span className="meta">Free · 20 minutes · No slides, just your data.</span>
           </div>
           <div data-reveal="380" className="contact-alt">
             Prefer email? <a href={`mailto:${EMAIL}?subject=Analytics%2C%20automation%20%26%20AI`} data-track="cta_click" data-intent="email" data-loc="contact">{EMAIL}</a>
-                {" · "}<a href={RESUME} download="Megha-Karnwal-Resume.pdf" data-track="cta_click" data-intent="resume_download" data-loc="contact">Résumé (PDF)</a>
-              </div>
-            </div>
-            {/* FAQ lives here now: last questions answered right beside the ask */}
-            <div id="faq" data-section="faq">
-              <div data-reveal="120" className="eyebrow">BEFORE YOU BOOK</div>
-              <Faq />
-            </div>
+            {" · "}<a href={RESUME} download="Megha-Karnwal-Resume.pdf" data-track="cta_click" data-intent="resume_download" data-loc="contact">Résumé (PDF)</a>
           </div>
         </div>
       </section>
