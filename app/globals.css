@@ -499,34 +499,15 @@ html.consent-open body > *:not(.consent-layer) { filter: blur(10px); pointer-eve
 @media (max-width: 819px) { .nav-burger { display: flex } .nav { padding-left: 14px } .nav-cta { padding: 10px 14px; font-size: 13.5px } }
 @media (min-width: 820px) { .nav-menu { display: none } }
 
-/* ── Shorter page: tighter closing sections (Approach and Method untouched) ── */
-/* Point of view: 2x2 notes */
+/* Point of view: notes in a 2x2 grid */
 .notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px }
 .note-card { font-size: clamp(17px, 1.5vw, 20px); padding: 18px 20px }
 @media (max-width: 699px) { .notes { grid-template-columns: minmax(0, 1fr) } }
-/* Trust: two columns of points, smaller photo */
-.trust { padding-top: 56px; padding-bottom: 32px; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) }
+/* Trust: points in two columns; the photo keeps its full size */
+.trust { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) }
 .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; margin-top: 28px }
 .fact { grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 16px 0; align-content: start }
-.reveal-circle .clip { width: min(340px, 70vw) }
-.orbit { width: min(380px, 78vw) }
-@media (max-width: 899px) { .trust { grid-template-columns: minmax(0, 1fr) } }
+@media (max-width: 999px) { .trust { grid-template-columns: minmax(0, 1fr) } }
 @media (max-width: 599px) { .facts { grid-template-columns: minmax(0, 1fr) } }
-/* Proof: outcome and KPIs in one footer row */
+/* Case cards: header, what I did, outcome (no KPI row) */
 .case { grid-row: span 3 }
-.case-foot { display: flex; flex-direction: column; gap: 10px; padding: 14px 22px 18px; border-top: 1px solid var(--tint-4); background: var(--tint) }
-.case-foot .out { font-size: 14px; line-height: 1.4; color: var(--ink); font-weight: 500 }
-.case.dark .case-foot { background: var(--brand); border-top-color: transparent }
-.case.dark .case-foot .out { color: #fff }
-/* Contact + FAQ in one closing section */
-.contact-box { padding: clamp(36px, 5vw, 64px) clamp(22px, 5vw, 64px) }
-.contact h2 { font-size: clamp(38px, 5vw, 66px) }
-.closing { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); margin-top: 32px; align-items: start }
-.next-steps { display: flex; flex-direction: column; gap: 0; margin: 0; padding: 0; list-style: none }
-.next-steps > li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; align-items: baseline; border-top: 1px solid var(--lilac); padding: 14px 0 }
-.next-steps .t { font-size: 17px; margin-top: 0; line-height: 1.45 }
-.contact-ctas { margin-top: 24px }
-.contact-alt { margin-top: 16px }
-.closing .faq-list { margin-top: 14px }
-.closing .faq-q { padding: 16px 4px; font-size: 17px }
-@media (max-width: 899px) { .closing { grid-template-columns: minmax(0, 1fr) } }
