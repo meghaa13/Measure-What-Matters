@@ -6,7 +6,8 @@ import MicroTools from "./MicroTools";
 import AppsSection from "./AppsSection";
 import Faq from "./Faq";
 import { HeroEyebrow, HeroSub } from "./HeroCopy";
-import { BookLink, CtaZone, Prompt } from "./Bits";
+import { BookLink, Prompt } from "./Bits";
+import Stack from "./Stack";
 import { CTA, EMAIL, LINKEDIN, RESUME, bookTarget, contactHref } from "./lib/site";
 
 const CASES = [
@@ -68,7 +69,7 @@ export default function Home() {
           <HeroSub />
           <div data-reveal="520" className="hero-ctas">
             <BookLink loc="hero" className="btn btn-primary">{CTA}</BookLink>
-            <a href="#story" className="btn btn-ghost" data-track="anchor_click" data-loc="hero">See how I work ↓</a>
+            <a href="#story" className="btn btn-ghost" data-track="nav_click" data-loc="hero">See how I work ↓</a>
           </div>
           <div data-reveal="600" className="reassure">Free · 20 minutes · No slides, just your data.</div>
         </div>
@@ -156,7 +157,22 @@ export default function Home() {
         </div>
       </section>
 
-      <CtaZone loc="after_work">If this looks like the work your site needs, let’s look at your tracking together.</CtaZone>
+
+      {/* STACK */}
+      <section id="stack" className="wrap techstack" data-section="stack">
+        <Prompt>What do you actually work with?</Prompt>
+        <h2 data-reveal="80" className="h2">One stack, in the order the work <em>happens</em>.</h2>
+        <p data-reveal="140" className="stack-sub">Tap a tool to see what I use it for.</p>
+        <Stack />
+      </section>
+
+      {/* MICRO TOOLS */}
+      <section id="tools" className="tools" data-section="micro_tools">
+        <div className="wrap">
+          <Prompt>Anything I can use right now?</Prompt>
+          <MicroTools />
+        </div>
+      </section>
 
       {/* TRUST */}
       <section className="wrap grid2 trust" data-section="trust">
@@ -173,8 +189,6 @@ export default function Home() {
         </div>
       </section>
 
-      <CtaZone loc="after_trust">Twenty minutes is enough to tell you what your current setup is missing.</CtaZone>
-
       {/* CERT MARQUEE */}
       <div data-view="1" className="marquee">
         <div>
@@ -184,13 +198,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* MICRO TOOLS */}
-      <section id="tools" className="tools" data-section="micro_tools">
-        <div className="wrap">
-          <Prompt>Anything I can use right now?</Prompt>
-          <MicroTools />
-        </div>
-      </section>
 
       {/* SIDE HUSTLE */}
       <section id="apps" className="apps" data-section="side_hustle">
@@ -246,8 +253,8 @@ export default function Home() {
             <span className="meta">Free · 20 minutes · No slides, just your data.</span>
           </div>
           <div data-reveal="380" className="contact-alt">
-            Prefer email? <a href={`mailto:${EMAIL}?subject=Analytics%2C%20automation%20%26%20AI`} data-track="email_click" data-loc="contact">{EMAIL}</a>
-            {" · "}<a href={RESUME} download="Megha-Karnwal-Resume.pdf" data-track="resume_download" data-loc="contact">Résumé (PDF)</a>
+            Prefer email? <a href={`mailto:${EMAIL}?subject=Analytics%2C%20automation%20%26%20AI`} data-track="cta_click" data-intent="email" data-loc="contact">{EMAIL}</a>
+            {" · "}<a href={RESUME} download="Megha-Karnwal-Resume.pdf" data-track="cta_click" data-intent="resume_download" data-loc="contact">Résumé (PDF)</a>
           </div>
         </div>
       </section>

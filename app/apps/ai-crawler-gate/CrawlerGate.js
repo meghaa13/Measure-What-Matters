@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ScrollEffects from "../../ScrollEffects";
 import SiteChrome from "../../SiteChrome";
-import { track, toolEvent, TOOLS } from "../../lib/analytics";
+import { toolEvent, formSubmit, TOOLS } from "../../lib/analytics";
 import { CTA, EMAIL, contactHref } from "../../lib/site";
 import GateHero from "./GateHero";
 import { verdicts } from "./verdict";
@@ -59,9 +59,9 @@ function Citations({ site }) {
   };
   const runAll = async (e) => {
     e.preventDefault();
-    if (!validEmail(email)) return;
+    if (!validEmail(email)) { formSubmit("ai_citations", "report_citations", { status: "failed", failure_reason: "invalid_email" }); return; }
     postForm("ai-citations", { email: email.trim(), site });
-    track("generate_lead", { lead_source: "ai_citations" });
+    formSubmit("ai_citations", "report_citations", { email });
     setState("running");
     const j = await getQuestions(); if (!j) return;
     await Promise.all(j.questions.filter((q) => !answers[q]).map((q) => ask(q, j.brand)));
@@ -117,7 +117,7 @@ function Citations({ site }) {
       )}
 
       {state === "partial" && (
-        <form className="ths-gate mx-gate" onSubmit={runAll}>
+        <form className="ths-gate mx-gate" onSubmit={runAll} data-form="ai_citations" data-loc="report_citations">
           <div><b>Run all 5 questions, free</b><span>Add your email and the other 4 run here straight away. Nothing to wait for in your inbox.</span></div>
           <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" aria-label="Email" />
           <button type="submit">Run all 5</button>
@@ -303,7 +303,7 @@ export default function CrawlerGate() {
           <section className="sx-next" data-cta-zone="1">
             <div data-par="0.06" className="ring" />
             <div><span className="label">NEXT STEP</span><h2>Want AI referrals measured in GA4?</h2><p>I set up tracking for AI search and assistant referrals, so you can see which ones send visits, what those visitors do, and whether they become leads.</p></div>
-            <div className="actions"><a href={contactHref} className="ths-btn" data-track="cta_click" data-loc="ai_gate">{CTA}</a><span>or email <a href={`mailto:${EMAIL}`} data-track="email_click" data-loc="ai_gate">{EMAIL}</a></span></div>
+            <div className="actions"><a href={contactHref} className="ths-btn" data-track="cta_click" data-loc="ai_gate">{CTA}</a><span>or email <a href={`mailto:${EMAIL}`} data-track="cta_click" data-intent="email" data-loc="ai_gate">{EMAIL}</a></span></div>
           </section>
         </section>
       )}

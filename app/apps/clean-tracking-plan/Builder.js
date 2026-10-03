@@ -384,8 +384,8 @@ export default function Builder() {
           </div>
           <div className="ctp-cta-actions">
             <a className="ctp-btn" href={`mailto:${EMAIL}?subject=${encodeURIComponent(`Tracking plan for my ${TYPES[S.type].label} site`)}&body=${encodeURIComponent(`Hi Megha,\n\nI used The Clean Tracking Plan and would like help implementing it.\n\nMy plan: ${shareURL()}\n`)}`}
-              onClick={() => track("cta_click", { cta_location: "builder_cta", app_name: "clean_tracking_plan" })}>Book a 20-min call</a>
-            <div className="ctp-mail">or email <code>{EMAIL}</code> <button type="button" className="ctp-mini" onClick={() => { track("email_click", { cta_location: "builder_cta", method: "copy" }); copy("mail", EMAIL); }}>{label("mail")}</button></div>
+              onClick={() => track("cta_click", { click_surface: "builder_cta", click_text: "Book a 20-min call", click_url: "mailto", cta_intent: "book_call", app_name: "clean_tracking_plan" })}>Book a 20-min call</a>
+            <div className="ctp-mail">or email <code>{EMAIL}</code> <button type="button" className="ctp-mini" onClick={() => { track("secondary_cta_click", { click_surface: "builder_cta", click_text: "Copy email", click_url: null, cta_intent: "email_copy", app_name: "clean_tracking_plan" }); copy("mail", EMAIL); }}>{label("mail")}</button></div>
           </div>
         </section>
 

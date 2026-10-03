@@ -17,7 +17,7 @@ export default function Faq() {
         const on = open === i;
         return (
           <div key={x.q} className={`faq-item${on ? " open" : ""}`}>
-            <button className="faq-q" aria-expanded={on} onClick={() => { setOpen(on ? -1 : i); if (!on) track("faq_open", { item_name: x.q }); }}>
+            <button className="faq-q" aria-expanded={on} onClick={() => { setOpen(on ? -1 : i); track("faq_interaction", { click_surface: "faq", faq_question: x.q, faq_position: i + 1, faq_state: on ? "closed" : "opened" }); }}>
               <span>{x.q}</span><span className="plus">+</span>
             </button>
             <div className="faq-a"><div><p>{x.a}</p></div></div>

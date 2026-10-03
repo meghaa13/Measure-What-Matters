@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import ScrollEffects from "../../ScrollEffects";
 import SiteChrome from "../../SiteChrome";
-import { track, toolEvent, TOOLS } from "../../lib/analytics";
+import { toolEvent, formSubmit, TOOLS } from "../../lib/analytics";
 import { CTA, EMAIL, contactHref } from "../../lib/site";
 import { Coverage, Inventory } from "./Report";
 import HeroPreview from "./HeroPreview";
@@ -110,7 +110,7 @@ export default function Scanner() {
   // Lead capture: Netlify Forms (form definition lives in public/__forms.html).
   const unlock = async (e) => {
     e.preventDefault();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { formSubmit("tag_scan_report", "report_gate", { status: "failed", failure_reason: "invalid_email" }); return; }
     setSending(true);
     try {
       await fetch("/__forms.html", {
@@ -119,7 +119,7 @@ export default function Scanner() {
       });
     } catch { /* still unlock; the report is the visitor's either way */ }
     setSending(false); setUnlocked(true);
-    track("generate_lead", { lead_source: "tag_scan", tracking_health: data.score }); // never the email itself
+    formSubmit("tag_scan_report", "report_gate", { email, tracking_health: data.score }); // domain only, never the address
   };
 
   const s = data?.snapshot;
@@ -237,7 +237,7 @@ export default function Scanner() {
                 <div className="ths-rest">
                   <h2>{unlocked ? "Full report" : `${findings.length - FREE_COUNT} more issue${findings.length - FREE_COUNT > 1 ? "s" : ""}`}</h2>
                   {!unlocked && (
-                    <form className="ths-gate" onSubmit={unlock}>
+                    <form className="ths-gate" onSubmit={unlock} data-form="tag_scan_report" data-loc="report_gate">
                       <div><b>Get the full report</b><span>Every issue with evidence and the fix. I&apos;ll also send a short note on what to tackle first.</span></div>
                       <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" aria-label="Email" />
                       <button type="submit" disabled={sending}>{sending ? "Sending…" : "Show full report"}</button>
@@ -259,7 +259,7 @@ export default function Scanner() {
               </div>
               <div className="actions">
                 <a href={contactHref} className="ths-btn" data-track="cta_click" data-loc="tag_scan">{CTA}</a>
-                <span>or email <a href={`mailto:${EMAIL}?subject=${encodeURIComponent(`Tag audit for ${data.host}`)}`} data-track="email_click" data-loc="tag_scan">{EMAIL}</a></span>
+                <span>or email <a href={`mailto:${EMAIL}?subject=${encodeURIComponent(`Tag audit for ${data.host}`)}`} data-track="cta_click" data-intent="email" data-loc="tag_scan">{EMAIL}</a></span>
               </div>
             </section>
 

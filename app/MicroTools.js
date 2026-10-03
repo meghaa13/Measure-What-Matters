@@ -89,7 +89,7 @@ export default function MicroTools() {
                   </div>
                   <div className="try" style={slide(80, .4)}>
                     <div><span className="label">TRY IT</span><p>{tool.note}</p></div>
-                    <Link href={tool.href} data-track="tool_open" data-loc="micro_tools" data-app={tool.key}>Open the tool <span aria-hidden="true">→</span></Link>
+                    <Link href={tool.href} data-track="cta_click" data-intent="open_tool" data-loc="micro_tools" data-app={tool.key}>Open the tool <span aria-hidden="true">→</span></Link>
                   </div>
                 </div>
               </div>
