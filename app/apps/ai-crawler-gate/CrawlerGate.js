@@ -3,6 +3,7 @@ import { useState } from "react";
 import ScrollEffects from "../../ScrollEffects";
 import SiteChrome from "../../SiteChrome";
 import { toolEvent, formSubmit, TOOLS } from "../../lib/analytics";
+import { AI_CITATIONS } from "../../lib/site";
 import { CTA, EMAIL, contactHref } from "../../lib/site";
 import GateHero from "./GateHero";
 import { verdicts } from "./verdict";
@@ -237,7 +238,7 @@ export default function CrawlerGate() {
               <button type="submit" disabled={state === "loading"}>{state === "loading" ? "Checking…" : "Check my site"}</button>
             </form>
             <div data-reveal="480" className="sx-examples"><span>Try:</span>{recent.examples.map((x) => <button key={x} type="button" onClick={() => check(null, x, recent.recent.includes(x) ? "recent" : "example")} disabled={state === "loading"}>{x}</button>)}</div>
-            <div data-reveal="560" className="sx-trust"><span>Plain-English verdict</span><span>Live citation sample</span><span>GA4 setup for AI traffic</span></div>
+            <div data-reveal="560" className="sx-trust"><span>Plain-English verdict</span>{AI_CITATIONS ? <span>Live citation sample</span> : <span>Copy-paste robots.txt fix</span>}<span>GA4 setup for AI traffic</span></div>
           </div>
           <div data-reveal="200" className="sx-hero-art"><GateHero input={input} checked={checked} state={state} data={data} onSee={toResult} /></div>
         </div>
@@ -264,7 +265,7 @@ export default function CrawlerGate() {
           </div>
 
           {/* 2. Citations */}
-          <Citations site={data.host} />
+          {AI_CITATIONS && <Citations site={data.host} />}
 
           {/* 3. How AI reads the page, and measuring AI traffic */}
           {data.reading && <Reading r={data.reading} />}
@@ -308,7 +309,7 @@ export default function CrawlerGate() {
         </section>
       )}
 
-      <footer className="sx-foot"><div className="sx-wrap"><span>© 2026 Megha Karnwal · AI Visibility Check</span><span>Reads robots.txt and public headers. Citation samples use Claude with web search.</span><a href="/">meghakarnwal.com ↗</a></div></footer>
+      <footer className="sx-foot"><div className="sx-wrap"><span>© 2026 Megha Karnwal · AI Visibility Check</span><span>Reads robots.txt and public headers only.{AI_CITATIONS ? " Citation samples use Claude with web search." : ""}</span><a href="/">meghakarnwal.com ↗</a></div></footer>
     </div>
   );
 }

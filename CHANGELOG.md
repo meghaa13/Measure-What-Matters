@@ -4,6 +4,29 @@ All notable changes to meghakarnwal.com. Newest first. Branch flow: changes ship
 
 ## [Unreleased] — on `stage`, awaiting approval for `main`
 
+### 2026-10-04 · GTM container, phone menu, content accuracy, shorter page
+
+**Measurement**
+- **Added** the GTM container `GTM-PKHZLGS4` on every page (head loader after Consent Mode defaults, plus the noscript frame). `NEXT_PUBLIC_GTM_ID` can override it.
+
+**Site**
+- **Added** a phone menu: a menu button on small screens that lists every section.
+- **Changed** the page to be shorter (about 12 desktop screens down to about 11): FAQ merged into the Contact section, point-of-view notes in a 2×2 grid, trust points in two columns with a smaller photo, one footer row per case card, tighter padding.
+- **Changed** the background: drifting glows removed, dots halved.
+- **Removed** the hero tool strip, the photo beside the Method heading, and the "Coming soon" tab.
+
+**Content accuracy**
+- **Changed** the Stack section to match the Method cards, and added R, Make, Apps Script and Next.js.
+- **Changed** "Clarity" to "MS Clarity" everywhere.
+- **Changed** the demo panels in Method to be labelled as examples.
+- **Changed** the Proof header to "4 client sites" and "In-house at Intelegencia".
+- **Changed** the Comment Co-Pilot sample so it no longer shows an invented client result.
+- **Removed** repeated copy: Employee of the Quarter and "two years" each appear once; FAQ no longer repeats the Contact steps.
+- **Removed** Clean Tracking Plan from the "Free tools" list in the footer; it sits under Side projects, as on the page.
+
+**AI features**
+- **Changed** the AI citation sample to off and hidden until a Claude API key is added (`ANTHROPIC_API_KEY` and `NEXT_PUBLIC_AI_CITATIONS=on`).
+
 ### 2026-10-04 · Universal dataLayer, logo, stack section, background dots
 
 **Measurement**

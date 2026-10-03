@@ -15,7 +15,7 @@ const STEPS = [
 const DRAFTS = [
   { label: "Affirm & extend", text: "We saw the same shift — paid social's assisted conversions finally showed up instead of getting buried under last-click search." },
   { label: "Ask a question", text: "Did budget actually move after the switch, or did the model change stay mostly a reporting exercise?" },
-  { label: "Share a data point", text: "Ran the same migration on a B2B client's property — content-assisted pipeline went from invisible to ~18% of attributed revenue in a quarter." },
+  { label: "Add a practical tip", text: "Worth comparing assisted conversions before and after the switch. That is usually where the shift shows up first." },
 ];
 
 const INSTALL = [
@@ -159,7 +159,6 @@ export default function AppsSection() {
             <span className="num">{num}</span>{name}
           </button>
         ))}
-        <span className="soon"><span className="num">03</span>Coming soon</span>
       </div>
       <div ref={trackRef} className="co-track" style={{ height: pinned ? "300vh" : "auto" }}>
         <div className="co-stage" style={{ position: pinned ? "sticky" : "static", top: PIN_TOP }}>
