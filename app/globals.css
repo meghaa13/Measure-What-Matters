@@ -340,12 +340,12 @@ a:hover { color: var(--brand-dark) }
 .tool-dots button.on { width: 28px; background: var(--brand) }
 
 /* pov */
-.pov { position: relative; min-height: 90vh; display: flex; align-items: center; overflow: hidden }
+.pov { position: relative; display: flex; align-items: center; overflow: hidden }
 .pov-img { position: absolute; top: 0; right: 0; bottom: 0; width: min(62%,900px); -webkit-mask-image: linear-gradient(to right, transparent, #000 45%); mask-image: linear-gradient(to right, transparent, #000 45%) }
 .pov-img img { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; object-fit: cover; object-position: 50% 35%; transform: translate3d(0,var(--y,0px),0) scale(calc(1.12 - var(--v,0) * .1)); filter: saturate(.85) }
 .pov-img .wash { position: absolute; inset: 0; background: linear-gradient(to top, #FBFAFD, rgba(251,250,253,0) 30%), rgba(197,182,240,.18) }
 @media (max-width: 699px) { .pov-img { width: 100%; opacity: .35 } }
-.pov-body { position: relative; width: 100%; padding-top: 80px; padding-bottom: 80px }
+.pov-body { position: relative; width: 100%; padding-top: 64px; padding-bottom: 64px }
 .pov .prompt { margin-bottom: 20px }
 .notes { display: flex; flex-direction: column; gap: 14px; margin-top: 36px }
 .note-card { padding: clamp(18px,4vw,24px) clamp(18px,4vw,26px); border-radius: 22px; background: rgba(255,255,255,.86); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid var(--line); font-family: var(--serif); font-size: clamp(21px,5vw,26px); line-height: 1.2 }
@@ -480,16 +480,53 @@ html.consent-open body > *:not(.consent-layer) { filter: blur(10px); pointer-eve
 @media (max-width: 900px) { .stack-grid { grid-template-columns: 1fr } .stack-rail { display: none } }
 @media (prefers-reduced-motion: reduce) { .stack-rail span { animation: none; width: 100%; opacity: .4 } }
 
-/* Ambient background, site-wide: slow drifting glows + data lines running down both side gutters */
-.ambient { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden }
-.ambient .orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .5; will-change: transform }
-.ambient .o1 { width: 520px; height: 520px; left: -160px; top: 8%; background: radial-gradient(circle, rgba(142,116,221,.42), transparent 70%); animation: orb-a 26s ease-in-out infinite }
-.ambient .o2 { width: 460px; height: 460px; right: -140px; top: 46%; background: radial-gradient(circle, rgba(91,67,181,.30), transparent 70%); animation: orb-b 32s ease-in-out infinite }
-.ambient .o3 { width: 380px; height: 380px; left: 38%; bottom: -160px; background: radial-gradient(circle, rgba(224,122,184,.20), transparent 70%); animation: orb-a 38s ease-in-out infinite reverse }
-@keyframes orb-a { 50% { transform: translate3d(90px, 70px, 0) scale(1.12) } }
-@keyframes orb-b { 50% { transform: translate3d(-110px, -60px, 0) scale(.92) } }
 /* Background dots: fade in and out in place, only on empty background (placed by Ambient.js) */
 .dots-layer { position: absolute; left: 0; top: 0; width: 100%; height: 0; z-index: 10; pointer-events: none; overflow: hidden }
 .dots-layer .dot { position: absolute; border-radius: 50%; opacity: 0; box-shadow: 0 0 10px 1px rgba(142,116,221,.35); animation: dot-blink 6s ease-in-out infinite }
 .dots-layer .dot.w { box-shadow: 0 0 0 1px rgba(142,116,221,.5), 0 0 12px 2px rgba(142,116,221,.4) }
 @keyframes dot-blink { 0%, 100% { opacity: 0; transform: scale(.4) } 45%, 60% { opacity: .9; transform: scale(1) } }
+
+/* Phone menu */
+.nav-burger { display: none; flex: none; width: 42px; height: 42px; margin-left: 6px; border-radius: 50%; border: 1px solid var(--line); background: #fff; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0 }
+.nav-burger span { width: 16px; height: 1.5px; border-radius: 2px; background: var(--ink); transition: transform .3s var(--ease), opacity .2s }
+.nav-burger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg) }
+.nav-burger.open span:nth-child(2) { opacity: 0 }
+.nav-burger.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg) }
+.nav-menu { position: fixed; z-index: 49; top: 78px; left: 14px; right: 14px; display: flex; flex-direction: column; padding: 10px; border-radius: 24px; background: rgba(251,250,253,.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); box-shadow: 0 24px 50px -24px rgba(46,34,99,.4); animation: consent-in .25s var(--ease) }
+.nav-menu[hidden] { display: none }
+.nav-menu a { padding: 14px 16px; border-radius: 14px; font-size: 17px; color: var(--ink) }
+.nav-menu a:hover, .nav-menu a:active { background: var(--tint) }
+@media (max-width: 819px) { .nav-burger { display: flex } .nav { padding-left: 14px } .nav-cta { padding: 10px 14px; font-size: 13.5px } }
+@media (min-width: 820px) { .nav-menu { display: none } }
+
+/* ── Shorter page: tighter closing sections (Approach and Method untouched) ── */
+/* Point of view: 2x2 notes */
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px }
+.note-card { font-size: clamp(17px, 1.5vw, 20px); padding: 18px 20px }
+@media (max-width: 699px) { .notes { grid-template-columns: minmax(0, 1fr) } }
+/* Trust: two columns of points, smaller photo */
+.trust { padding-top: 56px; padding-bottom: 32px; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; margin-top: 28px }
+.fact { grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 16px 0; align-content: start }
+.reveal-circle .clip { width: min(340px, 70vw) }
+.orbit { width: min(380px, 78vw) }
+@media (max-width: 899px) { .trust { grid-template-columns: minmax(0, 1fr) } }
+@media (max-width: 599px) { .facts { grid-template-columns: minmax(0, 1fr) } }
+/* Proof: outcome and KPIs in one footer row */
+.case { grid-row: span 3 }
+.case-foot { display: flex; flex-direction: column; gap: 10px; padding: 14px 22px 18px; border-top: 1px solid var(--tint-4); background: var(--tint) }
+.case-foot .out { font-size: 14px; line-height: 1.4; color: var(--ink); font-weight: 500 }
+.case.dark .case-foot { background: var(--brand); border-top-color: transparent }
+.case.dark .case-foot .out { color: #fff }
+/* Contact + FAQ in one closing section */
+.contact-box { padding: clamp(36px, 5vw, 64px) clamp(22px, 5vw, 64px) }
+.contact h2 { font-size: clamp(38px, 5vw, 66px) }
+.closing { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); margin-top: 32px; align-items: start }
+.next-steps { display: flex; flex-direction: column; gap: 0; margin: 0; padding: 0; list-style: none }
+.next-steps > li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; align-items: baseline; border-top: 1px solid var(--lilac); padding: 14px 0 }
+.next-steps .t { font-size: 17px; margin-top: 0; line-height: 1.45 }
+.contact-ctas { margin-top: 24px }
+.contact-alt { margin-top: 16px }
+.closing .faq-list { margin-top: 14px }
+.closing .faq-q { padding: 16px 4px; font-size: 17px }
+@media (max-width: 899px) { .closing { grid-template-columns: minmax(0, 1fr) } }

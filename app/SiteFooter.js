@@ -6,7 +6,6 @@ const TOOLS = [
   ["/apps/tag-scanner", "Tag Health Scan"],
   ["/apps/lead-path", "Lead Path X-Ray"],
   ["/apps/ai-crawler-gate", "AI Visibility Check"],
-  ["/apps/clean-tracking-plan", "Clean Tracking Plan"],
 ];
 const SITE = [["/#story", "Approach"], ["/#method", "Method"], ["/#work", "Proof"], ["/#stack", "Stack"], ["/#apps", "Side projects"], ["/#faq", "FAQ"]];
 

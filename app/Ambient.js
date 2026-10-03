@@ -8,8 +8,8 @@ import { usePathname } from "next/navigation";
 const COLORS = ["#FFFFFF", "#C5B6F0", "#E6E0FA", "#8E74DD", "#5B43B5"];
 const HEROES = '[data-section="hero"], [data-section="tool_hero"], .sx-hero';
 const PAD = 18;       // clear space kept around every obstacle
-const AREA_PER_DOT = 26000; // px² of free background per dot
-const MAX_DOTS = 170;
+const AREA_PER_DOT = 52000; // px² of free background per dot
+const MAX_DOTS = 85;
 
 // Small seeded generator, so the layout is stable between recalculations.
 function rng(seed) { let s = seed; return () => { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; }; }
@@ -114,11 +114,6 @@ export default function Ambient() {
   }, [pathname]);
 
   return (
-    <>
-      <div className="ambient" aria-hidden="true">
-        <span className="orb o1" /><span className="orb o2" /><span className="orb o3" />
-      </div>
-      <div ref={ref} className="dots-layer" aria-hidden="true" />
-    </>
+    <div ref={ref} className="dots-layer" aria-hidden="true" />
   );
 }

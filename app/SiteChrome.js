@@ -18,6 +18,7 @@ const scrollToId = (id) => {
 export default function SiteChrome({ home = true, current = null }) {
   const [active, setActive] = useState(home ? null : current);
   const [fab, setFab] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     let lock = 0, raf = 0;
@@ -41,7 +42,7 @@ export default function SiteChrome({ home = true, current = null }) {
   }, []);
 
   // On the landing page, smooth-scroll in place; elsewhere, a normal link to "/#id".
-  const go = (id) => (e) => { if (!home) return; e.preventDefault(); window.__navLock?.(900); setActive(id); scrollToId(id); };
+  const go = (id) => (e) => { setMenu(false); if (!home) return; e.preventDefault(); window.__navLock?.(900); setActive(id); scrollToId(id); };
   const book = (e) => { if (!bookTarget) go("contact")(e); };
   const href = (id) => (home ? `#${id}` : `/#${id}`);
   const bookLink = bookTarget ? bookHref : href("contact");
@@ -61,8 +62,15 @@ export default function SiteChrome({ home = true, current = null }) {
           <a href={bookLink} target={bookTarget} rel={bookTarget ? "noopener" : undefined} onClick={go("contact")} className={`nav-cta${fab ? " away" : ""}`} data-track="cta_click" data-loc="header">
             {CTA}<span aria-hidden="true">→</span>
           </a>
+          <button type="button" className={`nav-burger${menu ? " open" : ""}`} aria-label={menu ? "Close menu" : "Open menu"} aria-expanded={menu} aria-controls="nav-menu" onClick={() => setMenu(!menu)}><span /><span /><span /></button>
         </div>
       </nav>
+      {/* Phone menu: the header links are hidden on small screens */}
+      <div id="nav-menu" className="nav-menu" hidden={!menu}>
+        {[...NAV, ["apps", "Side projects"], ["faq", "FAQ"], ["contact", "Contact"]].map(([id, label]) => (
+          <a key={id} href={href(id)} onClick={go(id)} data-track="nav_click" data-loc="header_menu">{label}</a>
+        ))}
+      </div>
       <a href={bookLink} target={bookTarget} rel={bookTarget ? "noopener" : undefined} onClick={book}
         className={`fab${fab ? " on" : ""}`} aria-hidden={!fab} tabIndex={fab ? 0 : -1} data-track="cta_click" data-loc="floating">
         <span className="face"><img src="/uploads/img1.webp" alt="" /></span>

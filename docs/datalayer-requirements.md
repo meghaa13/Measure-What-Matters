@@ -42,7 +42,7 @@ Moving around the site: logo, menu links, "See how I work", 404 links, and **eve
 
 | Parameter | Values |
 |---|---|
-| `click_surface` | `header`, `footer`, `hero`, `not_found`, `side_hustle_tabs` (the app tabs: Comment Co-Pilot / The Clean Tracking Plan) |
+| `click_surface` | `header`, `header_menu` (the phone menu), `footer`, `hero`, `not_found`, `side_hustle_tabs` (the app tabs: Comment Co-Pilot / The Clean Tracking Plan) |
 | `click_text` | Visible text, max 60 characters |
 | `click_url` | Link target |
 
@@ -85,6 +85,8 @@ The page it sits on and the page the visitor came from are in the universal cont
 | `story_step` | Step name | `selected` | `step_number`, `method` (`tab` / `next` / `prev`) |
 | `app_step` | Step title | `selected` | `app_name`, `step_number` (the four steps under each app) |
 | `install_guide` | `comment_co_pilot` | `opened` / `closed` | — |
+| `stack_tool` | Tool name | `opened` / `closed` | `stack_group` |
+| `button` | Button text | `true` / `false` / `clicked` | Any untagged button, e.g. the phone menu button |
 
 All carry `click_surface`.
 

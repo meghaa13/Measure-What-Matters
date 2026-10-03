@@ -3,9 +3,8 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 import { track, setPage, emailDomain } from "./lib/analytics";
-import { audienceKey } from "./lib/site";
+import { audienceKey, GTM_ID } from "./lib/site";
 
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const LP_VERSION = "v4";
 
 const pageType = (path) => (path.startsWith("/apps/") ? "tool" : path === "/" ? "home" : path === "/privacy" ? "legal" : "other");

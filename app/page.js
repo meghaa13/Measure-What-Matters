@@ -21,7 +21,7 @@ const CASES = [
     did: ["Dashboards for engagement and CTR trends", "Ran client meetings independently"],
     kpis: ["CTR", "Engagement rate", "Returning users"], out: "Self-serve reporting for the client" },
   { top: "#EEE9FA", kind: "WEB ANALYTICS", name: "Cordia Energy", tools: "GA4 · GTM · MS Clarity",
-    did: ["GA4, GTM and Clarity implementation", "Event tracking across key site actions"],
+    did: ["GA4, GTM and MS Clarity implementation", "Event tracking across key site actions"],
     kpis: ["Form submissions", "Traffic by source", "Event coverage"], out: "Daily performance reporting" },
 ];
 
@@ -36,8 +36,8 @@ const FACTS = [
   ["Consent first", "Consent Mode configured and debugged so tags fire only when they are allowed to."],
   ["PII stays out", "Lead outcomes are joined by a request ID, and ad-platform matching uses hashed data. Never raw names or emails in analytics."],
   ["Clean at the source", "Staging traffic separated from production. Inflated sessions and \"(not set)\" dimensions fixed where they start, not patched in the report."],
-  ["Two years, live", "Production delivery since June 2024, including financial-services lead flows. Client meetings run independently for VPP and QS."],
-  ["Recognized", "Employee of the Quarter in Analytics at Intelegencia. B.Tech in Computer Science, Data Science minor."],
+  ["Live, not practice", "Production work on real lead flows, including financial services. Client meetings run independently for VPP and QS."],
+  ["Trained for it", "B.Tech in Computer Science with a Data Science minor, plus the certifications below."],
 ];
 
 const CERTS = ["Google Analytics 4", "Google Tag Manager Fundamentals", "GI Ventures & NVIDIA AI-ML", "IBM Python for AI & Data Science", "NPTEL Python for Data Science", "Microsoft Tech-Saksham Full Stack", "Google Analytics 4", "Google Tag Manager Fundamentals"];
@@ -82,9 +82,6 @@ export default function Home() {
             <div className="cap">MEGHA KARNWAL — ANALYTICS · AUTOMATION · AI</div>
           </div>
         </div>
-        <div data-reveal="700" className="toolbelt">
-          {["GA4", "GTM", "Looker Studio", "BigQuery", "MS Clarity", "Python", "SQL"].map((t) => <span key={t}>{t}</span>)}
-        </div>
       </header>
 
       {/* STORY */}
@@ -100,9 +97,6 @@ export default function Home() {
             <Prompt>Okay. So where does AI come in?</Prompt>
             <h2 data-reveal="80" className="h2">Analytics, then automation, then <em>AI</em>, in that order.</h2>
             <p data-reveal="160" className="lead" style={{ maxWidth: 440, margin: "20px 0 0" }}>AI multiplies whatever you feed it, including bad tracking. So I build from the bottom up: measure honestly, automate the repetitive work, then add AI where it saves real hours or finds real signal.</p>
-            <div data-view="1" data-reveal="220" className="duo">
-              <img loading="lazy" data-par="-0.1" src="/uploads/img2.webp" alt="" />
-            </div>
           </div>
         </div>
         <MethodCards />
@@ -115,9 +109,9 @@ export default function Home() {
           <div className="work-head">
             <h2 data-reveal="60" className="h2">On live sites, every day.</h2>
             <div data-reveal="120" className="stats">
-              <div><b>4</b><span>LIVE CLIENT SITES</span></div>
+              <div><b>4</b><span>CLIENT SITES</span></div>
               <div><b>2 yrs</b><span>SINCE JUNE 2024</span></div>
-              <div><b>Intelegencia</b><span>DELIVERED AT</span></div>
+              <div><b>Intelegencia</b><span>IN-HOUSE AT</span></div>
             </div>
           </div>
           <article data-reveal="160" className="vpp">
@@ -129,7 +123,7 @@ export default function Home() {
             </div>
             <div>
               <span className="label">WHAT I DID</span>
-              <ul className="ticks"><li>Mapped clickstream behavior with Clarity heatmaps</li><li>Identified the purchase-funnel drop-off points</li><li>Ran client meetings and communication</li></ul>
+              <ul className="ticks"><li>Mapped clickstream behavior with MS Clarity heatmaps</li><li>Identified the purchase-funnel drop-off points</li><li>Ran client meetings and communication</li></ul>
             </div>
             <div>
               <span className="label">KPIS OWNED</span>
@@ -145,8 +139,7 @@ export default function Home() {
                   <span className="case-tools" style={c.toolsColor ? { color: c.toolsColor } : undefined}>{c.tools}</span>
                 </div>
                 <ul className="ticks">{c.did.map((d) => <li key={d}>{d}</li>)}</ul>
-                <div className="case-kpis"><span className="label">KPIS OWNED</span><div className="kpis">{c.kpis.map((k) => <span key={k}>{k}</span>)}</div></div>
-                <div className="case-out"><span className="label">DELIVERED</span><span>{c.out}</span></div>
+                <div className="case-foot"><span className="out">{c.out}</span><div className="kpis">{c.kpis.map((k) => <span key={k}>{k}</span>)}</div></div>
               </article>
             ))}
           </div>
@@ -218,7 +211,7 @@ export default function Home() {
           <div className="wash" />
         </div>
         <div className="wrap pov-body">
-          <div style={{ maxWidth: 560 }}>
+          <div style={{ maxWidth: 760 }}>
             <Prompt white>Where do you think this is all heading?</Prompt>
             <div data-reveal="0" className="eyebrow">WORKING NOTES</div>
             <h2 data-reveal="80" className="h2" style={{ marginTop: 18 }}>Where analytics is heading next.</h2>
@@ -230,31 +223,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="wrap grid2 faq" data-section="faq">
-        <div>
-          <Prompt>A few quick questions first.</Prompt>
-          <h2 data-reveal="80" className="h2">Before you book.</h2>
-        </div>
-        <Faq />
-      </section>
-
       {/* CONTACT */}
       <section id="contact" className="contact" data-cta-zone="1" data-section="contact">
         <div className="contact-box">
           <div data-par="0.1" className="ring par" />
           <Prompt white>So, what&apos;s next?</Prompt>
           <h2 data-reveal="80">Bring one question your data can&apos;t answer <em className="accent">yet</em>.</h2>
-          <div className="next-steps">
-            {NEXT.map((t, i) => <div key={i} data-reveal={140 + i * 60}><div className="eyebrow" style={{ letterSpacing: 0 }}>0{i + 1}</div><div className="t">{t}</div></div>)}
-          </div>
-          <div data-reveal="320" className="contact-ctas">
-            <a href={contactHref} target={bookTarget} rel={bookTarget ? "noopener" : undefined} className="btn btn-primary" data-track="cta_click" data-loc="contact">{CTA}</a>
+          <div className="closing">
+            <div>
+              <ol className="next-steps">
+                {NEXT.map((t, i) => <li key={i} data-reveal={140 + i * 60}><span className="eyebrow" style={{ letterSpacing: 0 }}>0{i + 1}</span><span className="t">{t}</span></li>)}
+              </ol>
+              <div data-reveal="320" className="contact-ctas">
+                <a href={contactHref} target={bookTarget} rel={bookTarget ? "noopener" : undefined} className="btn btn-primary" data-track="cta_click" data-loc="contact">{CTA}</a>
             <span className="meta">Free · 20 minutes · No slides, just your data.</span>
           </div>
           <div data-reveal="380" className="contact-alt">
             Prefer email? <a href={`mailto:${EMAIL}?subject=Analytics%2C%20automation%20%26%20AI`} data-track="cta_click" data-intent="email" data-loc="contact">{EMAIL}</a>
-            {" · "}<a href={RESUME} download="Megha-Karnwal-Resume.pdf" data-track="cta_click" data-intent="resume_download" data-loc="contact">Résumé (PDF)</a>
+                {" · "}<a href={RESUME} download="Megha-Karnwal-Resume.pdf" data-track="cta_click" data-intent="resume_download" data-loc="contact">Résumé (PDF)</a>
+              </div>
+            </div>
+            {/* FAQ lives here now: last questions answered right beside the ask */}
+            <div id="faq" data-section="faq">
+              <div data-reveal="120" className="eyebrow">BEFORE YOU BOOK</div>
+              <Faq />
+            </div>
           </div>
         </div>
       </section>

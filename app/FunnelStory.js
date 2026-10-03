@@ -5,7 +5,7 @@ import { uiEvent } from "./lib/analytics";
 const STEPS = [
   { label: "Acquisition", title: "Start with where people come from.", body: "Before judging any channel, I map which sources send people to which pages. Search and social visitors arrive with different intent, so they get read differently." },
   { label: "Behavior", title: "Follow what they actually do.", body: "Path analysis on GA4 events shows the real routes through the site, including the ones that end in an exit." },
-  { label: "Diagnosis", title: "Find exactly where it breaks.", body: "Splitting each step by segment shows which group falls away and where. Clarity heatmaps and recordings then show why." },
+  { label: "Diagnosis", title: "Find exactly where it breaks.", body: "Splitting each step by segment shows which group falls away and where. MS Clarity heatmaps and recordings then show why." },
   { label: "Validation", title: "Prove the fix worked.", body: "Every change is measured against its baseline. On VPP, fixing the drop-off points found this way raised conversion rate by 50%. Then the same metrics are reported automatically, so the next leak is caught early." },
 ];
 

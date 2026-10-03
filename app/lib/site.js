@@ -6,6 +6,14 @@ export const CTA = "Book a 20-min call";
 export const BOOKING_URL = "";
 export const SHOW_PROMPTS = true;
 
+// Google Tag Manager container. Not a secret: it is visible in the page source.
+// NEXT_PUBLIC_GTM_ID (Netlify environment variable) overrides it, e.g. for a test container.
+export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-PKHZLGS4";
+
+// The AI citation sample needs a paid Claude API key (ANTHROPIC_API_KEY).
+// Off until one is added; set NEXT_PUBLIC_AI_CITATIONS=on in Netlify to show it.
+export const AI_CITATIONS = process.env.NEXT_PUBLIC_AI_CITATIONS === "on";
+
 export const EMAIL = "meghakarnwal13@gmail.com";
 export const LINKEDIN = "https://linkedin.com/in/megha-karnwal-453889251";
 export const RESUME = "/uploads/MeghaKarnwal-%20web%20analytics%20resume.pdf";
