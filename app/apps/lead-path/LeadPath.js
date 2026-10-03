@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import ScrollEffects from "../../ScrollEffects";
 import SiteChrome from "../../SiteChrome";
-import { track, toolEvent, TOOLS } from "../../lib/analytics";
+import { toolEvent, formSubmit, TOOLS } from "../../lib/analytics";
 import { CTA, EMAIL, contactHref } from "../../lib/site";
 import LeadHero from "./LeadHero";
 import { STAGES, leadVerdict } from "./verdict";
@@ -211,12 +211,12 @@ function useBulk() {
 
 function Monitoring({ site }) {
   const [email, setEmail] = useState(""), [done, setDone] = useState(false);
-  const submit = async (e) => { e.preventDefault(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return; await postForm("lead-path-monitoring", { email: email.trim(), site: site || "" }); setDone(true); track("generate_lead", { lead_source: "lead_path_monitoring" }); };
+  const submit = async (e) => { e.preventDefault(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { formSubmit("lead_path_monitoring", "report_monitoring", { status: "failed", failure_reason: "invalid_email" }); return; } await postForm("lead-path-monitoring", { email: email.trim(), site: site || "" }); setDone(true); formSubmit("lead_path_monitoring", "report_monitoring", { email }); };
   return (
     <div className="mx-monitor">
       <div><span className="label">WEEKLY MONITORING · EARLY ACCESS</span><b>Get an alert when a redirect starts dropping click IDs.</b><span className="muted">Redirects change silently when sites are redeployed. Monitoring re-checks your final URLs every week. Join the early-access list and I&apos;ll set it up with you.</span></div>
       {done ? <span className="pill ok">You&apos;re on the list.</span> : (
-        <form onSubmit={submit}><input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" aria-label="Email" /><button type="submit">Join</button></form>
+        <form onSubmit={submit} data-form="lead_path_monitoring" data-loc="report_monitoring"><input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" aria-label="Email" /><button type="submit">Join</button></form>
       )}
     </div>
   );
@@ -334,7 +334,7 @@ export default function LeadPath() {
           <section className="sx-next" data-cta-zone="1">
             <div data-par="0.06" className="ring" />
             <div><span className="label">NEXT STEP</span><h2>Want the CRM side checked too?</h2><p>This is the outside view. The paid audit follows real leads into the CRM and confirms every Verify item, with a fix plan in priority order.</p></div>
-            <div className="actions"><a href={contactHref} className="ths-btn" data-track="cta_click" data-loc="lead_path">{CTA}</a><span>or email <a href={`mailto:${EMAIL}`} data-track="email_click" data-loc="lead_path">{EMAIL}</a></span></div>
+            <div className="actions"><a href={contactHref} className="ths-btn" data-track="cta_click" data-loc="lead_path">{CTA}</a><span>or email <a href={`mailto:${EMAIL}`} data-track="cta_click" data-intent="email" data-loc="lead_path">{EMAIL}</a></span></div>
           </section>
         </section>
       )}

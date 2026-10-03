@@ -2,7 +2,7 @@
 @keyframes coSweep { from { background-position: 160% 0 } to { background-position: -60% 0 } }
 @keyframes coBlink { 50% { opacity: 0 } }
 @keyframes coPulse { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
-.apps { position: relative; padding: 120px 0 110px }
+.apps { position: relative; padding: 80px 0 80px }
 .apps-wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px }
 @keyframes fadeUp { from { opacity: 0; transform: translate3d(0,16px,0) } to { opacity: 1; transform: none } }
 .app-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 40px; padding: 6px; border-radius: 28px; background: var(--tint); border: 1px solid var(--line); width: fit-content; max-width: 100% }

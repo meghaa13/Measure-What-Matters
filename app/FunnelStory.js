@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { track } from "./lib/analytics";
+import { uiEvent } from "./lib/analytics";
 
 const STEPS = [
   { label: "Acquisition", title: "Start with where people come from.", body: "Before judging any channel, I map which sources send people to which pages. Search and social visitors arrive with different intent, so they get read differently." },
@@ -205,7 +205,7 @@ export default function FunnelStory() {
   const go = (i, method) => {
     const n = (i + 4) % 4;
     setTab(n);
-    track("story_step", { step_number: n + 1, step_name: STEPS[n].label, method });
+    uiEvent("story_step", STEPS[n].label, "selected", { click_surface: "story", step_number: n + 1, method });
   };
 
   return (

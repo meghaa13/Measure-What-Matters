@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { track } from "./lib/analytics";
+import { track, uiEvent } from "./lib/analytics";
 
 const DOWNLOAD = "/downloads/Comment-Co-Pilot.zip";
 
@@ -129,7 +129,7 @@ export default function AppsSection() {
   }, [counting]);
 
   const selectApp = (i, method) => {
-    if (i !== app) track("app_select", { app_name: APP_KEYS[i], method });
+    if (i !== app) track("nav_click", { click_surface: "side_hustle_tabs", click_text: APP_KEYS[i], click_url: null, method });
     setApp(i);
   };
   const pane = (on) => ({
@@ -176,7 +176,7 @@ export default function AppsSection() {
               {STEPS.map(([title, caption], i) => {
                 const a = i === st;
                 return (
-                  <button key={title} role="tab" aria-selected={a} className={`co-step${a ? " on" : ""}`} onClick={() => jump(i)}>
+                  <button key={title} role="tab" aria-selected={a} className={`co-step${a ? " on" : ""}`} onClick={() => { jump(i); uiEvent("app_step", title, "selected", { click_surface: "side_hustle", app_name: "comment_co_pilot", step_number: i + 1 }); }}>
                     <span className="n">0{i + 1}</span>
                     <span className="body">
                       <span className="t">{title}</span>
@@ -282,7 +282,7 @@ export default function AppsSection() {
               {CTP_STEPS.map((title, i) => {
                 const a = i === st;
                 return (
-                  <button key={title} role="tab" aria-selected={a} className={`co-step tp-step${a ? " on" : ""}`} onClick={() => jump(i)}>
+                  <button key={title} role="tab" aria-selected={a} className={`co-step tp-step${a ? " on" : ""}`} onClick={() => { jump(i); uiEvent("app_step", title, "selected", { click_surface: "side_hustle", app_name: "clean_tracking_plan", step_number: i + 1 }); }}>
                     <span className="n">0{i + 1}</span>
                     <span className="t">{title}</span>
                     <span className="bar" style={{ opacity: pinned && i <= st ? 1 : 0, transform: `scaleX(clamp(0, calc(var(--cp,0) * 4 - ${i}), 1))` }} />
@@ -355,10 +355,10 @@ export default function AppsSection() {
         <div key="co" className="app-bar-in" style={{ maxWidth: 720 }}>
           <div className="co-install">
             <div className="row">
-              <a href={DOWNLOAD} download="Comment-Co-Pilot.zip" onClick={() => { setInstallOpen(true); track("app_download", { app_name: "comment_co_pilot", file_name: "Comment-Co-Pilot.zip" }); }} className="co-dl">
+              <a href={DOWNLOAD} download="Comment-Co-Pilot.zip" onClick={() => { setInstallOpen(true); track("secondary_cta_click", { click_surface: "side_hustle", click_text: "Download", click_url: DOWNLOAD, cta_intent: "download", app_name: "comment_co_pilot" }); }} className="co-dl">
                 <span className="ico">↓</span>Download .zip
               </a>
-              <button className="co-how" aria-expanded={installOpen} onClick={() => { setInstallOpen((o) => !o); track("install_guide_toggle", { app_name: "comment_co_pilot", action: installOpen ? "close" : "open" }); }}>
+              <button className="co-how" aria-expanded={installOpen} onClick={() => { setInstallOpen((o) => !o); uiEvent("install_guide", "comment_co_pilot", installOpen ? "closed" : "opened", { click_surface: "side_hustle" }); }}>
                 How to install<span style={{ transform: `rotate(${installOpen ? 45 : 0}deg)` }}>+</span>
               </button>
               <span className="meta">Chrome extension · about 2 minutes to set up</span>
@@ -382,7 +382,7 @@ export default function AppsSection() {
         </div>
       ) : (
         <div key="ctp" className="app-bar-in tp-bar">
-          <Link href="/apps/clean-tracking-plan" className="co-dl tp-open" data-track="app_open" data-loc="side_hustle" data-app="clean_tracking_plan">Open the builder <span aria-hidden="true">→</span></Link>
+          <Link href="/apps/clean-tracking-plan" className="co-dl tp-open" data-track="cta_click" data-intent="open_tool" data-loc="side_hustle" data-app="clean_tracking_plan">Open the builder <span aria-hidden="true">→</span></Link>
           <span className="meta">Free · runs in your browser · nothing you type is sent</span>
         </div>
       )}

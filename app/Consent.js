@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { track } from "./lib/analytics";
+import { track, clearIds } from "./lib/analytics";
+import { LogoMark } from "./Logo";
+import { CONSENT_KEY, needsConsent, readConsent, testMode } from "./lib/region";
 
 // Cookie consent for visitors in consent-required regions (EEA, UK, Switzerland).
 // Region comes from the visitor country (mk_cc cookie, set by the Netlify edge
@@ -9,31 +11,8 @@ import { track } from "./lib/analytics";
 // Google's own Consent Mode default (in Analytics.js) already denies storage in
 // these countries by IP, so a missed visitor stays denied, never tracked by mistake.
 // While the banner is up the page is blurred and can't be used.
-const KEY = "mk_consent_v1";
-const CONSENT_COUNTRIES = ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"];
-const EU_ATLANTIC = ["Atlantic/Canary", "Atlantic/Madeira", "Atlantic/Azores", "Atlantic/Reykjavik", "Atlantic/Faroe"];
-const NON_EEA = ["Europe/Moscow", "Europe/Minsk", "Europe/Istanbul", "Europe/Kaliningrad", "Europe/Samara", "Europe/Volgograd", "Europe/Saratov", "Europe/Ulyanovsk", "Europe/Astrakhan", "Europe/Kirov"];
-
-function needsConsent() {
-  try {
-    if (testMode()) return true; // preview from outside Europe
-    const cc = /(?:^|;\s*)mk_cc=([A-Z]{2})/.exec(document.cookie)?.[1];
-    if (cc) return CONSENT_COUNTRIES.includes(cc);
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-    return (tz.startsWith("Europe/") && !NON_EEA.includes(tz)) || EU_ATLANTIC.includes(tz);
-  } catch { return false; }
-}
-
-// ?consent=test previews the banner for the rest of the tab session.
-function testMode() {
-  try {
-    if (new URLSearchParams(window.location.search).get("consent") === "test") sessionStorage.setItem("mk_consent_test", "1");
-    return sessionStorage.getItem("mk_consent_test") === "1";
-  } catch { return false; }
-}
-
-function read() { try { return JSON.parse(localStorage.getItem(KEY)); } catch { return null; } }
-function save(c) { try { localStorage.setItem(KEY, JSON.stringify({ ...c, at: Date.now() })); } catch { /* private mode */ } }
+function save(c) { try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ ...c, at: Date.now() })); } catch { /* private mode */ } }
+const read = readConsent;
 
 // GTM only reads consent commands pushed as an arguments object, like gtag() does.
 function gtag() { window.dataLayer = window.dataLayer || []; window.dataLayer.push(arguments); }
@@ -78,15 +57,15 @@ export default function Consent() {
   }, [show]);
 
   const decide = (c, method) => {
-    apply(c); save(c); setChoice(c); setDecided(true); setOpen(false); setMore(false);
-    track("consent_update", { analytics_consent: c.analytics ? "granted" : "denied", ads_consent: c.ads ? "granted" : "denied", method });
+    apply(c); save(c); if (!c.analytics) clearIds(); setChoice(c); setDecided(true); setOpen(false); setMore(false);
+    track("consent_update", { consent_choice: method, analytics_consent: c.analytics ? "granted" : "denied", ads_consent: c.ads ? "granted" : "denied" });
   };
 
   if (!show) return null;
   return (
     <div className="consent-layer" role="dialog" aria-modal="true" aria-labelledby="consent-title">
       <div className="consent-card">
-        <span className="eyebrow">PRIVACY</span>
+        <div className="consent-head"><LogoMark size={52} /><span className="eyebrow">PRIVACY</span></div>
         <h2 id="consent-title">Can I measure your visit?</h2>
         <p>I use Google Analytics to see which pages and tools are useful. No ads, no selling data, and nothing you type into the tools is stored. <a href="/privacy">Privacy notice</a></p>
         {more && (
@@ -109,5 +88,5 @@ export default function Consent() {
 }
 
 export function ConsentLink({ className }) {
-  return <button type="button" className={`consent-link ${className || ""}`} onClick={openConsent}>Cookie settings</button>;
+  return <button type="button" className={`consent-link ${className || ""}`} onClick={openConsent} data-track="nav_click">Cookie settings</button>;
 }

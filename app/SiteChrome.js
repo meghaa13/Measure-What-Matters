@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
+import Logo from "./Logo";
 import { CTA, bookHref, bookTarget } from "./lib/site";
 
-const NAV = [["story", "Approach"], ["method", "Method"], ["work", "Proof"], ["tools", "Tools"]];
-const SPY = ["story", "method", "work", "tools", "apps", "contact"];
+const NAV = [["story", "Approach"], ["method", "Method"], ["work", "Proof"], ["stack", "Stack"], ["tools", "Tools"]];
+const SPY = ["story", "method", "work", "stack", "tools", "apps", "contact"];
 
 const scrollToId = (id) => {
   const el = document.getElementById(id);
@@ -49,15 +50,15 @@ export default function SiteChrome({ home = true, current = null }) {
     <>
       <div className="progress"><div data-progress="1" /></div>
       <nav className="nav">
-        <a href={home ? "#top" : "/"} aria-label="Megha Karnwal — home" onClick={go("top")}>
-          <span className="logo"><span>mk</span><span className="dot" /></span>
+        <a href={home ? "#top" : "/"} aria-label="Megha Karnwal — home" onClick={go("top")} data-track="nav_click" data-loc="header">
+          <Logo />
         </a>
         <div className="nav-links">
           {NAV.map(([id, label]) => (
             <a key={id} href={href(id)} onClick={go(id)} aria-current={active === id ? "true" : undefined}
-              className={`nav-link${active === id ? " on" : ""}`} data-track="anchor_click" data-loc="nav">{label}</a>
+              className={`nav-link${active === id ? " on" : ""}`} data-track="nav_click" data-loc="header">{label}</a>
           ))}
-          <a href={bookLink} target={bookTarget} rel={bookTarget ? "noopener" : undefined} onClick={go("contact")} className={`nav-cta${fab ? " away" : ""}`} data-track="cta_click" data-loc="nav">
+          <a href={bookLink} target={bookTarget} rel={bookTarget ? "noopener" : undefined} onClick={go("contact")} className={`nav-cta${fab ? " away" : ""}`} data-track="cta_click" data-loc="header">
             {CTA}<span aria-hidden="true">→</span>
           </a>
         </div>

@@ -4,6 +4,7 @@ import "./apps.css";
 import Analytics from "./Analytics";
 import Consent from "./Consent";
 import SiteFooter from "./SiteFooter";
+import Ambient from "./Ambient";
 
 const serif = Newsreader({ subsets: ["latin"], style: ["normal", "italic"], weight: ["400", "500"], variable: "--font-serif" });
 const sans = Hanken_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans" });
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
       <body>
+        <Ambient />
         {children}
         <SiteFooter />
         <Analytics />
