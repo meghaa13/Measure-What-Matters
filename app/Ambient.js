@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 // that fade in and out in place. They are only ever placed on empty background:
 // never over text, cards, images or controls, and never in a hero section.
 const COLORS = ["#FFFFFF", "#C5B6F0", "#E6E0FA", "#8E74DD", "#5B43B5"];
-const HEROES = '[data-section="hero"], [data-section="tool_hero"], .sx-hero';
+const HEROES = '[data-section="hero"], [data-section="tool_hero"], .sx-hero, .method2';
 const PAD = 18;       // clear space kept around every obstacle
 const AREA_PER_DOT = 52000; // px² of free background per dot
 const MAX_DOTS = 85;
@@ -17,7 +17,8 @@ function rng(seed) { let s = seed; return () => { s = (s * 1664525 + 1013904223)
 function obstacles(layer) {
   const vw = window.innerWidth, out = [];
   const add = (r) => { if (r.width > 0 && r.height > 0) out.push([r.left + window.scrollX - PAD, r.top + window.scrollY - PAD, r.right + window.scrollX + PAD, r.bottom + window.scrollY + PAD]); };
-  document.querySelectorAll(HEROES).forEach((el) => add(el.getBoundingClientRect()));
+  // A hero is kept clear edge to edge, including the empty margins beside it.
+  document.querySelectorAll(HEROES).forEach((el) => { const r = el.getBoundingClientRect(); out.push([-1e5, r.top + window.scrollY - PAD, 1e5, r.bottom + window.scrollY + PAD]); });
   for (const el of document.body.querySelectorAll("*")) {
     if (layer.contains(el) || el.closest(".ambient, .consent-layer, script, style")) continue;
     const cs = getComputedStyle(el);

@@ -4,6 +4,21 @@ All notable changes to meghakarnwal.com. Newest first. Branch flow: changes ship
 
 ## [Unreleased] — on `stage`, awaiting approval for `main`
 
+### 2026-10-05 · Section names, "What I build" scene, section openings, security headers
+
+**Site**
+- **Changed** the names of two sections so the difference is clear: "Approach" is now "Finding the problem" and "Method" is now "What I build". Each has a one-line plain description above it.
+- **Changed** "What I build" into its own scene: a purple panel with the text fixed on the left, while the four step cards come in from the right and settle over each other as you scroll or press the arrows. On phones the cards stack while scrolling down.
+- **Added** a different opening for each section as it scrolls into view (wipes, word-by-word heading, staggered cards, 3D tilt, zoom, flip, slide, expand).
+- **Added** four small effects: counting numbers in Proof, a glow that follows the pointer on cards, a light sweep on the Book button, and a slow colour drift behind the hero.
+- **Changed** "Finding the problem" on phones to show the chart before the text.
+- **Fixed** background dots appearing in the margins beside the hero.
+
+**Security and upkeep**
+- **Fixed** the security headers so they reach pages, not only files: `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` now come from `next.config.mjs`.
+- **Removed** the `x-powered-by` header.
+- **Added** a Dependabot config (monthly, targeting `stage`) and `docs/release-checklist.md` with the test sites and their expected results.
+
 ### 2026-10-04 · GTM container, phone menu, content accuracy, shorter page
 
 **Measurement**
