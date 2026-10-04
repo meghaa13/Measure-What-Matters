@@ -7,7 +7,7 @@ const TOOLS = [
   ["/apps/lead-path", "Lead Path X-Ray"],
   ["/apps/ai-crawler-gate", "AI Visibility Check"],
 ];
-const SITE = [["/#story", "Approach"], ["/#method", "Method"], ["/#work", "Proof"], ["/#stack", "Stack"], ["/#apps", "Side projects"], ["/#faq", "FAQ"]];
+const SITE = [["/#story", "Finding the problem"], ["/#method", "What I build"], ["/#work", "Proof"], ["/#stack", "Stack"], ["/#apps", "Side projects"], ["/#faq", "FAQ"]];
 
 // Shared footer on every page (rendered once in layout.js).
 export default function SiteFooter() {

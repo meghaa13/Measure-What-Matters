@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { CTA, bookHref, bookTarget } from "./lib/site";
 
-const NAV = [["story", "Approach"], ["method", "Method"], ["work", "Proof"], ["stack", "Stack"], ["tools", "Tools"]];
+const NAV = [["story", "Finding the problem"], ["method", "What I build"], ["work", "Proof"], ["stack", "Stack"], ["tools", "Tools"]];
 const SPY = ["story", "method", "work", "stack", "tools", "apps", "contact"];
 
 const scrollToId = (id) => {

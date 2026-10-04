@@ -511,3 +511,146 @@ html.consent-open body > *:not(.consent-layer) { filter: blur(10px); pointer-eve
 @media (max-width: 599px) { .facts { grid-template-columns: minmax(0, 1fr) } }
 /* Case cards: header, what I did, outcome (no KPI row) */
 .case { grid-row: span 3 }
+
+/* ── Trial effects ── */
+/* 2. Card glow: a soft light follows the pointer; invisible until hover */
+.stack-col, .case, .vpp, .note-card { position: relative }
+.stack-col::after, .case::after, .vpp::after, .note-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s; z-index: 3;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(142,116,221,.20), transparent 62%) }
+.stack-col:hover::after, .case:hover::after, .vpp:hover::after, .note-card:hover::after { opacity: 1 }
+.stack-col:hover, .case:hover, .note-card:hover { border-color: var(--brand-mid) }
+
+/* 3. Shimmer: a slow light sweep across the primary Book buttons */
+.btn-primary, .nav-cta { position: relative; overflow: hidden; isolation: isolate }
+.btn-primary::after, .nav-cta::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 45%; pointer-events: none; z-index: -1;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.38), transparent); transform: skewX(-18deg); animation: shimmer 4.5s ease-in-out infinite }
+@keyframes shimmer { 0%, 62% { left: -60% } 100% { left: 130% } }
+
+/* 4. Animated hero background: slow drifting colour behind the hero only */
+.hero::after { content: ""; position: absolute; inset: -80px -50vw 0; z-index: -1; pointer-events: none; opacity: .9;
+  background:
+    radial-gradient(38% 46% at 72% 38%, rgba(142,116,221,.34), transparent 70%),
+    radial-gradient(30% 40% at 88% 70%, rgba(224,122,184,.20), transparent 70%),
+    radial-gradient(34% 42% at 22% 24%, rgba(91,67,181,.16), transparent 70%),
+    radial-gradient(28% 36% at 40% 86%, rgba(197,182,240,.40), transparent 70%);
+  background-size: 140% 140%; filter: blur(24px); animation: aurora 18s ease-in-out infinite alternate;
+  -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent) }
+@keyframes aurora { 0% { background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0% } 50% { background-position: 60% 40%, 40% 60%, 50% 30%, 30% 70% } 100% { background-position: 100% 100%, 0% 0%, 100% 0%, 0% 100% } }
+/* 1. Counting numbers: the counter sits inside the big figure and must look like it */
+.work b > span { font: inherit !important; color: inherit !important; letter-spacing: inherit !important; text-transform: none !important; display: inline !important; margin: 0 !important; padding: 0 !important; background: none !important }
+
+/* ── Section openings: each section enters differently (set up in ScrollEffects.js) ── */
+[data-open] { --ease-open: cubic-bezier(.2, .7, .2, 1) }
+
+/* Wipes: the block is uncovered from one side */
+[data-open="wipe-l"], [data-open="wipe-r"] { transition: clip-path 1.1s var(--ease-open), transform 1.1s var(--ease-open), opacity .6s }
+[data-open="wipe-l"] { clip-path: inset(0 100% 0 0); transform: translateX(-28px); opacity: .4 }
+[data-open="wipe-r"] { clip-path: inset(0 0 0 100%); transform: translateX(28px); opacity: .4 }
+[data-open="wipe-l"].is-open, [data-open="wipe-r"].is-open { clip-path: inset(-40px); transform: none; opacity: 1 }
+
+/* Words: a heading lights up one word at a time */
+[data-open="words"] .w { opacity: .14; transition: opacity .5s ease calc(var(--i) * 70ms) }
+[data-open="words"].is-open .w { opacity: 1 }
+
+/* Pop: cards arrive one after another, each settling into place */
+[data-open="pop"] > * { opacity: 0; transform: translateY(46px) scale(.9) rotate(-2.5deg); transition: opacity .6s ease calc(var(--i) * 130ms), transform .9s var(--ease-open) calc(var(--i) * 130ms) }
+[data-open="pop"] > *:nth-child(even) { transform: translateY(46px) scale(.9) rotate(2.5deg) }
+[data-open="pop"].is-open > * { opacity: 1; transform: none }
+
+/* Steps: items arrive in their numbered order */
+[data-open="steps"] > * { opacity: 0; transform: translateX(-40px); transition: opacity .6s ease calc(var(--i) * 240ms), transform .9s var(--ease-open) calc(var(--i) * 240ms) }
+[data-open="steps"].is-open > * { opacity: 1; transform: none }
+
+/* Tilt: the block lies back in 3D and stands up flat as it scrolls into view (follows the scroll) */
+[data-open="tilt"] { --p: clamp(0, calc(var(--v, 0) * 3.2 - .12), 1); transform-origin: 50% 100%;
+  transform: perspective(1300px) rotateX(calc((1 - var(--p)) * 26deg)) scale(calc(.88 + var(--p) * .12)); opacity: calc(.35 + var(--p) * .65) }
+
+/* Zoom: comes forward from soft focus */
+[data-open="zoom"] { opacity: 0; transform: scale(.93); filter: blur(12px); transition: opacity .9s ease, transform 1.1s var(--ease-open), filter 1s ease }
+[data-open="zoom"].is-open { opacity: 1; transform: none; filter: none }
+
+/* Flip: cards fold down from their top edge */
+[data-open="flip"] { perspective: 1100px }
+[data-open="flip"] > * { opacity: 0; transform: rotateX(-78deg); transform-origin: 50% 0; transition: opacity .5s ease calc(var(--i) * 150ms), transform .9s var(--ease-open) calc(var(--i) * 150ms) }
+[data-open="flip"].is-open > * { opacity: 1; transform: none }
+
+/* Slide: rows come in from the right */
+[data-open="slide-r"] > * { opacity: 0; transform: translateX(70px); transition: opacity .6s ease calc(var(--i) * 110ms), transform .8s var(--ease-open) calc(var(--i) * 110ms) }
+[data-open="slide-r"].is-open > * { opacity: 1; transform: none }
+
+/* Expand: the panel grows from a smaller rounded card to full size (follows the scroll) */
+[data-open="expand"] { --p: clamp(0, calc(var(--v, 0) * 2.6 - .1), 1); transform: scale(calc(.86 + var(--p) * .14)); opacity: calc(.5 + var(--p) * .5); transform-origin: 50% 0 }
+
+/* ── Method scene: purple band; text fixed on the left; step cards come in from the right
+      and settle over each other, like the original stacking turned sideways ── */
+.method2 { position: relative; margin-top: 24px }
+.m2-stage { background: var(--brand-dark); color: #fff; overflow: clip; position: relative;
+  /* grows from an inset rounded card to the full width as it enters */
+  clip-path: inset(0 calc((1 - var(--me, 1)) * 6vw) round calc((1 - var(--me, 1)) * 56px)) }
+.m2-stage::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 70% at 85% 10%, rgba(142,116,221,.38), transparent 70%), radial-gradient(50% 60% at 5% 100%, rgba(224,122,184,.16), transparent 70%),
+    radial-gradient(circle, rgba(255,255,255,.10) 1px, transparent 1.4px) 0 0 / 28px 28px }
+.m2-inner { position: relative; max-width: 1180px; margin: 0 auto; padding: 88px var(--gutter) 64px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px }
+.m2-intro .h2 { color: #fff; font-size: clamp(36px, 4.2vw, 58px) }
+.m2-intro .h2 em { color: var(--lilac) }
+.m2-intro .lead { color: rgba(255,255,255,.74) }
+.m2-hint { display: none }
+.m2-right { min-width: 0 }
+.m2-deck .card { color: var(--ink); min-height: 0 }
+.m2-deck .card.dark { color: #fff }
+.m2-nav { display: none }
+
+/* not pinned (phones, reduce-motion): cards stack over each other while scrolling down, as before */
+.m2-track:not(.pinned) .m2-deck { display: flex; flex-direction: column; gap: 22px }
+.m2-track:not(.pinned) .card { position: sticky; top: var(--top, 96px) }
+
+/* pinned (wide screens): one screen tall; text left, the pile of cards right */
+.m2-track.pinned .m2-stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center }
+.m2-track.pinned .m2-inner { width: 100%; grid-template-columns: minmax(0, .82fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; padding-top: 90px; padding-bottom: 28px }
+/* short screens: tighter text on the left so it fits beside the cards */
+@media (max-height: 760px) { .m2-track.pinned .m2-intro .h2 { font-size: clamp(30px, 3.4vw, 44px) } .m2-track.pinned .m2-intro .lead { font-size: 16px; margin-top: 14px !important } .m2-track.pinned .m2-intro .prompt { margin-bottom: 16px } }
+/* every card shares one spot; the script slides each in and parks it one strip further right */
+.m2-track.pinned .m2-deck { display: grid; align-items: stretch } /* all four cards the same height, so the pile has clean edges */
+.m2-track.pinned .card { grid-area: 1 / 1; position: relative; top: auto; width: calc(100% - 3 * var(--strip, 30px)); padding: 28px; will-change: transform; box-shadow: -18px 30px 60px -30px rgba(0,0,0,.6) }
+.m2-track.pinned .card h3 { font-size: clamp(26px, 2.5vw, 36px); margin-top: 14px }
+.m2-track.pinned .card p { font-size: 15.5px; line-height: 1.55 }
+/* arrows + counter + progress line */
+.m2-track.pinned .m2-nav { display: flex; align-items: center; gap: 12px; margin-top: 22px }
+.m2-nav .arrow { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: transparent; color: #fff; font-size: 18px; cursor: pointer; transition: background .25s, border-color .25s, opacity .25s }
+.m2-nav .arrow.next { background: #fff; color: var(--brand-dark); border-color: #fff }
+.m2-nav .arrow:hover:not(:disabled) { border-color: #fff; background: rgba(255,255,255,.14) }
+.m2-nav .arrow.next:hover:not(:disabled) { background: var(--tint) }
+.m2-nav .arrow:disabled { opacity: .35; cursor: default }
+.m2-count { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; color: rgba(255,255,255,.75); margin-left: 6px }
+.m2-line { position: relative; flex: 1; height: 2px; border-radius: 2px; background: rgba(255,255,255,.18); overflow: hidden }
+.m2-line span { position: absolute; inset: 0; background: var(--lilac); transform-origin: 0 50%; transform: scaleX(var(--mp, 0)) }
+
+/* Method band: a contained rounded panel (like the contact panel), not edge to edge */
+.method2 { padding: 0 14px }
+.m2-stage { max-width: 1280px; margin: 0 auto; border-radius: 40px; clip-path: none; transform: scale(calc(.94 + var(--me, 1) * .06)); transform-origin: 50% 0 }
+.m2-track.pinned .m2-stage { top: 12px; height: calc(100vh - 24px) }
+.m2-track.pinned .m2-inner { padding-left: clamp(28px, 4vw, 56px); padding-right: clamp(28px, 4vw, 56px) }
+
+/* Approach on small screens: the chart comes first, then the text and arrows */
+@media (max-width: 859px) {
+  .story-grid { gap: 28px; margin-top: 28px }
+  .story-grid .panel-box { order: -1 }
+  .copy-stack { min-height: 210px }
+  .arrows { margin-top: 18px }
+}
+
+/* Method band: only as tall as its content needs, centred on screen (sizes set by MethodCards.js) */
+.m2-track.pinned .m2-stage { top: var(--st, 12px); height: var(--sh, calc(100vh - 24px)) }
+.m2-track.pinned .m2-inner { padding-top: var(--pt, 90px); padding-bottom: 30px }
+
+/* Plain-words section label: says what the section is, above its opening question */
+.sec-label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-bottom: 16px }
+.sec-label b { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .1em; color: var(--brand) }
+.sec-label span { font-size: 15px; color: var(--muted) }
+.sec-label.on-dark b { color: var(--lilac) }
+.sec-label.on-dark span { color: rgba(255,255,255,.7) }
+/* longer menu names: keep the header on one line */
+.nav-link { white-space: nowrap }
+@media (max-width: 1099px) { .nav-link { padding: 10px 10px; font-size: 13.5px } .nav .mk-tag { display: none } }
+/* with the longer names, narrow laptops and tablets use the menu button too */
+@media (max-width: 999px) { .nav-link { display: none } .nav-burger { display: flex } .nav-menu:not([hidden]) { display: flex } }

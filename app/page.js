@@ -8,6 +8,7 @@ import Faq from "./Faq";
 import { HeroEyebrow, HeroSub } from "./HeroCopy";
 import { BookLink, Prompt } from "./Bits";
 import Stack from "./Stack";
+import CountUp from "./apps/tag-scanner/CountUp";
 import { CTA, EMAIL, LINKEDIN, RESUME, bookTarget, contactHref } from "./lib/site";
 
 const CASES = [
@@ -25,13 +26,6 @@ const CASES = [
     kpis: ["Form submissions", "Traffic by source", "Event coverage"], out: "Daily performance reporting" },
 ];
 
-const BUILDS = [
-  ["LLM PIPELINE", "BlogAI research pipeline", "15 stages, parallel multi-model drafting, hallucination guards and a Streamlit UI."],
-  ["COMPUTER VISION", "People Counting System", "Live room occupancy with image alerts."],
-  ["COMPUTER VISION", "PPE Violation Detection", "Automated safety-compliance checks."],
-  ["CLOUD", "Rainbow Room", "Mental health screening for LGBTQIA+ users."],
-];
-
 const FACTS = [
   ["Consent first", "Consent Mode configured and debugged so tags fire only when they are allowed to."],
   ["PII stays out", "Lead outcomes are joined by a request ID, and ad-platform matching uses hashed data. Never raw names or emails in analytics."],
@@ -41,6 +35,13 @@ const FACTS = [
 ];
 
 const CERTS = ["Google Analytics 4", "Google Tag Manager Fundamentals", "GI Ventures & NVIDIA AI-ML", "IBM Python for AI & Data Science", "NPTEL Python for Data Science", "Microsoft Tech-Saksham Full Stack", "Google Analytics 4", "Google Tag Manager Fundamentals"];
+
+const BUILDS = [
+  ["LLM PIPELINE", "BlogAI research pipeline", "15 stages, parallel multi-model drafting, hallucination guards and a Streamlit UI."],
+  ["COMPUTER VISION", "People Counting System", "Live room occupancy with image alerts."],
+  ["COMPUTER VISION", "PPE Violation Detection", "Automated safety-compliance checks."],
+  ["CLOUD", "Rainbow Room", "Mental health screening for LGBTQIA+ users."],
+];
 
 const NOTES = [
   "AI is only as smart as the tracking plan underneath it.",
@@ -86,20 +87,20 @@ export default function Home() {
 
       {/* STORY */}
       <section id="story" className="wrap story" data-section="story">
+        <div data-reveal="0" className="sec-label"><b>FINDING THE PROBLEM</b><span>How I work out what is broken on a site.</span></div>
         <Prompt>We have the traffic. Why isn&apos;t it turning into results?</Prompt>
         <FunnelStory />
       </section>
 
       {/* METHOD */}
-      <section id="method" className="wrap grid2 method" data-section="method">
-        <div style={{ position: "relative" }}>
-          <div className="sticky">
-            <Prompt>Okay. So where does AI come in?</Prompt>
+      <section id="method" className="method2" data-section="method">
+        <MethodCards>
+            <div className="sec-label on-dark"><b>WHAT I BUILD</b><span>What I set up for you, step by step.</span></div>
+            <Prompt white>Okay. So where does AI come in?</Prompt>
             <h2 data-reveal="80" className="h2">Analytics, then automation, then <em>AI</em>, in that order.</h2>
             <p data-reveal="160" className="lead" style={{ maxWidth: 440, margin: "20px 0 0" }}>AI multiplies whatever you feed it, including bad tracking. So I build from the bottom up: measure honestly, automate the repetitive work, then add AI where it saves real hours or finds real signal.</p>
-          </div>
-        </div>
-        <MethodCards />
+            <span className="m2-hint">Keep scrolling <span aria-hidden="true">↓</span></span>
+        </MethodCards>
       </section>
 
       {/* WORK */}
@@ -109,8 +110,8 @@ export default function Home() {
           <div className="work-head">
             <h2 data-reveal="60" className="h2">On live sites, every day.</h2>
             <div data-reveal="120" className="stats">
-              <div><b>4</b><span>CLIENT SITES</span></div>
-              <div><b>2 yrs</b><span>SINCE JUNE 2024</span></div>
+              <div><b><CountUp to={4} /></b><span>CLIENT SITES</span></div>
+              <div><b><CountUp to={2} /> yrs</b><span>SINCE JUNE 2024</span></div>
               <div><b>Intelegencia</b><span>IN-HOUSE AT</span></div>
             </div>
           </div>
@@ -119,7 +120,7 @@ export default function Home() {
               <span className="case-kind">CRO ANALYSIS · CLIENT LEAD</span>
               <h3 className="case-name">VPP</h3>
               <span className="case-tools">MS Clarity · GA4</span>
-              <div className="result"><b>+50%</b><span>conversion rate after fixing funnel drop-offs</span></div>
+              <div className="result"><b>+<CountUp to={50} ms={1400} />%</b><span>conversion rate after fixing funnel drop-offs</span></div>
             </div>
             <div>
               <span className="label">WHAT I DID</span>

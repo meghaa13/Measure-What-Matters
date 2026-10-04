@@ -1,0 +1,13 @@
+# Dependabot opens a pull request when a dependency has an update or a security fix.
+# Pull requests target the stage branch, so every update is tested there before main.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    target-branch: "stage"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 5
+    groups:
+      next-and-react:
+        patterns: ["next", "react", "react-dom"]
