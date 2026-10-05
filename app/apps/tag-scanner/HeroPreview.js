@@ -26,7 +26,7 @@ function fromScan(data) {
   // Lead with what's NOT tracked, then the rest.
   const order = { not_tracked: 0, unclear: 1, tracked: 2 };
   const rows = [...(data.coverage || [])].sort((a, b) => order[a.status] - order[b.status]).slice(0, 4).map((r) => [r.item, r.status]);
-  return { host: data.host, totals, rows, score: data.score };
+  return { host: data.host, totals, rows, score: data.score, note: data.siteNote || null };
 }
 
 function useCountUp(target, run) {
@@ -118,7 +118,9 @@ export default function HeroPreview({ input = "", scanned = "", state = "idle", 
                 </div>
               ))}
             </div>
-            <div className="rows">
+            {/* Pasted IDs have no page checks to list; use the space to say what is known about the site. */}
+            {result?.note && !view.rows.length && <p className="site-note" style={{ opacity: st >= 3 ? 1 : 0 }}>{result.note}</p>}
+            <div className="rows" style={result?.note && !view.rows.length ? { display: "none" } : undefined}>
               {(view.rows.length ? view.rows : [["Forms", "tracked"], ["Phone links", "tracked"], ["Bookings", "tracked"], ["Video", "tracked"]]).map(([l, s], i) => (
                 <div key={l + i} style={{ opacity: st >= 3 && view.rows.length ? 1 : 0, transform: `translate3d(${st >= 3 ? 0 : -10}px,0,0)`, transitionDelay: `${st >= 3 ? i * 120 : 0}ms` }}>
                   <span>{l}</span><span className={`pill ${STATUS[s][0]}`}>{STATUS[s][1]}</span>
