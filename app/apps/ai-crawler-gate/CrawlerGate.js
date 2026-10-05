@@ -229,7 +229,7 @@ export default function CrawlerGate() {
         <div data-par="-0.05" className="sx-ring par" />
         <div className="sx-wrap sx-hero-grid">
           <div className="sx-hero-copy">
-            <div data-reveal="0" className="eyebrow"><span className="dot" />TOOL 03 · AI SEARCH · FREE</div>
+            <div data-reveal="0" className="eyebrow"><span className="dot" />TOOL 04 · AI SEARCH · FREE</div>
             <h1><span data-reveal="80">Is your site</span><span data-reveal="180"><em>visible</em> to AI search?</span></h1>
             <p data-reveal="300" className="lede">More people now ask an AI assistant before they search. If it can&apos;t read your site, it can&apos;t recommend you. See which assistants can find and quote you, how often they actually cite you, and get the fix.</p>
             <form data-reveal="400" className="sx-form" onSubmit={check}>
