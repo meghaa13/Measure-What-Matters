@@ -18,6 +18,7 @@ All notable changes to meghakarnwal.com. Newest first. Branch flow: changes ship
 - **Fixed** background dots appearing in the margins beside the hero.
 
 **Security and upkeep**
+- **Fixed** a failed Netlify build: fonts were fetched from Google Fonts during every build, and the build broke when that fetch went wrong. The three fonts are now files in `app/fonts`, so a build no longer needs Google. Same fonts, same total size.
 - **Fixed** unintended AI spend: the Netlify AI Gateway supplies an AI key automatically, so every Tag Health Scan was making a paid AI call for its summary. AI calls now need `AI_FEATURES=on`; without it the scan uses the built-in summary.
 - **Fixed** the security headers so they reach pages, not only files: `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` now come from `next.config.mjs`.
 - **Removed** the `x-powered-by` header.
