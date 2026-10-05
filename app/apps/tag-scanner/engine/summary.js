@@ -1,5 +1,8 @@
 // Step 6: plain-English summary written only from the findings.
-// Uses Claude when ANTHROPIC_API_KEY is set; otherwise a deterministic template.
+// Uses Claude only when AI is switched on on purpose (AI_FEATURES=on) and a key exists;
+// otherwise a deterministic template. The explicit switch matters on Netlify: its AI
+// Gateway supplies a key automatically and bills every call in credits, so the presence
+// of a key alone must never turn paid AI calls on.
 import Anthropic from "@anthropic-ai/sdk";
 
 export function templateSummary({ host, snapshot, findings, score }) {
@@ -10,7 +13,7 @@ export function templateSummary({ host, snapshot, findings, score }) {
 }
 
 export async function aiSummary(ctx) {
-  if (!process.env.ANTHROPIC_API_KEY || !ctx.findings.length) return null;
+  if (process.env.AI_FEATURES !== "on" || !process.env.ANTHROPIC_API_KEY || !ctx.findings.length) return null;
   const client = new Anthropic({ timeout: 9000, maxRetries: 0 });
   const facts = {
     site: ctx.host, score: ctx.score, snapshot: ctx.snapshot,

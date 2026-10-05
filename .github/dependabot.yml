@@ -7,7 +7,8 @@ updates:
     target-branch: "stage"
     schedule:
       interval: "monthly"
-    open-pull-requests-limit: 5
+    # One pull request a month for everything, so Netlify builds one preview, not several.
+    open-pull-requests-limit: 1
     groups:
-      next-and-react:
-        patterns: ["next", "react", "react-dom"]
+      all-dependencies:
+        patterns: ["*"]
