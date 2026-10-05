@@ -41,6 +41,21 @@ Other sites change their tags, so scores drift over time. A small drift is norma
 - Update Next.js and the Netlify Next.js runtime the same way.
 - Look at Netlify usage: bandwidth, function calls, edge function calls.
 
+## Netlify credits
+
+What uses credits, largest first, and how to keep each low.
+
+| What | Cost | How to keep it low |
+|---|---|---|
+| Production deploys | About 15 credits each | Collect changes and deploy once. Do not push small fixes one at a time. |
+| AI inference (AI Gateway) | Per AI call | Netlify supplies an AI key by itself and bills each call. The site makes **no** AI calls unless `AI_FEATURES=on` is set. Leave it unset. |
+| AI inference (Agent Runners) | Per use | This is the AI agent inside the Netlify dashboard. It only costs when you use it. |
+| Bandwidth | By data sent | Images are WebP and cached. Test on localhost, not on stage. |
+| Functions compute | By running time | Each tool run is a few seconds. Scan results are cached for an hour. |
+| Web requests | By request count | Tiny. No action needed. |
+
+Run the test sites on localhost first. Use stage only for the final check before a merge.
+
 ## Rules
 
 - `package-lock.json` stays committed, so every build installs the same versions.

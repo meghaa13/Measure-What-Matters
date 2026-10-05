@@ -12,6 +12,7 @@ export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-PKHZLGS4";
 
 // The AI citation sample needs a paid Claude API key (ANTHROPIC_API_KEY).
 // Off until one is added; set NEXT_PUBLIC_AI_CITATIONS=on in Netlify to show it.
+// The server side also needs AI_FEATURES=on, or no AI call is ever made.
 export const AI_CITATIONS = process.env.NEXT_PUBLIC_AI_CITATIONS === "on";
 
 export const EMAIL = "meghakarnwal13@gmail.com";

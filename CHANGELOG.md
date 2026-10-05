@@ -18,6 +18,7 @@ All notable changes to meghakarnwal.com. Newest first. Branch flow: changes ship
 - **Fixed** background dots appearing in the margins beside the hero.
 
 **Security and upkeep**
+- **Fixed** unintended AI spend: the Netlify AI Gateway supplies an AI key automatically, so every Tag Health Scan was making a paid AI call for its summary. AI calls now need `AI_FEATURES=on`; without it the scan uses the built-in summary.
 - **Fixed** the security headers so they reach pages, not only files: `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` now come from `next.config.mjs`.
 - **Removed** the `x-powered-by` header.
 - **Added** a Dependabot config (monthly, targeting `stage`) and `docs/release-checklist.md` with the test sites and their expected results.

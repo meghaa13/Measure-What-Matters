@@ -40,7 +40,8 @@ async function siteSummary(url) {
 }
 
 export async function POST(req) {
-  if (!process.env.ANTHROPIC_API_KEY) return NextResponse.json({ error: "not_configured" }, { status: 503 });
+  // Off unless switched on on purpose: the Netlify AI Gateway supplies a key by itself and bills each call.
+  if (process.env.AI_FEATURES !== "on" || !process.env.ANTHROPIC_API_KEY) return NextResponse.json({ error: "not_configured" }, { status: 503 });
   const ip = req.headers.get("x-nf-client-connection-ip") || req.headers.get("x-forwarded-for")?.split(",")[0] || "local";
   let body = {};
   try { body = await req.json(); } catch { /* empty */ }
