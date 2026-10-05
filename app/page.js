@@ -78,7 +78,7 @@ export default function Home() {
           <div data-par="0.08" className="halo par" />
           <div data-par="-0.05" className="halo-ring par" />
           <div data-reveal="200" className="portrait">
-            <img data-par="-0.14" className="par" src="/uploads/img1.webp" fetchPriority="high" alt="Megha Karnwal, analyst working across analytics, automation and AI" />
+            <img data-par="-0.14" className="par" src="/uploads/img1.webp" alt="Megha Karnwal, analyst working across analytics, automation and AI" />
             <div className="shade" />
             <div className="cap">MEGHA KARNWAL — ANALYTICS · AUTOMATION · AI</div>
           </div>

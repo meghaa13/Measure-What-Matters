@@ -96,10 +96,7 @@ export default function Ambient() {
   useEffect(() => {
     const layer = ref.current;
     let timer = 0, lastW = 0, lastH = 0;
-    // Placing the dots measures every element on the page, so it waits for a moment
-    // when the browser has nothing else to do (Safari has no idle callback: run directly).
-    const whenIdle = (fn) => (window.requestIdleCallback ? window.requestIdleCallback(fn, { timeout: 2000 }) : fn());
-    const schedule = (wait = 350) => { clearTimeout(timer); timer = setTimeout(() => whenIdle(() => build(layer)), wait); };
+    const schedule = (wait = 350) => { clearTimeout(timer); timer = setTimeout(() => build(layer), wait); };
     schedule(700);
     // Recalculate when the page changes shape (resize, reports appearing, tabs, accordions).
     const ro = new ResizeObserver(() => {

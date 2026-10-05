@@ -117,34 +117,26 @@ export default function ScrollEffects({ motion = 1 }) {
     const cl = (x) => Math.min(1, Math.max(0, x));
     const L = (el, key, v) => { const c = el[key]; let n = c == null ? v : c + (v - c) * k; if (Math.abs(n - v) < 0.0004) n = v; el[key] = n; return n; };
 
-    // Each frame: measure everything first, then write, so the browser lays the page
-    // out once instead of once per element. A value is only written when it changed,
-    // and the loop sleeps once everything has settled; scrolling or a change in the
-    // page's size wakes it again.
-    let raf = 0, moving = false;
-    const put = (el, key, target, text, write) => {
-      const n = L(el, key, target), s = text(n);
-      if (n !== target) moving = true;
-      if (el[key + "s"] !== s) { el[key + "s"] = s; write(s); }
-    };
+    let raf;
     const tick = () => {
-      raf = 0; moving = false;
       const vh = window.innerHeight;
-      const vr = views.map((el) => el.getBoundingClientRect());
-      const pr = pars.map((el) => el.parentElement.getBoundingClientRect());
-      const h = bar ? document.documentElement.scrollHeight - vh : 0, y = window.scrollY;
-      views.forEach((el, i) => put(el, "_v", cl((vh - vr[i].top) / (vh + vr[i].height)), (n) => n.toFixed(4), (s) => el.style.setProperty("--v", s)));
-      pars.forEach((el, i) => put(el, "_y", (pr[i].top + pr[i].height / 2 - vh / 2) * +el.dataset.par * m, (n) => n.toFixed(1) + "px", (s) => el.style.setProperty("--y", s)));
-      if (bar) put(bar, "_s", h > 0 ? cl(y / h) : 0, (n) => n.toFixed(4), (s) => { bar.style.transform = `scaleX(${s})`; });
-      if (moving) raf = requestAnimationFrame(tick);
+      for (const el of views) {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--v", L(el, "_v", cl((vh - r.top) / (vh + r.height))).toFixed(4));
+      }
+      for (const el of pars) {
+        const r = el.parentElement.getBoundingClientRect();
+        const off = r.top + r.height / 2 - vh / 2;
+        el.style.setProperty("--y", L(el, "_y", off * +el.dataset.par * m).toFixed(1) + "px");
+      }
+      if (bar) {
+        const h = document.documentElement.scrollHeight - vh;
+        bar.style.transform = `scaleX(${L(bar, "_s", h > 0 ? cl(window.scrollY / h) : 0).toFixed(4)})`;
+      }
+      raf = requestAnimationFrame(tick);
     };
-    const wake = () => { if (!raf) raf = requestAnimationFrame(tick); };
-    window.addEventListener("scroll", wake, { passive: true });
-    window.addEventListener("resize", wake);
-    const ro = new ResizeObserver(wake);
-    ro.observe(document.body);
     tick();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", wake); window.removeEventListener("resize", wake); ro.disconnect(); io.disconnect(); chatIO.disconnect(); openIO.disconnect(); };
+    return () => { cancelAnimationFrame(raf); io.disconnect(); chatIO.disconnect(); openIO.disconnect(); };
   }, [motion]);
   return null;
 }
