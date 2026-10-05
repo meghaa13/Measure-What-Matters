@@ -199,3 +199,7 @@
 .sx-preview .see { align-self: flex-start; border: none; background: none; padding: 0; font: 600 14px var(--sans); color: var(--brand); cursor: pointer }
 .sx-preview .see:hover { color: var(--brand-dark) }
 .sx-preview.is-result { box-shadow: 0 0 0 4px rgba(142,116,221,.18), 0 50px 90px -50px rgba(46,34,99,.55) }
+
+/* Pasted tag IDs: what is known about the website */
+.sx-aside-host small { font-size: 12.5px; line-height: 1.5; color: var(--muted); margin-top: 4px }
+.sx-preview .site-note { margin: 14px 0; padding: 14px 16px; border-radius: 14px; background: var(--tint); border: 1px solid var(--line); font-size: 13.5px; line-height: 1.55; color: var(--muted); transition: opacity .4s }

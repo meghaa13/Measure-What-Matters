@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { describePage, findSite, parseInput } from "../../apps/tag-scanner/engine/discover";
 import { fetchContainer } from "../../apps/tag-scanner/engine/parse";
 import { mergeFindings, rank, readGtag, readGtm, runRules, score, SCORE_NOTE } from "../../apps/tag-scanner/engine/rules";
+import { inferSite } from "../../apps/tag-scanner/engine/sitehint";
 import { aiSummary, templateSummary } from "../../apps/tag-scanner/engine/summary";
 import { gtagInventory, gtmInventory } from "../../apps/tag-scanner/engine/inventory";
 import { coverage } from "../../apps/tag-scanner/engine/coverage";
@@ -65,6 +66,20 @@ export async function POST(req) {
   const extra = [...new Set([...gtms.flatMap((m) => m.ga4Ids), ...gtmInv.flatMap((m) => m.ga4Ids)])].filter((id) => !ids.includes(id));
   const second = await Promise.all(extra.map(fetchContainer));
   const containers = [...first, ...second];
+
+  // Pasted IDs: a tag ID does not name its website, so look for the site inside the
+  // container settings and say so plainly when it is only a guess, or not found.
+  let siteGuess = null;
+  if (site.source === "pasted") {
+    siteGuess = inferSite(containers);
+    host = input.ids.join(", "); // show what was pasted, never a guessed site as if it were fact
+  }
+  // What can honestly be said about the website when only an ID was pasted.
+  const mentioned = (siteGuess?.candidates || []).slice(0, 2).map((c) => c.domain);
+  const siteNote = site.source !== "pasted" ? undefined
+    : mentioned.length
+      ? `A tag ID doesn't name its website. This one's settings mention ${mentioned.join(" and ")}, which is a clue, not proof. Scan the site's address to check the page too.`
+      : "A tag ID doesn't name its website, and nothing in this one's settings does either. Scan the site's address to see which site it is and check the page too.";
   const gtags = containers.filter((c) => c.id.startsWith("G-") && c.resource).map(readGtag);
   const ga4Inv = gtags.map(gtagInventory);
   const cov = coverage({ page: { ...page, html: site.html || "" }, gtmInv, ga4Inv, scope: site.source === "pasted" ? "none" : "homepage", statuses: containers });
@@ -93,6 +108,7 @@ export async function POST(req) {
 
   const value = {
     host, score: total, scoreNote: SCORE_NOTE, snapshot, summary, findings,
+    siteNote, siteMentions: site.source === "pasted" ? mentioned : undefined,
     inventory: { gtm: gtmInv, ga4: ga4Inv },
     coverage: site.source === "pasted" ? [] : cov.rows,
   };

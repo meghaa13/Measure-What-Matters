@@ -205,16 +205,18 @@ export default function FunnelStory() {
   }, [tab, seen]);
 
   // Auto-advance: while the section is on screen, move to the next step every few
-  // seconds so all four charts get seen. It waits while the pointer or keyboard focus
-  // is on the section, and stops for good the first time the visitor picks a step.
+  // seconds so all four charts get seen. It keeps going with the pointer anywhere on
+  // the section except on the chart card, and stops for good the first time the
+  // visitor picks a step with a tab or an arrow.
   const [auto, setAuto] = useState(true);
-  const [hold, setHold] = useState(false);
   const [inView, setInView] = useState(false);
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.45 });
     io.observe(root.current);
     return () => io.disconnect();
   }, []);
+  // Resting the pointer on the chart itself holds it, so a chart can be read.
+  const [hold, setHold] = useState(false);
   const playing = auto && inView && !hold;
   useEffect(() => {
     if (!playing) return;
@@ -230,7 +232,7 @@ export default function FunnelStory() {
   };
 
   return (
-    <div ref={root} onPointerEnter={() => setHold(true)} onPointerLeave={() => setHold(false)} onFocusCapture={() => setHold(true)} onBlurCapture={() => setHold(false)}>
+    <div ref={root}>
       <div data-reveal="60" role="tablist" className="tabs" style={{ "--auto-ms": `${AUTO_MS}ms` }}>
         {STEPS.map((s, i) => (
           <button key={s.label} role="tab" aria-selected={i === tab} className={`tab${i === tab ? " on" : ""}${i === tab && playing ? " timing" : ""}`} onClick={() => go(i, "tab")}>
@@ -254,7 +256,7 @@ export default function FunnelStory() {
             <button className="arrow next" aria-label="Next" onClick={() => go(tab + 1, "next")}>→</button>
           </div>
         </div>
-        <div data-reveal="200" className="panel-box">
+        <div data-reveal="200" className="panel-box" onPointerEnter={(e) => { if (e.pointerType === "mouse") setHold(true); }} onPointerLeave={() => setHold(false)}>
           {PANELS.map((Panel, i) => {
             const v = i === tab, on = v && seen ? 1 : 0;
             return (

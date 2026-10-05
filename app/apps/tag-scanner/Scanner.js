@@ -198,7 +198,7 @@ export default function Scanner() {
       {state === "done" && data && (
         <section className="sx-wrap sx-report-wrap">
           <aside className="sx-aside">
-            <div className="sx-aside-host"><span className="label">REPORT FOR</span><b>{data.host}</b></div>
+            <div className="sx-aside-host"><span className="label">REPORT FOR</span><b>{data.host}</b>{data.siteNote && <small>{data.siteNote}</small>}</div>
             <ReportNav items={navItems} />
             <div className={`sx-aside-score ${scoreTone}`}><span className="label">TRACKING HEALTH</span><b><CountUp to={data.score} /><small>/100</small></b></div>
           </aside>
