@@ -4,18 +4,6 @@ All notable changes to meghakarnwal.com. Newest first. Branch flow: changes ship
 
 ## [Unreleased] — on `stage`, awaiting approval for `main`
 
-### 2026-10-05 · CRO X-Ray (Tool 03), lighter scroll effects
-
-**Tools**
-- **Added** CRO X-Ray at `/apps/cro-xray`, as Tool 03. Paste a page (plus up to two more, such as a service or contact page) and it reads what a first-time visitor meets: headline and subhead quoted with plain signals, calls to action, sections, trust signals, forms, analytics tags, and speed, mobile and accessibility from Google PageSpeed Insights. Findings become "ideas worth testing" and "fix without testing". It states what it cannot see and points to the paid audit.
-- **Changed** AI Visibility Check from Tool 03 to Tool 04.
-- **Added** an optional AI read (five-second test, first-screen read from the phone screenshot, unanswered buyer questions, headline alternatives) using Google's Gemini API. Off by default. It needs `GEMINI_API_KEY`, `AI_FEATURES=on` and `NEXT_PUBLIC_CRO_AI=on` in Netlify. `GEMINI_MODEL` can override the model.
-- **Added** `NEXT_PUBLIC_PAGESPEED_KEY` for the PageSpeed calls, which run from the visitor's browser so no server function waits on them. Restrict the key in Google Cloud to this site's address and the PageSpeed Insights API.
-- **Changed** the privacy notice to cover what CRO X-Ray sends to Google.
-
-**Site**
-- **Changed** the scroll effects loop to stop when nothing is moving, and the background dots to be placed when the browser is idle. The hero photo is marked high priority.
-
 ### 2026-10-05 · Section names, "What I build" scene, section openings, security headers
 
 **Site**
