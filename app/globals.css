@@ -520,22 +520,13 @@ html.consent-open body > *:not(.consent-layer) { filter: blur(10px); pointer-eve
 .stack-col:hover::after, .case:hover::after, .vpp:hover::after, .note-card:hover::after { opacity: 1 }
 .stack-col:hover, .case:hover, .note-card:hover { border-color: var(--brand-mid) }
 
-/* 3. Shimmer: a slow light sweep across the primary Book buttons */
+/* 3. Shimmer: a slow light sweep across the primary Book buttons.
+   Moved with transform only, so the browser does it without re-laying-out the page. */
 .btn-primary, .nav-cta { position: relative; overflow: hidden; isolation: isolate }
-.btn-primary::after, .nav-cta::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 45%; pointer-events: none; z-index: -1;
-  background: linear-gradient(105deg, transparent, rgba(255,255,255,.38), transparent); transform: skewX(-18deg); animation: shimmer 4.5s ease-in-out infinite }
-@keyframes shimmer { 0%, 62% { left: -60% } 100% { left: 130% } }
+.btn-primary::after, .nav-cta::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 45%; pointer-events: none; z-index: -1; will-change: transform;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.38), transparent); transform: translateX(-140%) skewX(-18deg); animation: shimmer 4.5s ease-in-out infinite }
+@keyframes shimmer { 0%, 62% { transform: translateX(-140%) skewX(-18deg) } 100% { transform: translateX(320%) skewX(-18deg) } }
 
-/* 4. Animated hero background: slow drifting colour behind the hero only */
-.hero::after { content: ""; position: absolute; inset: -80px -50vw 0; z-index: -1; pointer-events: none; opacity: .9;
-  background:
-    radial-gradient(38% 46% at 72% 38%, rgba(142,116,221,.34), transparent 70%),
-    radial-gradient(30% 40% at 88% 70%, rgba(224,122,184,.20), transparent 70%),
-    radial-gradient(34% 42% at 22% 24%, rgba(91,67,181,.16), transparent 70%),
-    radial-gradient(28% 36% at 40% 86%, rgba(197,182,240,.40), transparent 70%);
-  background-size: 140% 140%; filter: blur(24px); animation: aurora 18s ease-in-out infinite alternate;
-  -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent) }
-@keyframes aurora { 0% { background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0% } 50% { background-position: 60% 40%, 40% 60%, 50% 30%, 30% 70% } 100% { background-position: 100% 100%, 0% 0%, 100% 0%, 0% 100% } }
 /* 1. Counting numbers: the counter sits inside the big figure and must look like it */
 .work b > span { font: inherit !important; color: inherit !important; letter-spacing: inherit !important; text-transform: none !important; display: inline !important; margin: 0 !important; padding: 0 !important; background: none !important }
 
@@ -552,9 +543,8 @@ html.consent-open body > *:not(.consent-layer) { filter: blur(10px); pointer-eve
 [data-open="words"] .w { opacity: .14; transition: opacity .5s ease calc(var(--i) * 70ms) }
 [data-open="words"].is-open .w { opacity: 1 }
 
-/* Pop: cards arrive one after another, each settling into place */
-[data-open="pop"] > * { opacity: 0; transform: translateY(46px) scale(.9) rotate(-2.5deg); transition: opacity .6s ease calc(var(--i) * 130ms), transform .9s var(--ease-open) calc(var(--i) * 130ms) }
-[data-open="pop"] > *:nth-child(even) { transform: translateY(46px) scale(.9) rotate(2.5deg) }
+/* Pop: cards arrive one after another with a short, gentle rise */
+[data-open="pop"] > * { opacity: 0; transform: translateY(18px); transition: opacity .5s ease calc(var(--i) * 70ms), transform .6s var(--ease-open) calc(var(--i) * 70ms) }
 [data-open="pop"].is-open > * { opacity: 1; transform: none }
 
 /* Steps: items arrive in their numbered order */
@@ -654,3 +644,8 @@ html.consent-open body > *:not(.consent-layer) { filter: blur(10px); pointer-eve
 @media (max-width: 1099px) { .nav-link { padding: 10px 10px; font-size: 13.5px } .nav .mk-tag { display: none } }
 /* with the longer names, narrow laptops and tablets use the menu button too */
 @media (max-width: 999px) { .nav-link { display: none } .nav-burger { display: flex } .nav-menu:not([hidden]) { display: flex } }
+
+/* Finding the problem: the active step tab shows a thin line filling while it waits to move on */
+.story .tab { position: relative; overflow: hidden }
+.story .tab.timing::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 5px; height: 2px; border-radius: 2px; background: rgba(255,255,255,.75); transform-origin: 0 50%; transform: scaleX(0); animation: tab-timer var(--auto-ms, 6500ms) linear forwards }
+@keyframes tab-timer { to { transform: scaleX(1) } }

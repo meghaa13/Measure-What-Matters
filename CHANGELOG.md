@@ -10,8 +10,11 @@ All notable changes to meghakarnwal.com. Newest first. Branch flow: changes ship
 - **Changed** the names of two sections so the difference is clear: "Approach" is now "Finding the problem" and "Method" is now "What I build". Each has a one-line plain description above it.
 - **Changed** "What I build" into its own scene: a purple panel with the text fixed on the left, while the four step cards come in from the right and settle over each other as you scroll or press the arrows. On phones the cards stack while scrolling down.
 - **Added** a different opening for each section as it scrolls into view (wipes, word-by-word heading, staggered cards, 3D tilt, zoom, flip, slide, expand).
-- **Added** four small effects: counting numbers in Proof, a glow that follows the pointer on cards, a light sweep on the Book button, and a slow colour drift behind the hero.
+- **Added** three small effects: counting numbers in Proof, a glow that follows the pointer on cards, and a light sweep on the Book button.
 - **Changed** "Finding the problem" on phones to show the chart before the text.
+- **Added** auto-advance to "Finding the problem": the four step charts change every 2.5 seconds while on screen, pause under the pointer, and stop once the visitor picks a step.
+- **Changed** the Proof section to open more gently: a short rise for the case cards, no tilt or wipe.
+- **Removed** the slow colour drift behind the hero, and rewrote the Book button light sweep, which cut the idle load on the browser from about 45% to 17%.
 - **Fixed** background dots appearing in the margins beside the hero.
 
 **Security and upkeep**
