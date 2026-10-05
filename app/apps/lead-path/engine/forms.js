@@ -31,7 +31,7 @@ function preview(html, start, open, body, inputs) {
     const id = attr(i.raw, "id");
     const label = (id && labels[id]) || attr(i.raw, "placeholder") || attr(i.raw, "aria-label") || nice(i.name) || i.type;
     const text = strip(label).replace(/\s*\*+\s*$/, "");
-    return { label: text.slice(0, 60), type: i.type, required: /\brequired\b|aria-required=["']true/i.test(i.raw) || /\*\s*$/.test(strip(label)) };
+    return { label: text.slice(0, 60), type: i.type, name: i.name, labelled: !!((id && labels[id]) || attr(i.raw, "aria-label") || attr(i.raw, "aria-labelledby")), required: /\brequired\b|aria-required=["']true/i.test(i.raw) || /\*\s*$/.test(strip(label)) };
   });
   const buttons = [...body.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/gi)];
   const btn = buttons.find((b) => /type=["']submit["']/i.test(b[1])) || buttons.filter((b) => !/type=["']button["']/i.test(b[1])).pop() || buttons.pop();
@@ -72,6 +72,7 @@ function htmlForms(html) {
     const hidden = inputs.filter((i) => i.type === "hidden").map((i) => i.name).filter(Boolean);
     out.push({
       preview: preview(html, m.index, open, body, inputs),
+      index: m.index, end: m.index + m[0].length, labelTags: (body.match(/<label\b/gi) || []).length,
       tool, method: (attr(open, "method") || "get").toUpperCase(), action: attr(open, "action") || "",
       methodExplicit: !!attr(open, "method"), jsHandled: !attr(open, "method") && !attr(open, "action"),
       fields: visible.length,

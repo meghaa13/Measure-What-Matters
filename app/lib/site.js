@@ -15,6 +15,11 @@ export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-PKHZLGS4";
 // The server side also needs AI_FEATURES=on, or no AI call is ever made.
 export const AI_CITATIONS = process.env.NEXT_PUBLIC_AI_CITATIONS === "on";
 
+// CRO X-Ray's five-second test uses Google's Gemini API (GEMINI_API_KEY, server only).
+// Off until a key is added; set NEXT_PUBLIC_CRO_AI=on in Netlify to show it.
+// The server side also needs AI_FEATURES=on, or no AI call is ever made.
+export const CRO_AI = process.env.NEXT_PUBLIC_CRO_AI === "on";
+
 export const EMAIL = "meghakarnwal13@gmail.com";
 export const LINKEDIN = "https://linkedin.com/in/megha-karnwal-453889251";
 export const RESUME = "/uploads/MeghaKarnwal-%20web%20analytics%20resume.pdf";
