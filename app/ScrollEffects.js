@@ -11,8 +11,7 @@ const OPENINGS = [
   [".story .copy-stack", "wipe-l"],     // Approach: text wipes in from the left...
   [".story .panel-box", "wipe-r"],      // ...and the chart from the right (Dual Wipe Reveal)
   [".m2-intro .h2", "words"],     // Method: the heading lights up word by word (Text Highlighter)
-  [".work .vpp", "wipe-l"],             // Proof: the lead case wipes in,
-  [".work .cases", "pop"],              // then the case cards pop in one after another (Stagger Reveal Grid)
+  [".work .cases", "pop"],              // Proof: the case cards rise in gently, one after another (the lead case keeps the plain fade)
   [".stack-grid", "steps"],             // Stack: the three cards arrive in order 01, 02, 03 (stepped Scroll Reveal)
   [".tools-viewport", "tilt"],          // Tools: the card tilts up flat as you scroll (Container Scroll Animation)
   [".co-track", "zoom"],                // Side projects: zooms in from soft focus (Progressive Blur)

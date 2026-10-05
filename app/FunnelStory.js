@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+
+const AUTO_MS = 2500; // how long each step stays up when advancing on its own
 import { uiEvent } from "./lib/analytics";
 
 const STEPS = [
@@ -194,7 +196,7 @@ export default function FunnelStory() {
     if (tab !== 3 || !seen) { setCount(0); return; }
     const t0 = performance.now();
     const step = (now) => {
-      const p = Math.min(1, (now - t0 - 1200) / 1100);
+      const p = Math.min(1, (now - t0 - 250) / 800); // quick enough to finish before the step moves on
       setCount(Math.round(50 * (p <= 0 ? 0 : 1 - Math.pow(1 - p, 3))));
       if (p < 1) raf.current = requestAnimationFrame(step);
     };
@@ -202,17 +204,36 @@ export default function FunnelStory() {
     return () => cancelAnimationFrame(raf.current);
   }, [tab, seen]);
 
+  // Auto-advance: while the section is on screen, move to the next step every few
+  // seconds so all four charts get seen. It waits while the pointer or keyboard focus
+  // is on the section, and stops for good the first time the visitor picks a step.
+  const [auto, setAuto] = useState(true);
+  const [hold, setHold] = useState(false);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.45 });
+    io.observe(root.current);
+    return () => io.disconnect();
+  }, []);
+  const playing = auto && inView && !hold;
+  useEffect(() => {
+    if (!playing) return;
+    const t = setTimeout(() => setTab((n) => (n + 1) % 4), AUTO_MS);
+    return () => clearTimeout(t);
+  }, [playing, tab]);
+
   const go = (i, method) => {
     const n = (i + 4) % 4;
+    setAuto(false);
     setTab(n);
     uiEvent("story_step", STEPS[n].label, "selected", { click_surface: "story", step_number: n + 1, method });
   };
 
   return (
-    <div ref={root}>
-      <div data-reveal="60" role="tablist" className="tabs">
+    <div ref={root} onPointerEnter={() => setHold(true)} onPointerLeave={() => setHold(false)} onFocusCapture={() => setHold(true)} onBlurCapture={() => setHold(false)}>
+      <div data-reveal="60" role="tablist" className="tabs" style={{ "--auto-ms": `${AUTO_MS}ms` }}>
         {STEPS.map((s, i) => (
-          <button key={s.label} role="tab" aria-selected={i === tab} className={`tab${i === tab ? " on" : ""}`} onClick={() => go(i, "tab")}>
+          <button key={s.label} role="tab" aria-selected={i === tab} className={`tab${i === tab ? " on" : ""}${i === tab && playing ? " timing" : ""}`} onClick={() => go(i, "tab")}>
             <span className="num">0{i + 1}</span>{s.label}
           </button>
         ))}
