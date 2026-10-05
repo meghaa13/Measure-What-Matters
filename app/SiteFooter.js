@@ -5,7 +5,6 @@ import { EMAIL, LINKEDIN, RESUME, contactHref, bookTarget } from "./lib/site";
 const TOOLS = [
   ["/apps/tag-scanner", "Tag Health Scan"],
   ["/apps/lead-path", "Lead Path X-Ray"],
-  ["/apps/cro-xray", "CRO X-Ray"],
   ["/apps/ai-crawler-gate", "AI Visibility Check"],
 ];
 const SITE = [["/#story", "Finding the problem"], ["/#method", "What I build"], ["/#work", "Proof"], ["/#stack", "Stack"], ["/#apps", "Side projects"], ["/#faq", "FAQ"]];

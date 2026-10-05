@@ -35,23 +35,8 @@ const TOOLS = [
     note: "Free · bulk mode for whole campaigns.",
   },
   {
-    key: "cro_xray",
-    kind: "TOOL 03 · CONVERSION",
-    name: "CRO X-Ray",
-    desc: "Paste a page. It reads the headline, calls to action, forms, trust signals, speed and accessibility the way a first-time visitor meets them, and turns what it finds into test ideas.",
-    sample: [
-      ["Primary call to action", "58% down the page", "warn"],
-      ["Contact form", "9 fields, phone required", "bad"],
-      ["Main content on mobile", "3.4 s", "warn"],
-      ["Text contrast", "OK", "ok"],
-    ],
-    sum: "4 ideas worth testing · 3 fixes that need no test",
-    href: "/apps/cro-xray",
-    note: "Free · an outside-in read, not a full audit.",
-  },
-  {
     key: "ai_crawler_gate",
-    kind: "TOOL 04 · AI SEARCH",
+    kind: "TOOL 03 · AI SEARCH",
     name: "AI Visibility Check",
     desc: "Can ChatGPT, Perplexity, Claude and Google AI Overviews find and quote your site? Plain verdict, what's blocking them, and a copy-paste fix.",
     sample: [
