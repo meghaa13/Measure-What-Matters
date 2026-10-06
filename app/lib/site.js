@@ -10,6 +10,12 @@ export const SHOW_PROMPTS = true;
 // NEXT_PUBLIC_GTM_ID (Netlify environment variable) overrides it, e.g. for a test container.
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-PKHZLGS4";
 
+// Google PageSpeed Insights key for CRO X-Ray. Optional: without one the tool uses Google's
+// shared free allowance, which runs out on busy days. The key is called from the visitor's
+// browser, so it is visible in the page: restrict it in Google Cloud to this site's address
+// and to the PageSpeed Insights API only.
+export const PSI_KEY = process.env.NEXT_PUBLIC_PSI_KEY || "";
+
 // The AI citation sample needs a paid Claude API key (ANTHROPIC_API_KEY).
 // Off until one is added; set NEXT_PUBLIC_AI_CITATIONS=on in Netlify to show it.
 // The server side also needs AI_FEATURES=on, or no AI call is ever made.

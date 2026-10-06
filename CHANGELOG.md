@@ -4,6 +4,15 @@ All notable changes to meghakarnwal.com. Newest first. Branch flow: changes ship
 
 ## [Unreleased] — on `stage`, awaiting approval for `main`
 
+### 2026-10-06 · CRO X-Ray (tool 03)
+- **Added** CRO X-Ray (`/apps/cro-xray`): a conversion audit of one page and the page its main button leads to. It reports a score ("N of M conversion basics in place"), the phone and desktop load times with screenshots, and ten areas that open on click: content and messaging, call to action, conversion journey, the form, trust and proof, questions and objections, navigation and structure, performance and loading, mobile and accessibility, data recording.
+- **Added** a roadmap under the audit: quick fixes (defects, no test needed) and hypotheses to test, each tagged with its bucket (value proposition, conversion journey, engagement, conversions), test type, effort, and the goal it should move.
+- **Added** links from the report to Tag Health Scan and Lead Path X-Ray.
+- **How it works:** page content is read on the server; speed and accessibility come from Google PageSpeed, run in the visitor's browser for phone and desktop. Every recommendation is a written rule filled in with what was read from the page; no AI model is called.
+- **Changed** AI Visibility Check from tool 03 to tool 04.
+- **Not included yet:** the optional "what a stranger thinks you sell" AI read. It needs a paid AI call, so it is left out.
+- **Needs before it is reliable:** a Google PageSpeed API key in `NEXT_PUBLIC_PSI_KEY`. Without one the speed half uses Google's shared free allowance, which was exhausted during testing.
+
 ### 2026-10-05 · Section names, "What I build" scene, section openings, security headers
 
 **Site**

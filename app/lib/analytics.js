@@ -70,7 +70,7 @@ export function clearIds() {
 
 // ── Category helpers ────────────────────────────────────────────────────────
 // Tools: one schema for every micro tool. stage: "start" | "complete" | "error" | "action"
-export const TOOLS = { scan: "tag_health_scan", lead: "lead_path_xray", ai: "ai_visibility", plan: "clean_tracking_plan" };
+export const TOOLS = { scan: "tag_health_scan", lead: "lead_path_xray", ai: "ai_visibility", plan: "clean_tracking_plan", cro: "cro_xray" };
 export function toolEvent(tool, stage, params = {}) {
   track(`tool_${stage}`, { tool_name: tool, ...params });
 }

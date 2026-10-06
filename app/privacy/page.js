@@ -24,6 +24,7 @@ export default function Privacy() {
           <li><b>What they read:</b> only public information about the website you enter: its HTML, robots.txt, redirects and published tag configuration. No logins, no private data, and forms are read, never submitted.</li>
           <li><b>What is stored:</b> nothing about you. Results are held in server memory for up to an hour so repeat checks of the same site are faster, then dropped. An anonymous count of which rules fired (no site, no IDs) is logged for aggregate stats.</li>
           <li><b>AI features:</b> the Tag Health Scan summary and the AI citation sample send the scanned domain and findings to Anthropic&apos;s Claude API. Anthropic doesn&apos;t use API data to train models.</li>
+          <li><b>Speed tests:</b> CRO X-Ray asks Google PageSpeed Insights to load the page address you entered. That request goes from your browser straight to Google, which handles it under its own privacy policy.</li>
           <li><b>Recent searches</b> are kept in your own browser (local storage) and never leave it.</li>
         </ul>
 

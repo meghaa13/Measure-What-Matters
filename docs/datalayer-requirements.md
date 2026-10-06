@@ -104,19 +104,20 @@ Only the **domain** of the email is pushed (`company.com`), never the address.
 
 ### Tools
 
-`tool_name`: `tag_health_scan`, `lead_path_xray`, `ai_visibility`, `clean_tracking_plan`.
+`tool_name`: `tag_health_scan`, `lead_path_xray`, `cro_xray`, `ai_visibility`, `clean_tracking_plan`.
 
 | Event | Fires when | Parameters |
 |---|---|---|
 | `tool_start` | Check submitted / builder opened | `input_source` (`typed` / `example` / `recent`; builder: `direct` / `shared_link`) |
 | `tool_complete` | Result shown / plan exported | Tool-specific results (below) |
-| `tool_error` | Check failed or nothing found | `error_type` (`request_failed`, `rate_limited`, `network`, `no_tags_found`, `archive_timeout`) |
+| `tool_error` | Check failed or nothing found | `error_type` (`request_failed`, `rate_limited`, `network`, `no_tags_found`, `archive_timeout`; CRO X-Ray speed test: `speed_quota`, `speed_unreachable`, `speed_timeout`, `speed_network`, `speed_refused`) |
 | `tool_action` | Interaction inside a result | `action` plus detail |
 
 | Tool | `tool_complete` extras | `tool_action` → `action` |
 |---|---|---|
 | Tag Health Scan | `input_type`, `tracking_health`, `findings`, `tags_found`, `not_tracked`, `id_source` | `report_nav` (`section`), `expand_tag_group` (`group`) |
 | Lead Path X-Ray | `mode`; single: `click_pass`, `forms`, `broken_stage`, `page_source`; bulk: `links`, `broken`, `with_spend` | `open_bulk`, `show_fix_snippet`, `open_crm_test_link` |
+| CRO X-Ray | Fires twice, with `stage`: `content` (`insights`, `top_insight`, `cta_found`, `form_found`, `page_blocked`) then `speed` (`insights`, `has_field_data`, `speed_cached`) | `insight_view` (`insight`, `insight_rank`), `screenshot_expand`, `open_checklist`, `add_second_page` |
 | AI Visibility Check | `assistants_visible`, `crawlers_blocked`, `cdn`, `robots` | `show_technical_details`, `choose_robots_preset` / `copy_robots` / `download_robots` (`preset`), `copy_ai_channel_regex`, `citation_free_question`, `citation_sample_complete` |
 | Clean Tracking Plan | `format`, `site_type`, `market` | `select_site_type` / `select_market` (`selection`), `toggle_stack` (`stack_item`, `enabled`), `copy_code` (`snippet`), `share_plan`, `use_hash_lab` |
 
