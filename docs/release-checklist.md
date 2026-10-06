@@ -24,6 +24,10 @@ Run these on stage before every merge. If a result changes and you did not chang
 | `http://127.0.0.1/`, `http://10.0.0.5/`, `http://169.254.169.254/` | Tag Health Scan | "That address can't be scanned." Checks internal addresses stay blocked. |
 | `intelegencia.com` | Lead Path X-Ray | A verdict with all four stages filled in. |
 | `intelegencia.com` | AI Visibility Check | A verdict and a robots.txt fix. |
+| `basecamp.com` | CRO X-Ray | Main button "Try Basecamp Free". No content finding (no Google tag is visible, so the tool stays silent on tracking). |
+| `shopify.com/free-trial` | CRO X-Ray | The main button is the form's own button. Must **not** report "no call to action". |
+| `mailchimp.com` | CRO X-Ray | Main button "Sign Up". Must **not** report an untracked form (the pricing page's one-field form is not a lead form). |
+| A page you know has a broken button | CRO X-Ray | The dead-end finding, marked Fix. |
 
 Other sites change their tags, so scores drift over time. A small drift is normal; a crash, an empty report or a blocked-address check that stops blocking is not.
 

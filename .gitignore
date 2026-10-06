@@ -2,3 +2,7 @@ node_modules
 .next
 .netlify
 *.log
+
+# local settings and keys: never commit
+.env
+.env*.local

@@ -225,3 +225,208 @@
 .mx-fp .more { font-size: 12.5px; color: var(--faint) }
 .mx-fp .btn { padding: 7px 14px; border-radius: 999px; background: var(--brand); color: #fff; font-size: 12.5px; font-weight: 600 }
 .mx-fp.embed b { font-size: 14.5px }
+
+/* ───────── CRO X-Ray */
+.cx-more { display: block; margin-top: 12px; padding: 0; border: 0; background: none; font: inherit; font-size: 13.5px; color: var(--brand); text-align: left; cursor: pointer; text-decoration: underline; text-underline-offset: 3px }
+.cx-second { display: flex; flex-direction: column; gap: 6px; margin-top: 12px }
+.cx-second label { font-size: 13px; color: var(--muted) }
+.cx-second input { padding: 12px 16px; border-radius: 14px; border: 1px solid var(--line); background: #fff; font-family: var(--mono); font-size: 14px; color: var(--ink) }
+.cx-second input:focus { outline: 2px solid var(--brand-mid); outline-offset: 1px }
+.sx-preview .cx-rows div span:first-child { font-size: 13.5px; line-height: 1.35 }
+.cx-progress { display: flex; align-items: center; gap: 10px; margin: 6px 0 0; font-size: 14.5px; color: var(--muted) }
+.cx-progress.off { color: var(--muted); padding: 10px 14px; border-radius: 12px; background: var(--tint); border: 1px solid var(--line) }
+.cx-progress .spin { flex: none; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--tint-4); border-top-color: var(--brand); animation: cx-spin .8s linear infinite }
+@keyframes cx-spin { to { transform: rotate(360deg) } }
+.cx-cards { display: flex; flex-direction: column; gap: 22px }
+.cx-card { display: flex; flex-direction: column; gap: 16px }
+.cx-card-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap }
+.cx-no { font-family: var(--mono); font-size: 12px; color: var(--brand) }
+.cx-conf { font-size: 12.5px; color: var(--faint) }
+.cx-card h3 { font-family: var(--sans, inherit); font-weight: 600; font-size: clamp(18px, 1.7vw, 21px); line-height: 1.35; margin: 0; max-width: 70ch }
+.cx-evs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 14px }
+.cx-ev { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 16px; background: var(--tint-3); border: 1px solid var(--line); min-width: 0 }
+.cx-ev blockquote { margin: 0; font-family: var(--serif); font-size: 18px; line-height: 1.35; color: var(--ink) }
+.cx-ev-note { grid-column: 1 / -1; margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--muted) }
+.cx-path { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 14px }
+.cx-path .chip { padding: 6px 12px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 500 }
+.cx-path .chip.to { background: #fff; color: var(--ink); border: 1px solid var(--line); font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere }
+.cx-chips { display: flex; flex-wrap: wrap; gap: 6px }
+.cx-chips code { font-family: var(--mono); font-size: 12px; padding: 4px 8px; border-radius: 7px; background: #fff; border: 1px solid var(--line); color: var(--ink-2); overflow-wrap: anywhere }
+.cx-table { display: flex; flex-direction: column }
+.cx-table > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; border-top: 1px solid var(--tint-4); font-size: 14px }
+.cx-table > div:first-child { border-top: 0 }
+.cx-table.wide > div { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr) auto; align-items: start; padding: 11px 0 }
+.cx-table.wide .v { color: var(--muted); overflow-wrap: anywhere }
+.cx-metrics { flex-direction: row; flex-wrap: wrap; gap: 10px; background: none; border: 0; padding: 0 }
+.cx-metrics > div { flex: 1 1 150px; display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 14px; background: var(--tint-3); border: 1px solid var(--line) }
+.cx-metrics span { font-size: 12.5px; color: var(--muted); line-height: 1.35 }
+.cx-metrics b { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1 }
+.cx-metrics .bad b { color: #B42335 } .cx-metrics .warn b { color: #9A6200 } .cx-metrics .ok b { color: #1F7A54 }
+.cx-bars { display: flex; flex-direction: column; gap: 8px }
+.cx-bars > div { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr) auto; align-items: center; gap: 10px; font-size: 13.5px }
+.cx-bars span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.cx-bars i { display: block; height: 8px; border-radius: 6px; background: var(--tint-4); overflow: hidden }
+.cx-bars i b { display: block; height: 100%; border-radius: 6px; background: var(--brand-mid) }
+.cx-bars .own i b { background: var(--lilac-2) }
+.cx-bars em { font-style: normal; font-family: var(--mono); font-size: 12px; color: var(--muted) }
+.cx-shot { padding: 0; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: #fff; cursor: zoom-in; width: 150px; max-width: 100%; align-self: flex-start; box-shadow: 0 16px 30px -20px rgba(46,34,99,.4) }
+.cx-shot img { display: block; width: 100%; height: auto }
+.cx-shot.big { width: min(260px, 100%); justify-self: center }
+.cx-film { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 8px; scrollbar-width: thin }
+.cx-film figure { flex: none; width: 92px; margin: 0; display: flex; flex-direction: column; gap: 6px }
+.cx-film img { display: block; width: 100%; height: auto; border-radius: 9px; border: 1px solid var(--line); background: #fff }
+.cx-film figcaption { font-family: var(--mono); font-size: 10.5px; color: var(--muted); line-height: 1.3 }
+.cx-film figure.mark img { border: 2px solid var(--brand); box-shadow: 0 8px 18px -8px rgba(91,67,181,.7) }
+.cx-film figure.mark figcaption { color: var(--brand); font-weight: 500 }
+.cx-why { margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink-2); max-width: 72ch; display: flex; flex-direction: column; gap: 4px }
+.cx-action { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: var(--tint); border: 1px solid var(--line) }
+.cx-action .tag { flex: none; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; padding: 5px 9px; border-radius: 7px; background: var(--brand); color: #fff }
+.cx-action.fix .tag { background: var(--ink) }
+.cx-action div { display: flex; flex-direction: column; gap: 4px }
+.cx-action b { font-weight: 600; line-height: 1.4 }
+.cx-action span { font-size: 13.5px; color: var(--muted); line-height: 1.45 }
+.cx-fewer { margin: 0; font-size: 14px; color: var(--muted) }
+.cx-clear h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 2.6vw, 30px); margin: 0 0 8px }
+.cx-clear p { margin: 0; color: var(--muted); line-height: 1.55; max-width: 70ch }
+.cx-screen { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center }
+.cx-notes { margin: 14px 0 0; padding-left: 18px; display: grid; gap: 8px; color: var(--muted); line-height: 1.55; font-size: 15px }
+.cx-notes b { color: var(--ink); font-weight: 600 }
+.cx-list summary { cursor: pointer; display: flex; flex-direction: column; gap: 2px; list-style: none }
+.cx-list summary::-webkit-details-marker { display: none }
+.cx-list summary b { font-family: var(--serif); font-weight: 400; font-size: 22px }
+.cx-list summary b::after { content: " +"; color: var(--brand) }
+.cx-list[open] summary b::after { content: " –" }
+.cx-list summary span { font-size: 13.5px; color: var(--muted) }
+.cx-list .cx-table { margin-top: 14px }
+.cx-zoom { position: fixed; inset: 0; z-index: 900; display: grid; place-items: center; gap: 12px; padding: 20px; background: rgba(20,18,28,.72); cursor: zoom-out }
+.cx-zoom img { max-width: min(420px, 92vw); max-height: 82vh; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,.5) }
+.cx-zoom button { padding: 10px 20px; border-radius: 999px; border: 0; background: #fff; color: var(--ink); font: inherit; cursor: pointer }
+@media (max-width: 760px) { .cx-screen { grid-template-columns: minmax(0, 1fr) } .cx-table.wide > div { grid-template-columns: minmax(0, 1fr) auto } .cx-table.wide .v { grid-column: 1 / -1; order: 3 } .cx-bars > div { grid-template-columns: minmax(0, 110px) minmax(0, 1fr) auto } }
+/* the filmstrip gets the full width of a finding */
+.cx-ev:has(.cx-film) { grid-column: 1 / -1 }
+
+/* CRO X-Ray: field-by-field evidence, links to the other tools */
+.cx-fields { grid-column: 1 / -1 }
+.cx-fields .cx-table > div > span:first-child { display: flex; flex-direction: column; gap: 2px; min-width: 0 }
+.cx-fields .cx-table b { font-weight: 500 }
+.cx-fields .cx-table em { font-style: normal; font-size: 13px; color: #9A6200; line-height: 1.4 }
+.cx-fields .cx-table .flag b { font-weight: 600 }
+.cx-tool { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; border-radius: 14px; border: 1px dashed var(--brand-mid); color: var(--ink); transition: background .25s, border-color .25s }
+.cx-tool:hover { background: var(--tint); border-style: solid; color: var(--ink) }
+.cx-tool b { color: var(--brand); font-weight: 600 }
+.cx-tool span { font-size: 13.5px; color: var(--muted) }
+.cx-toolgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 14px; margin-top: 18px }
+.cx-toolgrid a { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; border-radius: 18px; border: 1px solid var(--line); background: var(--tint-3); color: var(--ink); transition: border-color .25s, transform .25s }
+.cx-toolgrid a:hover { border-color: var(--brand-mid); transform: translateY(-2px); color: var(--ink) }
+.cx-toolgrid b { font-family: var(--serif); font-weight: 400; font-size: 24px }
+.cx-toolgrid span:not(.label) { font-size: 14.5px; line-height: 1.5; color: var(--muted) }
+.cx-toolgrid em { font-style: normal; font-weight: 600; color: var(--brand); margin-top: 4px }
+
+/* CRO X-Ray: summary at the top of the report */
+.cx-sum { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 22px 32px; align-items: start; background: linear-gradient(160deg, #fff, var(--tint-3)) }
+.cx-sum-main { display: flex; flex-direction: column; gap: 12px; min-width: 0 }
+.cx-sum h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 2.3vw, 28px); line-height: 1.25; margin: 0; max-width: 46ch }
+.cx-sum .cost { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); max-width: 70ch }
+.cx-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 10px; margin-top: 6px }
+.cx-tiles > div { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1px solid var(--line); min-width: 0 }
+.cx-tiles span { font-size: 12.5px; color: var(--muted) }
+.cx-tiles b { font-weight: 600; font-size: 17px; line-height: 1.3; overflow-wrap: anywhere }
+.cx-tiles em { font-style: normal; font-size: 12.5px; line-height: 1.4; color: var(--muted); overflow-wrap: anywhere }
+.cx-sum-shot { margin: 0; display: flex; flex-direction: column; gap: 6px; align-items: center }
+.cx-sum-shot .cx-shot { width: 132px }
+.cx-sum-shot figcaption { font-size: 12px; color: var(--faint) }
+.cx-plan { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid var(--line) }
+.cx-plan ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; counter-reset: plan }
+.cx-plan a { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; border-radius: 12px; color: var(--ink); transition: background .2s }
+.cx-plan a::before { counter-increment: plan; content: counter(plan); flex: none; width: 22px; font-family: var(--mono); font-size: 13px; color: var(--brand); padding-top: 3px }
+.cx-plan a:hover { background: var(--tint); color: var(--ink) }
+.cx-plan .tag { flex: none; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; padding: 4px 8px; border-radius: 7px; background: var(--brand); color: #fff; margin-top: 1px }
+.cx-plan .tag.fix { background: var(--ink) }
+.cx-plan a > span:last-child { display: flex; flex-direction: column; gap: 2px; min-width: 0 }
+.cx-plan b { font-weight: 600; font-size: 15.5px; line-height: 1.4 }
+.cx-plan em { font-style: normal; font-size: 13px; color: var(--muted) }
+.cx-card { scroll-margin-top: 110px }
+.cx-why { font-size: 15px }
+@media (max-width: 700px) { .cx-sum { grid-template-columns: 1fr } .cx-sum-shot { align-items: flex-start } }
+
+/* CRO X-Ray: audit areas and roadmap */
+.cx-areachips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px }
+.cx-areachips a { font-size: 13px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--ink-2) }
+.cx-areachips a b { font-weight: 600; color: #9A6200; margin-left: 4px }
+.cx-areachips a.all b { color: #1F7A54 }
+.cx-areachips a:hover { border-color: var(--brand-mid); color: var(--ink) }
+.cx-shots { display: flex; gap: 12px; align-items: flex-start }
+.cx-shots figure { margin: 0; display: flex; flex-direction: column; gap: 6px; align-items: center }
+.cx-shots .cx-shot { width: 112px; border-radius: 14px }
+.cx-shots .cx-shot.wide { width: 230px; border-radius: 10px }
+.cx-shots figcaption { font-size: 12px; color: var(--faint) }
+.cx-road h2, .cx-area h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 2.2vw, 27px); line-height: 1.2; margin: 0 }
+.cx-road-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 22px 32px; margin-top: 18px }
+.cx-road-cols > div { display: flex; flex-direction: column; gap: 8px; min-width: 0 }
+.cx-road ol { margin: 0; padding: 0; list-style: none; counter-reset: road; display: flex; flex-direction: column }
+.cx-road li a { display: flex; gap: 12px; padding: 10px 8px; border-top: 1px solid var(--tint-4); color: var(--ink); border-radius: 8px }
+.cx-road li:first-child a { border-top: 0 }
+.cx-road li a::before { counter-increment: road; content: counter(road); flex: none; width: 20px; font-family: var(--mono); font-size: 13px; color: var(--brand); padding-top: 2px }
+.cx-road li a:hover { background: var(--tint); color: var(--ink) }
+.cx-road li span { display: flex; flex-direction: column; gap: 2px; min-width: 0 }
+.cx-road li b { font-weight: 500; font-size: 15px; line-height: 1.45 }
+.cx-road li em { font-style: normal; font-size: 12.5px; color: var(--muted) }
+.cx-area { display: flex; flex-direction: column; gap: 6px; scroll-margin-top: 110px }
+.cx-area-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap }
+.cx-rows { display: flex; flex-direction: column; margin-top: 10px }
+.cx-row { display: flex; gap: 14px; padding: 13px 0; border-top: 1px solid var(--tint-4) }
+.cx-row:first-child { border-top: 0 }
+.cx-row .st { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; margin-top: 1px }
+.cx-row.ok .st { background: #E3F4EC; color: #1F7A54 } .cx-row.fix .st { background: #FBE4E7; color: #B42335 } .cx-row.test .st { background: #FFF1D6; color: #9A6200 } .cx-row.info .st { background: var(--tint-4); color: var(--muted) }
+.cx-row > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1 }
+.cx-row b { font-weight: 600; font-size: 15px }
+.cx-row > div > span { font-size: 15px; line-height: 1.5; color: var(--ink-2); overflow-wrap: anywhere; max-width: 86ch }
+.cx-row .do { display: flex; gap: 10px; align-items: flex-start; margin: 8px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--tint); border: 1px solid var(--line); font-size: 14.5px; line-height: 1.5; max-width: 90ch }
+.cx-row .do .tag { flex: none; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; padding: 3px 7px; border-radius: 6px; background: var(--brand); color: #fff; margin-top: 2px }
+.cx-row .do .tag.fix { background: var(--ink) }
+.cx-row .do > span:last-child { display: flex; flex-direction: column; gap: 3px }
+.cx-row .do em { font-style: normal; font-size: 13px; color: var(--muted) }
+.cx-area .cx-card { margin-top: 14px; padding: 18px; border-radius: 18px; border: 1px solid var(--line); background: var(--tint-3) }
+.cx-area .cx-card .cx-ev { background: #fff }
+.cx-area .cx-card h3 { font-family: var(--sans); font-weight: 600; font-size: 17px; line-height: 1.4 }
+@media (max-width: 700px) { .cx-shots .cx-shot.wide { width: 170px } }
+
+/* CRO X-Ray: hypothesis tags in the roadmap */
+.cx-road li .cx-meta { display: flex; flex-direction: row; flex-wrap: wrap; gap: 5px; margin-top: 4px }
+.cx-road li .cx-meta i { font-style: normal; font-size: 11.5px; padding: 2px 8px; border-radius: 999px; background: var(--tint); border: 1px solid var(--line); color: var(--ink-2) }
+
+/* CRO X-Ray: audit areas as accordions */
+details.cx-area { padding-top: 18px; padding-bottom: 18px }
+details.cx-area > summary { cursor: pointer; list-style: none }
+details.cx-area > summary::-webkit-details-marker { display: none }
+details.cx-area > summary h3 { font-size: clamp(19px, 1.8vw, 22px) }
+details.cx-area > summary h3::before { content: "+"; display: inline-block; width: 22px; color: var(--brand); font-family: var(--mono); font-size: 18px }
+details.cx-area[open] > summary h3::before { content: "–" }
+details.cx-area[open] > summary { margin-bottom: 8px }
+.cx-area-count { display: flex; align-items: center; gap: 8px; flex-wrap: wrap }
+.cx-area-count em { font-style: normal; font-size: 13px; color: var(--muted) }
+#cx-result details.cx-area + details.cx-area { margin-top: -10px }
+
+/* CRO X-Ray: compact summary and folded roadmap tail */
+.cx-tiles { grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)) }
+.cx-more-road > summary { cursor: pointer; list-style: none; padding: 10px 8px; font-size: 14px; font-weight: 600; color: var(--brand); border-top: 1px solid var(--tint-4) }
+.cx-more-road > summary::-webkit-details-marker { display: none }
+.cx-more-road[open] > summary { display: none }
+
+/* CRO X-Ray: the audit as one card of rows */
+.cx-audit h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 2.2vw, 27px); line-height: 1.2; margin: 0 }
+.cx-audit > .ths-sub { margin-bottom: 12px }
+.cx-audit details.cx-area { display: block; padding: 0; margin: 0 !important; border: 0; border-top: 1px solid var(--tint-4); border-radius: 0; background: none; box-shadow: none }
+.cx-audit details.cx-area > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 4px; margin: 0; flex-wrap: nowrap; border-radius: 10px; transition: background .2s }
+.cx-audit details.cx-area > summary:hover { background: var(--tint) }
+.cx-area-title { min-width: 0; flex: 1 }
+.cx-audit details.cx-area > summary h3 { font-family: var(--sans); font-weight: 600; font-size: 16.5px; line-height: 1.3 }
+.cx-audit details.cx-area > summary h3::before { width: 20px; font-size: 16px }
+.cx-area-title p { margin: 2px 0 0 20px; font-size: 14px; line-height: 1.4; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.cx-audit details.cx-area[open] .cx-area-title p { display: none }
+.cx-audit .cx-area-count { flex: none; justify-content: flex-end }
+.cx-audit details.cx-area > .ths-sub { margin: 0 4px 0 24px; font-style: italic }
+.cx-audit details.cx-area > .cx-rows { margin: 6px 4px 0 24px }
+.cx-audit details.cx-area > .cx-card { margin: 14px 4px 0 24px }
+.cx-audit details.cx-area[open] { padding-bottom: 18px }
+@media (max-width: 700px) { .cx-audit details.cx-area > summary { flex-wrap: wrap } .cx-area-title { flex-basis: 100% } .cx-audit .cx-area-count { margin-left: 20px } .cx-audit .cx-area-count em { display: none } }

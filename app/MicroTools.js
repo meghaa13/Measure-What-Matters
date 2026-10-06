@@ -35,8 +35,23 @@ const TOOLS = [
     note: "Free · bulk mode for whole campaigns.",
   },
   {
+    key: "cro_xray",
+    kind: "TOOL 03 · CONVERSION",
+    name: "CRO X-Ray",
+    desc: "Up to three conversion problems you can't see from your own desk: a promise the next step doesn't keep, a form nobody measures, a phone that waits too long for the button. Each with evidence.",
+    sample: [
+      ["\"Free trial\" leads to a sales form", "Ask", "warn"],
+      ["No tracking found on the quote form", "Likely", "bad"],
+      ["Main content appears after 4.1 s", "Measured", "bad"],
+      ["Padding the list with weak findings", "Never", "info"],
+    ],
+    sum: "verdict → the form works, but you can't measure it",
+    href: "/apps/cro-xray",
+    note: "Free · at most three findings.",
+  },
+  {
     key: "ai_crawler_gate",
-    kind: "TOOL 03 · AI SEARCH",
+    kind: "TOOL 04 · AI SEARCH",
     name: "AI Visibility Check",
     desc: "Can ChatGPT, Perplexity, Claude and Google AI Overviews find and quote your site? Plain verdict, what's blocking them, and a copy-paste fix.",
     sample: [
