@@ -71,7 +71,7 @@ export default function Home() {
         <div className="hspot-glow" aria-hidden="true" />
         <div className="hspot-copy">
           <HeroEyebrow />
-          <h1 data-reveal="100">Know which clicks <em>actually</em> become customers.</h1>
+          <h1 data-reveal="100"><span>Everyone wants AI.</span><span>Few have data</span><em>it can trust.</em></h1>
           <HeroSub />
           <div data-reveal="520" className="hero-ctas">
             <BookLink loc="hero" className="btn btn-primary">{CTA}</BookLink>
