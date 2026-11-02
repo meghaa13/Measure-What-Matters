@@ -111,22 +111,39 @@ export function findForms(html) {
   return [...plain, ...embeds.filter((e) => !plain.some((p) => p.tool === e.tool))];
 }
 
-// Pages likely to hold lead forms: homepage plus contact/demo/quote/pricing links, up to `limit`.
-export function leadPages(html, baseUrl, limit = 10) {
+// Pages to read for forms: one page of every type, up to `limit` including the homepage.
+// Pages inside a folder (/our-offices/mumbai, /blog/post) usually share a template, so one
+// page per folder is enough. Top-level pages (/pricing, /uae-golden-visa) can't be told apart
+// by their address, so each counts as its own type. Contact, demo and quote pages go first.
+const LEAD_WORDS = /contact|demo|quote|pricing|get-?started|book|talk|consult|request|enquir|inquir|trial|sign-?up|apply|partner|register/i;
+const NOT_A_PAGE = /\.(pdf|jpe?g|png|gif|webp|svg|zip|docx?|xlsx?|pptx?|mp4|mp3|xml|txt|css|js)$/i;
+const SKIP = /^\/(wp-admin|wp-login|wp-json|cart|checkout|my-account|login|logout|feed|tag|author|page)(\/|$)/i;
+export function leadPages(html, baseUrl, limit = 20) {
   const base = new URL(baseUrl);
   const host = base.hostname.replace(/^www\./, "");
-  const seen = new Set([base.origin + base.pathname]);
-  const out = [];
-  for (const m of html.matchAll(/<a\b[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]{0,120}?)<\/a>/gi)) {
+  const origin = base.origin; // www and non-www links count as the same page
+  const home = origin + base.pathname;
+  const seen = new Set([home]), links = [];
+  for (const m of html.matchAll(/<a\b[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]{0,160}?)<\/a>/gi)) {
     let u; try { u = new URL(m[1], base); } catch { continue; }
     if (u.hostname.replace(/^www\./, "") !== host || !/^https?:$/.test(u.protocol)) continue;
-    const text = m[2].replace(/<[^>]+>/g, " ");
-    if (!/contact|demo|quote|pricing|get-?started|book|talk|consult|request|enquir|inquir|trial|sign-?up/i.test(u.pathname + " " + text)) continue;
-    const key = u.origin + u.pathname;
-    if (seen.has(key)) continue;
-    seen.add(key); out.push(key);
-    if (out.length >= limit - 1) break;
+    if (NOT_A_PAGE.test(u.pathname) || SKIP.test(u.pathname)) continue;
+    const key = origin + u.pathname.replace(/\/+$/, "/");
+    const bare = key.replace(/\/$/, "");
+    if (seen.has(key) || seen.has(bare) || seen.has(bare + "/")) continue;
+    seen.add(key);
+    const parts = u.pathname.split("/").filter(Boolean);
+    links.push({ url: key, folder: parts.length > 1 ? parts[0].toLowerCase() : null, lead: LEAD_WORDS.test(u.pathname + " " + m[2].replace(/<[^>]+>/g, " ")) });
   }
+  const out = [], folders = new Set();
+  const take = (l) => {
+    if (out.length >= limit - 1 || out.includes(l.url)) return;
+    if (l.folder) { if (folders.has(l.folder)) return; folders.add(l.folder); }
+    out.push(l.url);
+  };
+  links.filter((l) => l.lead).forEach(take); // likely lead pages first
+  links.filter((l) => l.folder).forEach(take); // then one page from each folder
+  links.filter((l) => !l.folder).forEach(take); // then other top-level pages, in the order they are linked
   return out;
 }
 

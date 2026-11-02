@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="306" viewBox="0 0 800 306" role="img" aria-labelledby="ts5 ds5" font-family="Hanken Grotesk, system-ui, sans-serif">
+  <title id="ts5">The article's seven actions, grouped</title>
+  <desc id="ds5">Three groups. Find out: check whether you run Search ads in the US, UK, Australia or India; run the manual check and keep a screenshot log; ask your Google rep about an opt-out, sources and reporting. Prepare: write down a baseline of at least six weeks; review your own reviews; brief your team. Hold back: do not rewrite campaigns in a rush, because no data shows it helps or harms.</desc>
+  <defs><linearGradient id="e" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8F6FD"/><stop offset="1" stop-color="#EEE9FA"/></linearGradient></defs>
+  <rect width="800" height="306" fill="url(#e)"/>
+  <text x="40" y="34" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" fill="#5B43B5">WHAT TO DO WITH THIS</text>
+  <text x="40" y="62" font-family="Newsreader, Georgia, serif" font-size="22" fill="#1E1A2B">Find out, prepare, and do not rush.</text>
+  <rect x="40" y="84" width="232" height="206" rx="16" fill="#FFFFFF" stroke="#E4DEF2"/>
+  <rect x="284" y="84" width="232" height="206" rx="16" fill="#FFFFFF" stroke="#E4DEF2"/>
+  <rect x="528" y="84" width="232" height="206" rx="16" fill="#FFF7F8" stroke="#F0C9CE"/>
+  <g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" font-weight="600">
+    <text x="58" y="112" fill="#5B43B5">FIND OUT</text><text x="302" y="112" fill="#5B43B5">PREPARE</text><text x="546" y="112" fill="#B42335">HOLD BACK</text>
+  </g>
+  <g fill="#8E74DD"><circle cx="62" cy="136" r="3.5"/><circle cx="62" cy="186" r="3.5"/><circle cx="62" cy="236" r="3.5"/><circle cx="306" cy="136" r="3.5"/><circle cx="306" cy="196" r="3.5"/><circle cx="306" cy="258" r="3.5"/></g>
+  <circle cx="550" cy="136" r="3.5" fill="#B42335"/>
+  <g font-size="13" fill="#2B2540">
+    <text x="74" y="140">Do you run Search in the</text><text x="74" y="157">US, UK, Australia, India?</text>
+    <text x="74" y="190">Run the manual check and</text><text x="74" y="207">keep a screenshot log.</text>
+    <text x="74" y="240">Ask your rep: opt-out?</text><text x="74" y="257">Sources? Reporting?</text>
+    <text x="318" y="140">Write a baseline: CTR, conv.</text><text x="318" y="157">rate, cost per conversion,</text><text x="318" y="174">GA4 by campaign, 6+ weeks.</text>
+    <text x="318" y="200">Review your own reviews.</text><text x="318" y="217">Fix listings, answer</text><text x="318" y="234">common complaints.</text>
+    <text x="318" y="262">Brief your team.</text>
+    <text x="562" y="140">Do not rewrite campaigns</text><text x="562" y="157">in a rush.</text>
+    <text x="562" y="190" fill="#5D5670">No data yet shows it helps</text><text x="562" y="207" fill="#5D5670">or harms.</text>
+  </g>
+</svg>

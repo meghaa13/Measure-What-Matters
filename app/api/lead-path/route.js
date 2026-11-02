@@ -1,5 +1,5 @@
 // POST /api/lead-path
-//   { mode: "single", url }        → Click Survival + Form X-Ray (homepage + up to 9 lead pages)
+//   { mode: "single", url }        → Click Survival + Form X-Ray (homepage + up to 19 pages, one of each type)
 //   { mode: "bulk", urls: [...] }  → Click Survival only, up to 8 URLs per call (the client batches)
 import { NextResponse } from "next/server";
 import { parseInput, extractIds, findSite } from "../../apps/tag-scanner/engine/discover";
@@ -70,13 +70,18 @@ export async function POST(req) {
   // 3. Form X-Ray: landing page + lead pages
   const clean = (u) => { const x = new URL(u); x.search = ""; x.hash = ""; return x.toString(); };
   const pages = [{ url: clean(click.landedUrl), html: pageHtml }];
-  const more = pageSource === "live" ? leadPages(pageHtml, click.landedUrl, 10) : []; // archive copies: landing page only
+  const more = pageSource === "live" ? leadPages(pageHtml, click.landedUrl, 20) : []; // archive copies: landing page only
   const fetched = await Promise.all(more.map((u) => safeFetch(u, { timeout: 6000 }).then((r) => ({ url: r.url, html: r.text })).catch(() => null)));
-  pages.push(...fetched.filter(Boolean).map((p) => ({ ...p, url: clean(p.url) })));
+  // A link can redirect to a page already read (often the homepage); read each page once.
+  for (const p of fetched.filter(Boolean).map((x) => ({ ...x, url: clean(x.url) }))) {
+    const same = (u) => u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+    if (!pages.some((q) => same(q.url) === same(p.url))) pages.push(p);
+  }
   // Same form repeated on a page (or across pages) is reported once, listing every page it appears on.
   const byKey = new Map();
   for (const p of pages) for (const f of findForms(p.html)) {
-    const key = [f.tool, f.id || "", f.fields, f.method, (f.hidden || []).join(",")].join("|");
+    // Field types and labels are part of the key: two different forms can have the same number of fields.
+    const key = [f.tool, f.id || "", f.fields, f.method, (f.hidden || []).join(","), (f.preview?.fields || []).map((x) => `${x.type}:${x.label}`).join(",")].join("|");
     if (byKey.has(key)) { const e = byKey.get(key); if (!e.pages.includes(p.url)) e.pages.push(p.url); continue; }
     byKey.set(key, { ...formChecks(f, { tracking, utmSurvives: click.utmSurvives, attrInTags }), page: p.url, pages: [p.url] });
   }

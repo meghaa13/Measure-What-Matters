@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="340" viewBox="0 0 800 340" role="img" aria-labelledby="t d">
+  <title id="t">The five-step test for AI Mode traffic</title>
+  <desc id="d">Method diagram, no data plotted. Step 1 pick a page. Step 2 click through from AI Mode on desktop Chrome, a phone and a second browser, noting time and landing page. Step 3 check GA4 Realtime, then the Traffic acquisition and Landing page reports. Step 4 optionally query BigQuery. Step 5 check Search Console over many days. Repeat the GA4 part about ten times.</desc>
+  <rect width="800" height="340" fill="#FBFAFD"/>
+<text x="40" y="34" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#5B43B5" letter-spacing="1">THE TEST</text>
+<text x="40" y="62" font-family="Newsreader, Georgia, serif" font-size="22" fill="#1E1A2B">Five steps, run on your own property.</text>
+<rect x="40" y="84" width="134" height="150" rx="14" fill="#fff" stroke="#E4DEF2"/>
+<text x="56" y="110" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#5B43B5">STEP 1</text>
+<text x="56" y="136" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="15" fill="#1E1A2B" font-weight="600">Pick a page</text>
+<text x="56" y="160" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">A page AI Mode</text>
+<text x="56" y="178" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">links to, or a</text>
+<text x="56" y="196" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">site you own.</text>
+<rect x="186" y="84" width="134" height="150" rx="14" fill="#fff" stroke="#E4DEF2"/>
+<text x="202" y="110" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#5B43B5">STEP 2</text>
+<text x="202" y="136" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="15" fill="#1E1A2B" font-weight="600">Click through</text>
+<text x="202" y="160" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">Desktop Chrome,</text>
+<text x="202" y="178" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">phone, 2nd browser.</text>
+<text x="202" y="196" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">Note time, page.</text>
+<rect x="332" y="84" width="134" height="150" rx="14" fill="#2E2263"/>
+<text x="348" y="110" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#C5B6F0">STEP 3</text>
+<text x="348" y="136" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="15" fill="#fff" font-weight="600">Read GA4</text>
+<text x="348" y="160" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#E8E1F8">Realtime now. Later:</text>
+<text x="348" y="178" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#E8E1F8">Traffic acquisition,</text>
+<text x="348" y="196" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#E8E1F8">Landing page.</text>
+<rect x="478" y="84" width="134" height="150" rx="14" fill="#fff" stroke="#E4DEF2"/>
+<text x="494" y="110" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#5B43B5">STEP 4</text>
+<text x="494" y="136" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="15" fill="#1E1A2B" font-weight="600">BigQuery</text>
+<text x="494" y="160" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">If you export, check</text>
+<text x="494" y="178" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">the traffic source</text>
+<text x="494" y="196" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">fields.</text>
+<rect x="624" y="84" width="134" height="150" rx="14" fill="#fff" stroke="#E4DEF2"/>
+<text x="640" y="110" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#5B43B5">STEP 5</text>
+<text x="640" y="136" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="15" fill="#1E1A2B" font-weight="600">Search Console</text>
+<text x="640" y="160" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">Same page and date.</text>
+<text x="640" y="178" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">Counts under "Web".</text>
+<text x="640" y="196" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="12" fill="#2B2540">Check over days.</text>
+<rect x="40" y="252" width="720" height="34" rx="10" fill="#E8E1F8"/>
+<text x="56" y="274" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="13" fill="#2E2263">Repeat the GA4 part about ten times across browsers and devices. Record the result and the date.</text>
+<text x="40" y="318" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="13" fill="#5D5670">Figure 4. Method diagram. No data plotted: you produce the numbers.</text>
+</svg>

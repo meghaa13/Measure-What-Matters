@@ -290,7 +290,7 @@ export default function LeadPath() {
 
       {mode === "single" && state === "loading" && (
         <section className="sx-wrap sx-scanning"><div className="sx-term"><div className="sx-term-head"><span className="live">FOLLOWING THE CLICK · {input}</span><span>…</span></div><div className="sx-term-sweep" />
-          {["Adding fake click IDs and UTMs", "Following every redirect", "Reading the landing page and its tags", "Finding lead forms on up to 10 pages", "Checking how each form keeps the source"].map((t) => <div key={t} className="ln on"><span className="mk">›</span><span className="t">{t}</span><span className="d" /></div>)}
+          {["Adding fake click IDs and UTMs", "Following every redirect", "Reading the landing page and its tags", "Finding forms on one page of every type (up to 20)", "Checking how each form keeps the source"].map((t) => <div key={t} className="ln on"><span className="mk">›</span><span className="t">{t}</span><span className="d" /></div>)}
         </div></section>
       )}
       {mode === "single" && state === "error" && <section className="sx-wrap mx-section"><div className="ths-note" role="alert"><p>{msg}</p></div></section>}

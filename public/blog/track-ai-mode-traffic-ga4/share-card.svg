@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">Google says AI Mode earns less. What can you measure?</title>
+  <desc id="d">Share card for the article by Megha Karnwal, last checked 2 November 2026. Google gave no figure for AI Mode's lower monetisation. A test you can run on your own property.</desc>
+  <rect width="1200" height="630" fill="#2E2263"/>
+  <g fill="none" stroke="#C5B6F0" stroke-opacity=".45"><circle cx="1010" cy="300" r="120"/><circle cx="1010" cy="300" r="220" stroke-dasharray="4 8"/><circle cx="1010" cy="300" r="330"/></g>
+  <circle cx="1010" cy="300" r="26" fill="#C5B6F0"/>
+  <text x="70" y="96" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" fill="#C5B6F0" letter-spacing="3">AI MODE · GA4 · SEARCH CONSOLE</text>
+  <text x="70" y="220" font-family="Newsreader, Georgia, serif" font-size="82" fill="#fff">Google says AI Mode</text>
+  <text x="70" y="316" font-family="Newsreader, Georgia, serif" font-size="82" fill="#fff">earns less.</text>
+  <text x="70" y="412" font-family="Newsreader, Georgia, serif" font-size="82" fill="#C5B6F0" font-style="italic">What can you measure?</text>
+  <text x="70" y="500" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="28" fill="#EEE9FA">Google gave no figure. Here is a test you can run.</text>
+  <text x="70" y="568" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" fill="#C5B6F0">Megha Karnwal · Last checked 2 Nov 2026</text>
+</svg>
