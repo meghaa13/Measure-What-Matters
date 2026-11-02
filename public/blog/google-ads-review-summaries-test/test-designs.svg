@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520" role="img" aria-labelledby="t2 d2" font-family="Hanken Grotesk, system-ui, sans-serif">
+  <title id="t2">Four ways to test review summaries, and the weakness of each</title>
+  <desc id="d2">A diagram of the method in the article. A true A/B test needs a review summary switch, which the help page does not list. Four observational designs are shown instead: before and after with a marker, matched campaigns, GA4 landing page and quality checks, and support signals. Each has a stated weakness. Source: article text, citing Google Ads Help pages 18760807 and 6261395.</desc>
+  <rect width="800" height="520" fill="#FBFAFD"/>
+  <text x="40" y="38" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" fill="#5B43B5">FIGURE 2 &#183; HOW TO TEST WITHOUT A SWITCH</text>
+  <text x="40" y="64" font-family="Newsreader, Georgia, serif" font-size="22" fill="#1E1A2B">No control to flip, so every design is a hint, not proof.</text>
+  <rect x="40" y="86" width="720" height="62" rx="14" fill="#2E2263"/>
+  <text x="60" y="112" font-size="14" font-weight="600" fill="#FFFFFF">Can you switch review summaries off for a control group?</text>
+  <text x="60" y="134" font-size="13" fill="#E8E1F8">As far as the help page shows, no setting exists. A custom experiment needs a setting to change.</text>
+  <line x1="400" y1="148" x2="400" y2="176" stroke="#8E74DD" stroke-width="2"/>
+  <text x="414" y="168" font-family="JetBrains Mono, monospace" font-size="11" fill="#5D5670">So use observational designs</text>
+  <g fill="#FFFFFF" stroke="#E4DEF2">
+    <rect x="40" y="184" width="348" height="150" rx="14"/>
+    <rect x="412" y="184" width="348" height="150" rx="14"/>
+    <rect x="40" y="350" width="348" height="150" rx="14"/>
+    <rect x="412" y="350" width="348" height="150" rx="14"/>
+  </g>
+  <g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing=".6" fill="#5B43B5">
+    <text x="58" y="210">1 &#183; BEFORE / AFTER WITH A MARKER</text>
+    <text x="430" y="210">2 &#183; MATCHED CAMPAIGNS</text>
+    <text x="58" y="376">3 &#183; GA4 LANDING PAGE AND QUALITY</text>
+    <text x="430" y="376">4 &#183; SUPPORT SIGNALS</text>
+  </g>
+  <g font-size="13" fill="#1E1A2B">
+    <text x="58" y="234">Compare CTR, conversion rate and cost</text>
+    <text x="58" y="252">per conversion for 4 to 6 weeks each side</text>
+    <text x="58" y="270">of the date summaries first appear.</text>
+    <text x="430" y="234">Compare similar pairs, such as brand</text>
+    <text x="430" y="252">against brand in two regions, where</text>
+    <text x="430" y="270">summaries show on one and not the other.</text>
+    <text x="58" y="400">Compare engagement rate, conversion rate</text>
+    <text x="58" y="418">and revenue per session by campaign,</text>
+    <text x="58" y="436">before and after.</text>
+    <text x="430" y="400">Count support tickets or sales-call</text>
+    <text x="430" y="418">mentions of claims you never made.</text>
+  </g>
+  <g font-size="13" fill="#5D5670">
+    <text x="58" y="298" font-weight="600" fill="#B42335">Weakness</text>
+    <text x="58" y="316">Seasonality and Google changes share the window.</text>
+    <text x="430" y="298" font-weight="600" fill="#B42335">Weakness</text>
+    <text x="430" y="316">Google chooses where to show it, so it is biased.</text>
+    <text x="58" y="464" font-weight="600" fill="#B42335">Weakness</text>
+    <text x="58" y="482">Shows who clicked, not why they clicked.</text>
+    <text x="430" y="464" font-weight="600" fill="#B42335">Weakness</text>
+    <text x="430" y="482">Anecdotal, but the fastest warning.</text>
+  </g>
+</svg>

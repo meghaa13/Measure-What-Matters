@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="352" viewBox="0 0 800 352" role="img" aria-labelledby="t1 d1" font-family="Hanken Grotesk, system-ui, sans-serif">
+  <title id="t1">Timeline of Google review summary sightings, December 2025 to October 2026</title>
+  <desc id="d1">Three earlier sightings (3 December 2025, 3 July 2026, 5 September 2026) and the help page coverage on 24, 25 and 26 October 2026, placed on a date axis from 1 December 2025 to 31 October 2026. Source: PPC Land, 25 October 2026.</desc>
+  <rect width="800" height="352" fill="#FBFAFD"/>
+  <text x="40" y="34" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" fill="#5B43B5">FIGURE 1 &#183; WHAT WAS SEEN, AND WHEN</text>
+  <text x="40" y="58" font-family="Newsreader, Georgia, serif" font-size="22" fill="#1E1A2B">Sightings came first. The help page was reported last.</text>
+  <!-- axis: 1 Dec 2025 (x=60) to 31 Oct 2026 (x=740), about 2.04 px per day -->
+  <line x1="60" y1="180" x2="740" y2="180" stroke="#C5B6F0" stroke-width="2"/>
+  <g font-family="JetBrains Mono, monospace" font-size="10" fill="#5D5670" text-anchor="middle">
+    <text x="60" y="204">Dec 2025</text>
+    <text x="217" y="204">Mar 2026</text>
+    <text x="400" y="204">Jun 2026</text>
+    <text x="583" y="204">Sep 2026</text>
+    <text x="696" y="204">Oct 2026</text>
+  </g>
+  <g stroke="#C5B6F0" stroke-width="1"><line x1="60" y1="174" x2="60" y2="186"/><line x1="217" y1="174" x2="217" y2="186"/><line x1="400" y1="174" x2="400" y2="186"/><line x1="583" y1="174" x2="583" y2="186"/></g>
+  <!-- Labels alternate: Dec and Sep above the line, Jul and Oct below, so no two labels share a row. -->
+  <g stroke="#9A93AE" stroke-width="1">
+    <line x1="64" y1="172" x2="64" y2="124"/>
+    <line x1="626" y1="172" x2="626" y2="124"/>
+    <line x1="496" y1="188" x2="496" y2="226"/>
+    <line x1="727" y1="189" x2="727" y2="226"/>
+  </g>
+  <g stroke="#5B43B5" stroke-width="2" fill="#FBFAFD">
+    <circle cx="64" cy="180" r="7"/><circle cx="496" cy="180" r="7"/><circle cx="626" cy="180" r="7"/>
+  </g>
+  <circle cx="727" cy="180" r="8" fill="#5B43B5"/>
+  <g font-size="13" fill="#1E1A2B">
+    <text x="40" y="92" font-weight="600">3 Dec 2025</text>
+    <text x="40" y="110" fill="#5D5670">Review excerpts in ads</text>
+    <text x="626" y="92" text-anchor="middle" font-weight="600">5 Sep 2026</text>
+    <text x="626" y="110" text-anchor="middle" fill="#5D5670">"What customers love" test</text>
+    <text x="530" y="244" text-anchor="end" font-weight="600">3 Jul 2026</text>
+    <text x="530" y="262" text-anchor="end" fill="#5D5670">AI summary with a</text>
+    <text x="530" y="278" text-anchor="end" fill="#5D5670">"can make mistakes" note</text>
+    <text x="772" y="244" text-anchor="end" font-weight="600">24 to 26 Oct 2026</text>
+    <text x="772" y="262" text-anchor="end" fill="#5D5670">Help page reported by</text>
+    <text x="772" y="278" text-anchor="end" fill="#5D5670">PPC News Feed (24), PPC Land (25),</text>
+    <text x="772" y="294" text-anchor="end" fill="#5D5670">Search Engine Roundtable (26)</text>
+  </g>
+  <g font-size="12" fill="#5D5670">
+    <circle cx="48" cy="318" r="5" fill="#FBFAFD" stroke="#5B43B5" stroke-width="2"/><text x="62" y="322">Earlier sighting. PPC Land says the help page does not confirm these became this feature.</text>
+    <circle cx="48" cy="338" r="5" fill="#5B43B5"/><text x="62" y="342">Coverage of the "About Review summaries" help page. The page itself is undated.</text>
+  </g>
+</svg>

@@ -5,6 +5,11 @@ import MethodCards from "./MethodCards";
 import MicroTools from "./MicroTools";
 import AppsSection from "./AppsSection";
 import Faq from "./Faq";
+import PostCard from "./blog/PostCard";
+import { posts } from "./blog/posts";
+import "./blog/blog-index.css";
+import "./data-strip.css";
+import "./hero-spot.css";
 import { HeroEyebrow, HeroSub } from "./HeroCopy";
 import { BookLink, Prompt } from "./Bits";
 import Stack from "./Stack";
@@ -43,14 +48,14 @@ const BUILDS = [
   ["CLOUD", "Rainbow Room", "Mental health screening for LGBTQIA+ users."],
 ];
 
+const NEXT = ["Book 20 minutes and tell me the question.", "We look at what's tracked, what's trusted and what's still manual.", "You leave with the first three fixes, in priority order."];
+
 const NOTES = [
   "AI is only as smart as the tracking plan underneath it.",
   "Dashboards stop being the product. Decisions become the product.",
   "AI search is the newest referral channel, and most teams aren't measuring it yet.",
   "Tracking is a trust contract with the people being tracked.",
 ];
-
-const NEXT = ["Book 20 minutes and tell me the question.", "We look at what's tracked, what's trusted and what's still manual.", "You leave with the first three fixes, in priority order."];
 
 export default function Home() {
   return (
@@ -59,29 +64,20 @@ export default function Home() {
       <SiteChrome />
 
       {/* HERO */}
-      <header id="top" className="wrap hero" data-section="hero">
-        <div style={{ position: "relative", zIndex: 2 }}>
+      <header id="top" className="hspot" data-section="hero">
+        <div className="hspot-photo">
+          <img data-par="-0.06" className="par" src="/uploads/hero-spotlight.webp" alt="Megha Karnwal, web and data analyst" fetchPriority="high" />
+        </div>
+        <div className="hspot-glow" aria-hidden="true" />
+        <div className="hspot-copy">
           <HeroEyebrow />
-          <h1>
-            <span data-reveal="80">Everyone wants AI.</span>
-            <span data-reveal="180">Few have data</span>
-            <span data-reveal="280" className="accent">it can trust.</span>
-          </h1>
+          <h1 data-reveal="100">Know which clicks <em>actually</em> become customers.</h1>
           <HeroSub />
           <div data-reveal="520" className="hero-ctas">
             <BookLink loc="hero" className="btn btn-primary">{CTA}</BookLink>
             <a href="#story" className="btn btn-ghost" data-track="nav_click" data-loc="hero">See how I work ↓</a>
           </div>
           <div data-reveal="600" className="reassure">Free · 20 minutes · No slides, just your data.</div>
-        </div>
-        <div className="hero-art">
-          <div data-par="0.08" className="halo par" />
-          <div data-par="-0.05" className="halo-ring par" />
-          <div data-reveal="200" className="portrait">
-            <img data-par="-0.14" className="par" src="/uploads/img1.webp" alt="Megha Karnwal, analyst working across analytics, automation and AI" />
-            <div className="shade" />
-            <div className="cap">MEGHA KARNWAL — ANALYTICS · AUTOMATION · AI</div>
-          </div>
         </div>
       </header>
 
@@ -101,6 +97,14 @@ export default function Home() {
             <p data-reveal="160" className="lead" style={{ maxWidth: 440, margin: "20px 0 0" }}>AI multiplies whatever you feed it, including bad tracking. So I build from the bottom up: measure honestly, automate the repetitive work, then add AI where it saves real hours or finds real signal.</p>
             <span className="m2-hint">Keep scrolling <span aria-hidden="true">↓</span></span>
         </MethodCards>
+      </section>
+
+      {/* DATA HANDLING: small strip under the method section */}
+      <section className="wrap data-strip" data-section="data_handling" aria-labelledby="ds-h">
+        <h2 id="ds-h" data-reveal="0" className="ds-h">How I handle your data</h2>
+        <ul className="ds-list">
+          {FACTS.map(([b, t], i) => <li key={b} data-reveal={60 + i * 50}><b>{b}</b><span>{t}</span></li>)}
+        </ul>
       </section>
 
       {/* WORK */}
@@ -168,13 +172,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TRUST */}
-      <section className="wrap grid2 trust" data-section="trust">
+      {/* BLOG: latest writing (replaces the "Sensitive data" section) */}
+      <section id="blog" className="wrap grid2 trust" data-section="blog">
         <div>
-          <Prompt>Can we trust you with our data?</Prompt>
-          <h2 data-reveal="80" className="h2">Sensitive data, handled like it&apos;s <em>sensitive</em>.</h2>
-          <div className="facts">
-            {FACTS.map(([b, s], i) => <div key={b} data-reveal={120 + i * 60} className="fact"><b>{b}</b><span>{s}</span></div>)}
+          <Prompt>What are you writing about?</Prompt>
+          <h2 data-reveal="80" className="h2">Latest <em>writing</em>.</h2>
+          <div className="bl-list">
+            {posts.slice(0, 3).map((p, i) => <div key={p.slug} data-reveal={120 + i * 60}><PostCard post={p} loc="home_blog" /></div>)}
+          </div>
+          <div className="bl-foot">
+            <a className="bl-all" href="/blog" data-track="blog_click" data-loc="home_all">All posts <span aria-hidden="true">→</span></a>
           </div>
         </div>
         <div data-view="1" className="reveal-circle">

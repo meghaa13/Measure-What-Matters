@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="306" viewBox="0 0 800 306" role="img" aria-labelledby="ts3 ds3" font-family="Hanken Grotesk, system-ui, sans-serif">
+  <title id="ts3">Three risks of claims you did not write</title>
+  <desc id="ds3">Three cards. Accuracy: an AI paraphrase of reviews can be wrong or pull from a similarly named business. Brand and legal: positive-only text sits oddly next to the US FTC rule on fake reviews, final rule of 14 August 2024, and it is not addressed for platform summaries. Your data gets murky: if click-through or conversion rate moves, the cause cannot be told apart. This is the author's opinion.</desc>
+  <defs><linearGradient id="c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8F6FD"/><stop offset="1" stop-color="#EEE9FA"/></linearGradient></defs>
+  <rect width="800" height="306" fill="url(#c)"/>
+  <text x="40" y="34" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" fill="#5B43B5">WHY IT MATTERS</text>
+  <text x="40" y="62" font-family="Newsreader, Georgia, serif" font-size="22" fill="#1E1A2B">Their claim reads as your claim. Three risks.</text>
+  <g>
+    <rect x="40" y="84" width="232" height="208" rx="16" fill="#FFFFFF" stroke="#E4DEF2"/>
+    <rect x="284" y="84" width="232" height="208" rx="16" fill="#FFFFFF" stroke="#E4DEF2"/>
+    <rect x="528" y="84" width="232" height="208" rx="16" fill="#FFFFFF" stroke="#E4DEF2"/>
+  </g>
+  <g>
+    <circle cx="68" cy="116" r="14" fill="#E8E1F8"/><text x="68" y="121" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#2E2263">1</text>
+    <circle cx="312" cy="116" r="14" fill="#E8E1F8"/><text x="312" y="121" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#2E2263">2</text>
+    <circle cx="556" cy="116" r="14" fill="#E8E1F8"/><text x="556" y="121" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#2E2263">3</text>
+  </g>
+  <g font-size="15" font-weight="600" fill="#1E1A2B">
+    <text x="90" y="121">Accuracy</text>
+    <text x="334" y="121">Brand and legal</text>
+    <text x="578" y="121">Your data gets murky</text>
+  </g>
+  <g font-size="13" fill="#2B2540">
+    <text x="58" y="158">An AI paraphrase of reviews</text>
+    <text x="58" y="177">can be wrong, or pull from a</text>
+    <text x="58" y="196">similarly named business.</text>
+    <text x="302" y="158">Positive-only text sits oddly</text>
+    <text x="302" y="177">next to the FTC fake-review</text>
+    <text x="302" y="196">rule (final rule,</text>
+    <text x="302" y="215">14 Aug 2024).</text>
+    <text x="546" y="158">If CTR or conversion rate</text>
+    <text x="546" y="177">moves, you cannot tell if the</text>
+    <text x="546" y="196">summary, your copy or</text>
+    <text x="546" y="215">something else caused it.</text>
+  </g>
+  <g font-family="JetBrains Mono, monospace" font-size="10" fill="#5D5670">
+    <text x="58" y="274">Open question, PPC Land [1]</text>
+    <text x="302" y="262">Platform summaries:</text>
+    <text x="302" y="276">not addressed [1][3][4]</text>
+    <text x="546" y="274">The author's opinion</text>
+  </g>
+</svg>

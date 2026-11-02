@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { CTA, bookHref, bookTarget } from "./lib/site";
 
-const NAV = [["story", "Finding the problem"], ["method", "What I build"], ["work", "Proof"], ["stack", "Stack"], ["tools", "Tools"]];
-const SPY = ["story", "method", "work", "stack", "tools", "apps", "contact"];
+const NAV = [["story", "Finding the problem"], ["method", "What I build"], ["work", "Proof"], ["stack", "Stack"], ["tools", "Tools"], ["blog", "Blog"]];
+const SPY = ["story", "method", "work", "stack", "tools", "blog", "apps", "contact"];
 
 const scrollToId = (id) => {
   const el = document.getElementById(id);
@@ -44,7 +44,7 @@ export default function SiteChrome({ home = true, current = null }) {
   // On the landing page, smooth-scroll in place; elsewhere, a normal link to "/#id".
   const go = (id) => (e) => { setMenu(false); if (!home) return; e.preventDefault(); window.__navLock?.(900); setActive(id); scrollToId(id); };
   const book = (e) => { if (!bookTarget) go("contact")(e); };
-  const href = (id) => (home ? `#${id}` : `/#${id}`);
+  const href = (id) => (home ? `#${id}` : id === "blog" ? "/blog" : `/#${id}`);
   const bookLink = bookTarget ? bookHref : href("contact");
 
   return (

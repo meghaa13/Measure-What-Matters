@@ -1,0 +1,24 @@
+/* Homepage hero: dark panel with the message on the left, photo on the right.
+   Sized by viewport height too, so both buttons stay on a laptop's first screen. */
+.hspot { position: relative; isolation: isolate; overflow: hidden; min-height: min(100svh, 900px); display: flex; background: #1A1626; color: #FBFAFD }
+.hspot-photo { position: absolute; top: 0; right: 0; bottom: 0; width: 54%; overflow: hidden }
+.hspot-photo img { position: absolute; left: 0; top: 96px; width: 100%; height: calc(100% - 96px); object-fit: cover; object-position: 50% 0 }
+.hspot-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, #1A1626 0%, rgba(26,22,38,.85) 16%, rgba(26,22,38,0) 46%), linear-gradient(to bottom, #1A1626 96px, rgba(26,22,38,0) 190px) }
+.hspot-glow { position: absolute; left: -20vw; bottom: -30vh; width: 70vw; height: 70vw; border-radius: 50%; background: radial-gradient(circle, rgba(142,116,221,.28), rgba(142,116,221,0) 62%); pointer-events: none }
+.hspot-copy { position: relative; z-index: 2; width: 100%; max-width: 1180px; margin: 0 auto; padding: 112px 28px 36px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center }
+.hspot .hero-kicker { color: #C5B6F0; letter-spacing: .12em }
+.hspot .hero-kicker::before { display: none }
+.hspot h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(46px, min(6.2vw, 11vh), 92px); line-height: .98; letter-spacing: -.03em; margin: 16px 0 0; max-width: 9.5ch; color: #FBFAFD }
+.hspot h1 em { font-style: italic; color: #B3A1EC }
+.hspot .sub { font-size: clamp(16px, 2.1vh, 18px); line-height: 1.5; color: #D8D2E6; max-width: 46ch; margin: 18px 0 0 }
+.hspot .hero-ctas { margin-top: 22px }
+.hspot .btn-primary { background: #fff; color: #2E2263 }
+.hspot .btn-ghost { background: transparent; color: #FBFAFD; border: 1px solid rgba(255,255,255,.35) }
+.hspot .reassure { margin-top: 14px; color: #C5B6F0 }
+@media (max-width: 859px) {
+  .hspot { min-height: 0; flex-direction: column }
+  .hspot-photo { position: relative; width: 100%; height: 62vw; min-height: 300px; max-height: 480px; order: 0 }
+  .hspot-photo img { top: 80px; height: calc(100% - 80px); object-position: 50% 12% }
+  .hspot-photo::after { background: linear-gradient(to top, #1A1626 0%, rgba(26,22,38,0) 40%), linear-gradient(to bottom, #1A1626 80px, rgba(26,22,38,0) 140px) }
+  .hspot-copy { padding: 8px 20px 36px }
+}

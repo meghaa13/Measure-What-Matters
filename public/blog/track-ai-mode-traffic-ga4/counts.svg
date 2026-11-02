@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="320" viewBox="0 0 800 320" role="img" aria-labelledby="t d">
+  <title id="t">How Search Console counts an AI Mode click</title>
+  <desc id="d">Diagram, no data plotted. A click on an external link in AI Mode counts as a click and its position uses the same method as a normal results page. It is reported in the Performance report under the Web search type. There is no AI Mode only filter, and Search Labs experiment data is excluded.</desc>
+  <rect width="800" height="320" fill="#FBFAFD"/>
+<text x="40" y="34" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#5B43B5" letter-spacing="1">WHAT SEARCH CONSOLE DOES</text>
+<text x="40" y="62" font-family="Newsreader, Georgia, serif" font-size="22" fill="#1E1A2B">AI Mode is counted, but not split out.</text>
+<rect x="40" y="86" width="200" height="110" rx="14" fill="#fff" stroke="#E4DEF2"/>
+<text x="56" y="112" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#5B43B5">1 · THE CLICK</text>
+<text x="56" y="138" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="15" fill="#1E1A2B" font-weight="600">Click an external link</text>
+<text x="56" y="162" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="13" fill="#2B2540">in AI Mode</text>
+<rect x="300" y="86" width="200" height="110" rx="14" fill="#fff" stroke="#E4DEF2"/>
+<text x="316" y="112" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#5B43B5">2 · THE COUNT</text>
+<text x="316" y="138" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="15" fill="#1E1A2B" font-weight="600">Counts as a click.</text>
+<text x="316" y="162" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="13" fill="#2B2540">Position uses the same</text>
+<text x="316" y="180" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="13" fill="#2B2540">method as normal results.</text>
+<rect x="560" y="86" width="200" height="110" rx="14" fill="#2E2263"/>
+<text x="576" y="112" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#C5B6F0">3 · THE REPORT</text>
+<text x="576" y="138" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="15" fill="#fff" font-weight="600">Performance report,</text>
+<text x="576" y="162" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="13" fill="#E8E1F8">search type "Web"</text>
+<path d="M246 141h44m-8-6l8 6-8 6" stroke="#5B43B5" stroke-width="2" fill="none"/>
+<path d="M506 141h44m-8-6l8 6-8 6" stroke="#5B43B5" stroke-width="2" fill="none"/>
+<rect x="40" y="222" width="720" height="48" rx="12" fill="#FFF7F8" stroke="#E9B8BF"/>
+<text x="58" y="242" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#9E1D2E">NOT AVAILABLE</text><text x="58" y="261" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="14" fill="#1E1A2B">No "AI Mode only" filter. Search Labs experiment data is excluded.</text>
+<text x="40" y="296" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="13" fill="#5D5670">Figure 2. Based on Google's two documentation pages. Illustration, no data plotted.</text>
+<text x="40" y="316" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#5D5670">Sources: Search Console Help (undated); Google Search Central, AI features, updated 10 Dec 2025.</text>
+</svg>
