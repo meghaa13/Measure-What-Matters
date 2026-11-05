@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="t5 d5">
+<title id="t5">Google says server-side GTM will send full IPs to Ads in 2027</title>
+<desc id="d5">Share card with the article title, the reported date 11 January 2027 and the byline Megha Karnwal.</desc>
+<defs><pattern id="g" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="#C5B6F0" opacity=".3"/></pattern></defs>
+<rect width="1200" height="630" fill="#2E2263"/><rect width="1200" height="630" fill="url(#g)"/>
+<circle cx="1050" cy="120" r="260" fill="#5B43B5" opacity=".5"/>
+<text x="80" y="110" font-family="Courier New,monospace" font-size="22" letter-spacing="3" fill="#C5B6F0">ANALYTICS  /  SERVER-SIDE GTM</text>
+<text x="80" y="230" font-family="Georgia,serif" font-size="64" fill="#fff">Google says server-side GTM</text>
+<text x="80" y="305" font-family="Georgia,serif" font-size="64" fill="#fff">will send full IPs to Ads</text>
+<text x="80" y="380" font-family="Georgia,serif" font-size="64" font-style="italic" fill="#C5B6F0">in 2027</text>
+<rect x="80" y="430" width="440" height="52" rx="26" fill="#fff"/>
+<text x="300" y="465" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#2E2263">Reported start: 11 Jan 2027</text>
+<text x="80" y="570" font-family="Arial,sans-serif" font-size="24" fill="#EEE9FA">Megha Karnwal  |  Single-sourced: what is known and unknown</text>
+</svg>
