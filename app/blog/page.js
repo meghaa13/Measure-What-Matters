@@ -1,13 +1,14 @@
 import SiteChrome from "../SiteChrome";
 import PostCard from "./PostCard";
 import { posts } from "./posts";
+import { pageMeta } from "../lib/seo";
 import "./blog-index.css";
 
-export const metadata = {
+export const metadata = pageMeta({
   title: "Blog | Megha Karnwal",
   description: "Notes on analytics, measurement and AI for marketing teams. Every claim links to a dated source.",
-  alternates: { canonical: "/blog" },
-};
+  path: "/blog",
+});
 
 export default function BlogIndex() {
   const [latest, ...rest] = posts;

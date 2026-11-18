@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700" role="img" aria-labelledby="t4 d4">
+<title id="t4">Decorative background</title>
+<desc id="d4">Deep purple background with a faint dotted grid and a soft glow on the right. Decorative only.</desc>
+<defs>
+<pattern id="g" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.4" fill="#C5B6F0" opacity=".28"/></pattern>
+<radialGradient id="glow" cx="1150" cy="340" r="520" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#6A4FD0" stop-opacity=".55"/><stop offset="1" stop-color="#6A4FD0" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1600" height="700" fill="#2E2263"/><rect width="1600" height="700" fill="url(#g)"/><rect width="1600" height="700" fill="url(#glow)"/>
+</svg>

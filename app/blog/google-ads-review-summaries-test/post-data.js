@@ -2,7 +2,7 @@
 // Text markup: [n] becomes a link to source n, **bold** becomes <strong>.
 // Do not edit the wording here without editing the article first.
 
-export const SITE_URL = "https://meghakarnwal.com";
+export const SITE_URL = "https://measure-what-matter.netlify.app";
 
 export const post = {
   slug: "google-ads-review-summaries-test",

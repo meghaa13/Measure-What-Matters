@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380" role="img" aria-labelledby="t d">
+  <title id="t">Garante fine build-up: EUR 700 million starting amount, EUR 805 million final fine</title>
+  <desc id="d">Two horizontal bars on a zero-based axis from 0 to 900 EUR million. Starting amount 700. Final fine 805. The last 105 is the difference by subtraction. Source: Garante decision doc web 10321455, section 6.2.</desc>
+  <rect width="800" height="380" fill="#fff"/>
+  <text x="40" y="38" font-family="Newsreader, Georgia, serif" font-size="26" fill="#1E1A2B">The Garante's fine: start and finish, EUR million</text>
+  <text x="40" y="92" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#2B2540">Starting amount</text>
+  <rect x="40" y="104" width="560" height="52" rx="8" fill="#8E74DD"/>
+  <text x="58" y="140" font-family="Inter, system-ui, sans-serif" font-size="26" fill="#1E1A2B">700</text>
+  <text x="40" y="200" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#2B2540">Final fine</text>
+  <rect x="40" y="212" width="560" height="52" rx="8" fill="#5B43B5"/>
+  <rect x="600" y="212" width="84" height="52" rx="8" fill="#C5B6F0"/>
+  <rect x="600" y="212" width="12" height="52" fill="#C5B6F0"/>
+  <text x="58" y="248" font-family="Inter, system-ui, sans-serif" font-size="26" fill="#fff">805</text>
+  <text x="642" y="247" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#2E2263">+105</text>
+  <path d="M40 286 H 760" stroke="#9A93AE" stroke-width="1.5"/>
+  <g stroke="#9A93AE" stroke-width="1.5"><path d="M40 286 v8"/><path d="M280 286 v8"/><path d="M520 286 v8"/><path d="M760 286 v8"/></g>
+  <g font-family="Inter, system-ui, sans-serif" font-size="20" fill="#5D5670" text-anchor="middle"><text x="40" y="318">0</text><text x="280" y="318">300</text><text x="520" y="318">600</text><text x="760" y="318">900</text></g>
+  <text x="40" y="352" font-family="Inter, system-ui, sans-serif" font-size="17" fill="#5D5670">Source: Garante decision doc web 10321455, section 6.2, 13 Nov 2026. +105 is subtraction.</text>
+</svg>

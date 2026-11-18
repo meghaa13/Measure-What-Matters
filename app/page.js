@@ -15,6 +15,13 @@ import { BookLink, Prompt } from "./Bits";
 import Stack from "./Stack";
 import CountUp from "./apps/tag-scanner/CountUp";
 import { CTA, EMAIL, LINKEDIN, RESUME, bookTarget, contactHref } from "./lib/site";
+import { pageMeta } from "./lib/seo";
+
+export const metadata = pageMeta({
+  title: "Megha Karnwal — Web & Data Analyst",
+  description: "Web & Data Analyst working across analytics, automation and AI.",
+  path: "/",
+});
 
 const CASES = [
   { dark: true, top: "#2E2263", kind: "IN-HOUSE · MEASUREMENT + EXPERIMENTS", name: "Intelegencia", tools: "GA4 · BigQuery · Statsig",

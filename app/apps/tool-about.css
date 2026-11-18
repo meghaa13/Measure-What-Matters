@@ -1,0 +1,14 @@
+.ta { border-top: 1px solid var(--line); margin-top: 56px; padding: 56px 0 24px; background: var(--bg) }
+.ta-wrap { max-width: 760px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter) }
+.ta h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 16px; color: var(--ink) }
+.ta h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; margin: 40px 0 8px; color: var(--ink) }
+.ta h4 { font-family: var(--sans); font-weight: 600; font-size: 16px; margin: 22px 0 4px; color: var(--ink) }
+.ta p, .ta li { font-size: 16px; line-height: 1.65; color: var(--muted) }
+.ta-intro { margin: 0 0 8px }
+.ta-steps { padding-left: 22px; margin: 18px 0 0 }
+.ta-steps li { margin: 0 0 10px }
+.ta-steps strong { color: var(--ink); font-weight: 600 }
+.ta-faq p { margin: 0 }
+.ta-related { margin: 32px 0 0; font-size: 15px }
+.ta a { color: var(--brand); text-decoration: underline; text-underline-offset: 3px }
+.ta a:hover { color: var(--brand-dark) }

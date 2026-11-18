@@ -1,7 +1,7 @@
 // Blog post page. Place at site/app/blog/google-ads-review-summaries-test/page.js
 // with post-data.js and blog.css beside it. Server component: no client JavaScript of its own.
 import SiteChrome from "../../SiteChrome";
-import { EMAIL, CTA, bookHref, bookTarget } from "../../lib/site";
+import { EMAIL, LINKEDIN, CTA, bookHref, bookTarget } from "../../lib/site";
 import { cardsFor } from "./figure-cards";
 import { SITE_URL, post, figures, heroImage, sectionArt, sections, lead, sources, disclosure, related } from "./post-data";
 import "./blog.css";
@@ -10,7 +10,7 @@ const url = `${SITE_URL}/blog/${post.slug}`;
 
 export function generateMetadata() {
   return {
-    title: `${post.title} — Megha Karnwal`,
+    title: post.title,
     description: post.description,
     alternates: { canonical: url },
     openGraph: {
@@ -145,8 +145,8 @@ export default function PostPage() {
     image: `${SITE_URL}${post.shareImage}`,
     datePublished: post.publishedAt,
     dateModified: post.lastChecked,
-    author: { "@type": "Person", name: post.author, url: SITE_URL },
-    publisher: { "@type": "Person", name: post.author, url: SITE_URL },
+    author: { "@type": "Person", name: post.author, url: SITE_URL, sameAs: [LINKEDIN] },
+    publisher: { "@type": "Person", name: post.author, url: SITE_URL, sameAs: [LINKEDIN] },
     mainEntityOfPage: url,
     citation: sources.map((s) => s.url),
   };
@@ -172,7 +172,7 @@ export default function PostPage() {
                   <span>{post.headlineStat.label} <sup className="bp-cite"><a href={`#src-${post.headlineStat.cite}`}>[{post.headlineStat.cite}]</a></sup></span>
                 </div>
                 <dl className="bp-facts">
-                  <div><dt>By</dt><dd>{post.author}</dd></div>
+                  <div><dt>By</dt><dd><a href="/">{post.author}</a></dd></div>
                   <div><dt>Published</dt><dd><time dateTime={post.publishedAt}>{longDate(post.publishedAt)}</time></dd></div>
                   <div><dt>Last checked</dt><dd><time dateTime={post.lastChecked}>{longDate(post.lastChecked)}</time></dd></div>
                   <div><dt>Sources</dt><dd><a href="#sources">{sources.length} linked</a></dd></div>

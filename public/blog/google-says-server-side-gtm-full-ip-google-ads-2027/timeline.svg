@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" width="800" height="320" role="img" aria-labelledby="t1 d1">
+<title id="t1">Timeline from 2 November 2026 to 11 January 2027</title>
+<desc id="d1">Horizontal timeline, days drawn to scale. 2 November 2026: PPC Land reports the Google email. 3 November: this article last checked. 27 November: Black Friday. 30 November: Cyber Monday. 11 January 2027: the reported change date. 69 days between 3 November and 11 January.</desc>
+<rect width="800" height="340" fill="#FBFAFD"/>
+<text x="40" y="38" font-family="Georgia,serif" font-size="22" fill="#1E1A2B">About ten weeks to decide on purpose</text>
+<line x1="60" y1="170" x2="740" y2="170" stroke="#C5B6F0" stroke-width="4" stroke-linecap="round"/>
+<line x1="70" y1="170" x2="740" y2="170" stroke="#5B43B5" stroke-width="4"/>
+<circle cx="60" cy="170" r="8" fill="#fff" stroke="#5B43B5" stroke-width="3"/>
+<line x1="60" y1="162" x2="60" y2="124" stroke="#9A93AE"/>
+<text x="40" y="100" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#1E1A2B">2 Nov 2026</text>
+<text x="40" y="118" font-family="Arial,sans-serif" font-size="14" fill="#5D5670">PPC Land reports</text>
+<circle cx="70" cy="170" r="8" fill="#5B43B5"/>
+<line x1="70" y1="178" x2="70" y2="212" stroke="#9A93AE"/>
+<text x="40" y="230" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#1E1A2B">3 Nov</text>
+<text x="40" y="248" font-family="Arial,sans-serif" font-size="14" fill="#5D5670">Last checked</text>
+<circle cx="303" cy="170" r="7" fill="#fff" stroke="#8E74DD" stroke-width="3"/>
+<line x1="303" y1="162" x2="303" y2="124" stroke="#9A93AE"/>
+<text x="303" y="100" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#1E1A2B">27 Nov</text>
+<text x="303" y="118" font-family="Arial,sans-serif" font-size="14" fill="#5D5670">Black Friday</text>
+<circle cx="332" cy="170" r="7" fill="#fff" stroke="#8E74DD" stroke-width="3"/>
+<line x1="332" y1="178" x2="332" y2="212" stroke="#9A93AE"/>
+<text x="332" y="230" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#1E1A2B">30 Nov</text>
+<text x="332" y="248" font-family="Arial,sans-serif" font-size="14" fill="#5D5670">Cyber Monday</text>
+<circle cx="740" cy="170" r="11" fill="#B42335"/>
+<line x1="740" y1="159" x2="740" y2="124" stroke="#9A93AE"/>
+<text x="760" y="100" text-anchor="end" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#B42335">11 Jan 2027</text>
+<text x="760" y="118" text-anchor="end" font-family="Arial,sans-serif" font-size="14" fill="#5D5670">Reported change date</text>
+<path d="M70 280 H740 M70 272 V288 M740 272 V288" stroke="#5B43B5" stroke-width="2" fill="none"/>
+<rect x="320" y="266" width="170" height="28" rx="14" fill="#F3F0FB"/>
+<text x="405" y="285" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#2E2263">69 days</text>
+</svg>
