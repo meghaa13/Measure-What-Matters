@@ -1,4 +1,4 @@
-const SITE = "https://meghakarnwal.com";
+const SITE = "https://measure-what-matter.netlify.app";
 export default function robots() {
   return {
     rules: [
