@@ -42,9 +42,10 @@ export default function SiteChrome({ home = true, current = null }) {
   }, []);
 
   // On the landing page, smooth-scroll in place; elsewhere, a normal link to "/#id".
-  const go = (id) => (e) => { setMenu(false); if (!home) return; e.preventDefault(); window.__navLock?.(900); setActive(id); scrollToId(id); };
+  // "Blog" is the exception: it always opens the /blog page, never the strip on the landing page.
+  const go = (id) => (e) => { setMenu(false); if (!home || id === "blog") return; e.preventDefault(); window.__navLock?.(900); setActive(id); scrollToId(id); };
   const book = (e) => { if (!bookTarget) go("contact")(e); };
-  const href = (id) => (home ? `#${id}` : id === "blog" ? "/blog" : `/#${id}`);
+  const href = (id) => (id === "blog" ? "/blog" : home ? `#${id}` : `/#${id}`);
   const bookLink = bookTarget ? bookHref : href("contact");
 
   return (
