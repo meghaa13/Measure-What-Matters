@@ -87,7 +87,7 @@ export const sections = [
             period: "Q3 call, 5 Nov 2026",
             figure: "\"Very nonmaterial\"",
             figureNote: "number of bookings on Muse and Instinct; no count given",
-            text: "On its Q3 call on 5 Nov 2026, CEO Brian Chesky said: \"We do have nearly 0.5 million bookings a day and a very nonmaterial number of bookings happen on Muse and Instinct.\" Both are outside AI agents. Fortune identifies Muse as Meta's agent, launched in September. As for Instinct, neither Fortune nor the transcript says what it is. Chesky also said \"we're not seeing a lot of traffic today and it's not really increased over the last 4 weeks\". [3][4]",
+            text: "On its Q3 call on 5 Nov 2026, CEO Brian Chesky said: \"We do have nearly 0.5 million bookings a day and a very nonmaterial number of bookings happen on Muse and Instinct.\" Both are outside AI agents. Muse is Meta's personal AI agent, launched in September 2026 (Fortune, Axios). As for Instinct, neither Fortune nor the transcript says what it is. Chesky also said \"we're not seeing a lot of traffic today and it's not really increased over the last 4 weeks\". [3][4][7]",
           },
         ],
       },
@@ -249,7 +249,7 @@ export const sources = [
     dateLabel: "10 Nov 2026",
     url: "https://fortune.com/2026/11/10/ai-agents-uber-doordash-airbnb-limited-traction/",
     supports: "Ran the three calls together. Identifies Muse as Meta's agent, launched in September. Says nothing further on Instinct.",
-    status: "Muse as Meta's agent rests on this one source",
+    status: "Identifies Muse as Meta's agent. Read through a fetch summary, not the raw page.",
     verified: false,
   },
   {
@@ -274,6 +274,17 @@ export const sources = [
     status: "Opened by the critic",
     verified: true,
   },
+  {
+    n: 7,
+    title: "Meta debuts Muse, its long-planned personal AI agent",
+    outlet: "Axios",
+    date: "2026-09-08",
+    dateLabel: "8 Sep 2026",
+    url: "https://axios.com/2026/09/08/meta-debuts-muse-personal-ai-agent",
+    supports: "Meta launched Muse, a personal AI agent, in September 2026.",
+    status: "Seen as a search result (headline and summary), page not opened",
+    verified: false,
+  },
 ];
 
 // Printed under the list.
@@ -285,7 +296,7 @@ export const disclosure = {
   body: [
     "AI agents researched, wrote and fact-checked this article. A separate checking agent compared claims with their sources and sent the draft back for fixes before it reached me.",
     "I read it, correct it and publish it.",
-    "Company quotes come from earnings call transcripts, which may contain transcription errors. Muse as Meta's agent comes from one source, Fortune.",
+    "Company quotes come from earnings call transcripts, which may contain transcription errors. Fortune was read through a fetch summary, not the raw page; Axios was seen only as a search result.",
   ],
 };
 
