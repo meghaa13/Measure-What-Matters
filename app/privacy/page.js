@@ -3,11 +3,7 @@ import { ConsentLink } from "../Consent";
 import { EMAIL } from "../lib/site";
 import { pageMeta } from "../lib/seo";
 
-export const metadata = pageMeta({
-  title: "Privacy — Megha Karnwal",
-  description: "What this site and its free tools collect, why, and how long it's kept.",
-  path: "/privacy",
-});
+export const metadata = pageMeta("/privacy");
 
 export default function Privacy() {
   return (

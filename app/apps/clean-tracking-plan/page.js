@@ -3,11 +3,7 @@ import ToolAbout from "../ToolAbout";
 import { pageMeta } from "../../lib/seo";
 import "./builder.css";
 
-export const metadata = pageMeta({
-  title: "GA4 dataLayer Requirements Template | Clean Tracking Plan",
-  description: "Get the dataLayer requirements for your website type, with every field classified before it is collected: safe, consent-gated, hash only, or never collect.",
-  path: "/apps/clean-tracking-plan",
-});
+export const metadata = pageMeta("/apps/clean-tracking-plan");
 
 export default function CleanTrackingPlanPage() {
   return (

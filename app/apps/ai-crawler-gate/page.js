@@ -5,11 +5,7 @@ import "../tag-scanner/scanner.css";
 import "../tag-scanner/scanner-layout.css";
 import "../micro.css";
 
-export const metadata = pageMeta({
-  title: "AI Crawler & robots.txt Checker | AI Visibility Check",
-  description: "Can ChatGPT, Perplexity, Claude and Google AI Overviews find and quote your site? Plain verdict and a copy-paste robots.txt fix.",
-  path: "/apps/ai-crawler-gate",
-});
+export const metadata = pageMeta("/apps/ai-crawler-gate");
 
 export default function CrawlerGatePage() {
   return (

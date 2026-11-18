@@ -6,7 +6,7 @@ import Consent from "./Consent";
 import SiteFooter from "./SiteFooter";
 import Ambient from "./Ambient";
 import { GTM_ID } from "./lib/site";
-import { SITE_URL } from "./lib/seo";
+import { SITE_URL, SITE } from "./lib/seo";
 
 // Fonts are files in app/fonts, not fetched from Google while building. A build can no
 // longer fail because Google Fonts was unreachable or answered differently.
@@ -23,8 +23,8 @@ const mono = localFont({ src: "./fonts/JetBrainsMono.woff2", weight: "400 500", 
 export const metadata = {
   // Lets relative addresses in page metadata (like "/blog") become full addresses.
   metadataBase: new URL(SITE_URL),
-  title: "Megha Karnwal — Web & Data Analyst",
-  description: "Web & Data Analyst working across analytics, automation and AI.",
+  title: SITE.title,
+  description: SITE.description,
 };
 
 export default function RootLayout({ children }) {

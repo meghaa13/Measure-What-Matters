@@ -4,11 +4,7 @@ import { pageMeta } from "../../lib/seo";
 import "./scanner.css";
 import "./scanner-layout.css";
 
-export const metadata = pageMeta({
-  title: "Free GTM & GA4 Tag Checker | Tag Health Scan",
-  description: "Scan a website's Google tag and GTM setup. See what's tracked, what's broken and what's risky, with a confidence label on every finding.",
-  path: "/apps/tag-scanner",
-});
+export const metadata = pageMeta("/apps/tag-scanner");
 
 export default function TagScannerPage() {
   return (

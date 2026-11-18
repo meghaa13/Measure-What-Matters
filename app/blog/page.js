@@ -6,11 +6,7 @@ import { posts, fmtDate } from "./posts";
 import { pageMeta } from "../lib/seo";
 import "./blog-index.css";
 
-export const metadata = pageMeta({
-  title: "Blog | Megha Karnwal",
-  description: "Notes on analytics, measurement and AI for marketing teams. Every claim links to a dated source.",
-  path: "/blog",
-});
+export const metadata = pageMeta("/blog");
 
 export default function BlogIndex() {
   const slides = posts.slice(0, 4).map((p) => ({

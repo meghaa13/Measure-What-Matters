@@ -1,7 +1,8 @@
 import Link from "next/link";
 import SiteChrome from "./SiteChrome";
+import { PAGES } from "../config/seo.mjs";
 
-export const metadata = { title: "Page not found — Megha Karnwal" };
+export const metadata = { title: PAGES.notFound.title };
 
 export default function NotFound() {
   return (

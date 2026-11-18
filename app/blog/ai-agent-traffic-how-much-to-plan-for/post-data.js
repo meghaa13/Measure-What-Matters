@@ -3,7 +3,8 @@
 // The only additions to the article's words are the [n] citation markers and the figure captions.
 // Do not edit the wording here without editing the article first.
 
-export const SITE_URL = "https://measure-what-matter.netlify.app";
+import { SITE_URL } from "../../../config/seo.mjs";
+export { SITE_URL };
 
 const B = "/blog/ai-agent-traffic-how-much-to-plan-for/";
 

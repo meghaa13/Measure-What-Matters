@@ -5,11 +5,7 @@ import "../tag-scanner/scanner.css";
 import "../tag-scanner/scanner-layout.css";
 import "../micro.css";
 
-export const metadata = pageMeta({
-  title: "Free Lead Source Tracking Checker | Lead Path X-Ray",
-  description: "Follow one visit from an ad, email, social or partner link through redirects, tags and forms, and see where its source gets lost before the CRM.",
-  path: "/apps/lead-path",
-});
+export const metadata = pageMeta("/apps/lead-path");
 
 export default function LeadPathPage() {
   return (

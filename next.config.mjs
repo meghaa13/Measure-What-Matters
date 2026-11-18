@@ -1,3 +1,5 @@
+import { redirects } from "./config/redirects.mjs";
+
 // Security headers for every page and API response. They live here (not only in
 // netlify.toml) because Netlify applies netlify.toml headers to static files,
 // but pages rendered by Next.js only get what Next.js itself sends.
@@ -13,6 +15,10 @@ const securityHeaders = [
 const nextConfig = {
   // Don't advertise the framework in an "x-powered-by" header.
   poweredByHeader: false,
+  // Every redirect is listed in config/redirects.mjs.
+  async redirects() {
+    return redirects;
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

@@ -5,11 +5,7 @@ import "../tag-scanner/scanner.css";
 import "../tag-scanner/scanner-layout.css";
 import "../micro.css";
 
-export const metadata = pageMeta({
-  title: "Free Website CRO Check | CRO X-Ray",
-  description: "Up to three conversion problems you can't see from your own desk: promises the next step doesn't keep, forms nobody measures, and phones that wait too long for the button. With the evidence.",
-  path: "/apps/cro-xray",
-});
+export const metadata = pageMeta("/apps/cro-xray");
 
 export default function CroXrayPage() {
   return (

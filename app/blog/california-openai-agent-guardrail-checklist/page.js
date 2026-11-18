@@ -1,6 +1,7 @@
 // Blog post page. Place at site/app/blog/california-openai-agent-guardrail-checklist/page.js
 // with post-data.js and blog.css beside it. Server component: no client JavaScript of its own.
 import SiteChrome from "../../SiteChrome";
+import { postSeo } from "../../lib/seo";
 import { EMAIL, LINKEDIN, CTA, bookHref, bookTarget } from "../../lib/site";
 import { cardsFor } from "./figure-cards";
 import { SITE_URL, post, sectionArt, sections, lead, sources, alsoCovered, disclosure, related } from "./post-data";
@@ -9,21 +10,22 @@ import "./blog.css";
 const url = `${SITE_URL}/blog/${post.slug}`;
 
 export function generateMetadata() {
+  const { title, description } = postSeo(post);
   return {
-    title: post.title,
-    description: post.description,
+    title,
+    description,
     alternates: { canonical: url },
     openGraph: {
       type: "article",
-      title: post.title,
-      description: post.description,
+      title,
+      description,
       url,
       publishedTime: post.publishedAt,
       modifiedTime: post.lastChecked,
       authors: [post.author],
-      images: [{ url: `${SITE_URL}${post.shareImage}`, width: 1200, height: 630, alt: post.title }],
+      images: [{ url: `${SITE_URL}${post.shareImage}`, width: 1200, height: 630, alt: title }],
     },
-    twitter: { card: "summary_large_image", title: post.title, description: post.description },
+    twitter: { card: "summary_large_image", title, description },
   };
 }
 

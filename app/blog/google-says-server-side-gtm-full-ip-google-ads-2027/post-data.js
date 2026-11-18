@@ -2,7 +2,8 @@
 // Text markup: [n] becomes a link to source n, bold becomes <strong>.
 // Do not edit the wording here without editing the article first.
 
-export const SITE_URL = "https://measure-what-matter.netlify.app";
+import { SITE_URL } from "../../../config/seo.mjs";
+export { SITE_URL };
 
 const B = "/blog/google-says-server-side-gtm-full-ip-google-ads-2027/";
 
