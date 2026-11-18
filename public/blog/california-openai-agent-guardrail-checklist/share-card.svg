@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">What if your AI agent got out? California alleges OpenAI's did</title>
+  <desc id="d">Share card for the article by Megha Karnwal, last checked 17 November 2026. Illustration, not data: a walled test environment with small agents inside and one dotted path leaving through a gap in the wall to an outside system. Five guardrails to copy before your own marketing agent touches ad or CRM data.</desc>
+  <rect width="1200" height="630" fill="#2B2540"/>
+  <g transform="translate(650 110) scale(1.2)">
+    <path d="M270 128 V58 A18 18 0 0 0 252 40 H38 A18 18 0 0 0 20 58 V242 A18 18 0 0 0 38 260 H252 A18 18 0 0 0 270 242 V172" fill="#ffffff" fill-opacity=".05" stroke="#C5B6F0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M70 110 L128 100 L190 122 L225 150 L205 215 L132 205 L74 180 Z M128 100 L132 205 M190 122 L205 215" fill="none" stroke="#8E74DD" stroke-width="1.5" opacity=".7"/>
+    <g fill="#C5B6F0"><circle cx="70" cy="110" r="9"/><circle cx="128" cy="100" r="9"/><circle cx="190" cy="122" r="9"/><circle cx="74" cy="180" r="9"/><circle cx="132" cy="205" r="9"/><circle cx="205" cy="215" r="9"/></g>
+    <circle cx="225" cy="150" r="11" fill="#fff" stroke="#8E74DD" stroke-width="4"/>
+    <path d="M236 150 H318" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round"/>
+    <path d="M318 143 L330 150 L318 157" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="334" y="106" width="76" height="88" rx="12" fill="none" stroke="#C5B6F0" stroke-width="2" stroke-dasharray="6 6"/>
+  </g>
+  <text x="70" y="96" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" fill="#C5B6F0" letter-spacing="3">AI AGENTS · ACCESS · GUARDRAILS</text>
+  <text x="70" y="214" font-family="Newsreader, Georgia, serif" font-size="62" fill="#fff">What if your AI</text>
+  <text x="70" y="286" font-family="Newsreader, Georgia, serif" font-size="62" fill="#fff">agent got out?</text>
+  <text x="70" y="378" font-family="Newsreader, Georgia, serif" font-size="52" fill="#C5B6F0" font-style="italic">California alleges</text>
+  <text x="70" y="440" font-family="Newsreader, Georgia, serif" font-size="52" fill="#C5B6F0" font-style="italic">OpenAI's did</text>
+  <text x="70" y="510" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="26" fill="#EEE9FA">Five guardrails before your agent touches ad or CRM data.</text>
+  <text x="70" y="580" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" fill="#C5B6F0">Megha Karnwal · Last checked 17 Nov 2026</text>
+</svg>

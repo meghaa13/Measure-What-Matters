@@ -1,0 +1,211 @@
+/* Blog post styles for the California / OpenAI page. Uses tokens from globals.css. Every class starts with bp- because
+   globals.css has generic names (.read, .tag, .cite) that clash.
+   This page: dark hero with its own contained-system-and-breach illustration (HTML, not the shared purple template),
+   one centred block below it (rail left, reading column right), section openers that vary. */
+.bp { padding-bottom: 72px }
+/* 1074px content = 250px rail + 64px gap + 760px reading column */
+.bp-wrap { width: 100%; max-width: calc(1074px + 2 * var(--gutter)); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter) }
+
+/* ---------- hero ---------- */
+.bp-hero { position: relative; color: #fff; background: var(--ink-2); padding: clamp(104px, 13vw, 136px) 0 clamp(30px, 5vw, 48px); border-bottom: 1px solid var(--brand-dark) }
+.bp-hero-in { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px 48px; align-items: center }
+.bp-hero-text { min-width: 0 }
+.bp-meta { grid-column: 1 / -1 }
+@media (min-width: 900px) {
+  .bp-hero-in { grid-template-columns: minmax(0, 1fr) 400px }
+  .bp-ill { grid-column: 2; grid-row: 1 }
+}
+.bp-tag { display: inline-block; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #fff; border: 1px solid var(--brand-mid); border-radius: 999px; padding: 7px 14px }
+.bp-hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -.025em; margin: 22px 0 0; color: #fff; text-wrap: balance }
+.bp-hero h1 em { font-style: italic; color: var(--lilac); display: inline-block }
+.bp-stand { font-size: clamp(17px, 2vw, 20px); line-height: 1.55; color: #DDD7EF; margin: 20px 0 0; max-width: 54ch; text-wrap: pretty }
+
+/* hero illustration: a walled test area, agents inside, one path leaving through a gap */
+.bp-ill { width: min(100%, 400px); margin: 0 auto }
+.bp-ill svg { display: block; width: 100%; height: auto }
+.bp-ill .ill-wall { fill: rgba(255,255,255,.05); stroke: var(--lilac); stroke-width: 2; stroke-linecap: round }
+.bp-ill .ill-links path { fill: none; stroke: var(--brand-mid); stroke-width: 1.5; opacity: .7 }
+.bp-ill .ill-dots circle { fill: var(--lilac) }
+.bp-ill .ill-go { fill: #fff; stroke: var(--brand-mid); stroke-width: 4 }
+.bp-ill .ill-path { fill: none; stroke: #fff; stroke-width: 2.5; stroke-dasharray: 2 7; stroke-linecap: round }
+.bp-ill .ill-arrow { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round }
+.bp-ill .ill-out { fill: none; stroke: var(--lilac); stroke-width: 2; stroke-dasharray: 6 6 }
+.bp-ill text { font-family: var(--mono) }
+.bp-ill .ill-k { font-size: 12px; letter-spacing: .1em; fill: #DDD7EF }
+.bp-ill .ill-flag { font-size: 13px; letter-spacing: .06em; fill: #fff }
+.bp-ill .ill-t { font-size: 14px; fill: #fff }
+
+/* trust bar: flat, hairlines only */
+.bp-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 36px; margin-top: 8px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.22) }
+.bp-stat { display: flex; align-items: center; gap: 14px }
+.bp-stat b { font-family: var(--serif); font-weight: 400; font-size: clamp(36px, 5vw, 48px); line-height: 1; color: #fff; white-space: nowrap }
+.bp-stat span { font-size: 15px; line-height: 1.4; color: #DDD7EF; max-width: 26ch }
+.bp-facts { display: flex; flex-wrap: wrap; gap: 12px 28px; margin: 0; padding: 0 }
+.bp-facts > div { min-width: 0 }
+.bp-facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #BDB5D6 }
+.bp-facts dd { margin: 3px 0 0; font-size: 15px; font-weight: 500; color: #fff }
+.bp-hero a { text-decoration: underline; text-underline-offset: 3px }
+.bp-hero .bp-cite a { color: var(--lilac); text-decoration: none }
+.bp-updates { list-style: none; margin: 16px 0 0; padding: 0; font-size: 14px; color: #DDD7EF }
+
+/* ---------- layout: one centred block, rail left, reading column right ---------- */
+.bp-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 40px }
+.bp-main { counter-reset: sec; min-width: 0; width: 100%; max-width: 760px; margin-inline: auto }
+@media (min-width: 1020px) {
+  .bp-layout { grid-template-columns: 250px minmax(0, 760px); gap: 64px; padding-top: 56px; justify-content: center }
+  .bp-rail { position: sticky; top: 96px; align-self: start }
+  .bp-main { margin-inline: 0 }
+}
+
+/* rail */
+.bp-rail-h { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); margin: 0 0 12px }
+.bp-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; border-left: 1px solid var(--line) }
+.bp-toc a { display: block; padding: 7px 0 7px 16px; margin-left: -1px; border-left: 1px solid transparent; font-size: 14px; line-height: 1.35; color: var(--ink-2) }
+.bp-toc a:hover { color: var(--brand-dark); border-left-color: var(--brand); text-decoration: underline }
+.bp-trust { margin-top: 28px; padding: 18px 18px 20px; border-radius: 16px; background: var(--tint); border: 1px solid var(--line) }
+.bp-trust p:not(.bp-rail-h) { margin: 0 0 8px; font-size: 13.5px; line-height: 1.5; color: var(--ink-2) }
+.bp-trust a { font-size: 13.5px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px }
+@media (max-width: 1019px) {
+  .bp-rail { max-width: 760px; width: 100%; margin-inline: auto }
+  .bp-toc ol { display: flex; flex-wrap: wrap; gap: 8px; border-left: 0 }
+  .bp-toc a { padding: 7px 13px; margin: 0; border: 1px solid var(--line); border-radius: 999px; background: #fff }
+  .bp-trust { display: none } /* the same facts sit in the hero trust bar and the sources list */
+}
+
+/* ---------- reading column ---------- */
+.bp-main p, .bp-main li { font-size: 18px; line-height: 1.7; color: var(--ink-2) }
+.bp-main p { margin: 18px 0 0 }
+.bp-main ul, .bp-main ol { margin: 16px 0 0; padding-left: 24px; display: grid; gap: 9px }
+.bp-main li::marker { color: var(--brand-mid) }
+.bp-main a { text-decoration: underline; text-underline-offset: 3px }
+.bp-updated { color: var(--muted) }
+
+.bp-lead { margin-top: 20px; padding: clamp(20px, 3vw, 30px); border-radius: 22px; background: linear-gradient(135deg, var(--tint) 0%, var(--tint-2) 100%); border: 1px solid var(--line) }
+.bp-eyebrow { font-family: var(--mono); font-size: 12px !important; letter-spacing: .1em; text-transform: uppercase; color: var(--brand) !important; margin: 0 !important }
+.bp-lead p:not(.bp-eyebrow) { margin-top: 12px; font-size: 19px; line-height: 1.6; color: var(--ink) }
+
+/* ---------- section openers: four different treatments ---------- */
+.bp-sec { margin-top: clamp(56px, 7vw, 88px); counter-increment: sec }
+.bp-sec h2, .bp-sources h2, .bp-made h2, .bp-related h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 5.2vw, 56px); line-height: 1.03; letter-spacing: -.02em; margin: 0; color: var(--ink); text-wrap: pretty }
+.bp-sec h2::before { content: counter(sec, decimal-leading-zero); display: block; margin-bottom: 14px; font-family: var(--mono); font-size: 13px; letter-spacing: .1em; color: var(--brand) }
+/* a: hairline across the full column, type wraps the width */
+.bp-op-rule h2 { border-top: 1px solid var(--ink); padding-top: 20px }
+/* b: oversized numeral in the margin column, heading beside it, hairline below */
+.bp-op-numeral h2 { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: clamp(14px, 3vw, 28px); align-items: start; padding-bottom: 22px; border-bottom: 1px solid var(--line); font-size: clamp(30px, 4.8vw, 50px) }
+.bp-op-numeral h2::before { margin: 0; font-family: var(--serif); font-size: clamp(64px, 11vw, 112px); line-height: .8; letter-spacing: -.04em; color: var(--lilac-2) }
+/* c: heading sits in a tinted panel that holds the opening */
+.bp-op-panel h2 { padding: 22px clamp(18px, 3vw, 30px) 26px; border-radius: 22px; background: var(--tint); border: 1px solid var(--line); font-size: clamp(30px, 4.8vw, 50px) }
+/* d: double rule, heavier top line */
+.bp-op-rule2 h2 { border-top: 4px solid var(--ink); padding-top: 18px; box-shadow: inset 0 5px 0 -4px #fff, inset 0 6px 0 -4px var(--ink) }
+.bp-op-rule2 h2::before { color: var(--red) }
+
+/* inline citations */
+.bp-cite { font-family: var(--mono); font-size: 11px; line-height: 0; margin-left: 1px }
+.bp-main .bp-cite a { color: var(--brand); text-decoration: none; padding: 2px 1px; border-radius: 4px }
+.bp-cite a:hover { background: var(--tint-2); color: var(--brand-dark) }
+:target { scroll-margin-top: 96px }
+.bp-sources li:target { background: var(--tint); border-radius: 12px }
+
+/* ---------- figures ---------- */
+.bp-fig { display: block; margin: 28px 0 0; padding: 10px; border-radius: 22px; background: #fff; border: 1px solid var(--line) }
+.bp-fig img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line) }
+.bp-fig figcaption { padding: 12px 8px 4px; font-size: 14px; line-height: 1.55; color: var(--muted) }
+.bp-fig figcaption a { text-decoration: underline; text-underline-offset: 3px }
+
+/* phone versions of the figures */
+.bp-cards { display: none }
+@media (max-width: 899px) {
+  .bp-fig img.bp-svg { display: none }
+  .bp-cards { display: block; padding: 12px 8px 4px }
+  .bp-main .bp-cards p, .bp-main .bp-cards li, .bp-main .bp-cards span, .bp-main .bp-cards b { font-size: 15px; line-height: 1.5; max-width: none }
+  .bp-main .bp-cards p { margin: 0 }
+  .bp-main .bp-cards .bp-cards-eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--brand) }
+  .bp-main .bp-cards .bp-cards-h { font-family: var(--serif); font-size: 22px; line-height: 1.2; color: var(--ink); margin-top: 8px }
+  .bp-cards-lead { display: grid; gap: 4px; margin-top: 14px; padding: 14px 16px; border-radius: 14px; background: var(--brand-dark); color: #fff }
+  .bp-main .bp-cards-lead b, .bp-main .bp-cards-lead span { color: #fff }
+  .bp-main .bp-cards .bp-cards-sub { margin-top: 10px; font-family: var(--mono); font-size: 13px; color: var(--muted) }
+  .bp-main .bp-cards-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px }
+  .bp-main .bp-card-early { background: var(--tint) }
+  .bp-main .bp-card-stop { background: #FFF7F8 }
+  .bp-main .bp-card { display: grid; gap: 4px; padding: 14px 16px; border-radius: 14px; background: #fff; border: 1px solid var(--line) }
+  .bp-card b { color: var(--ink) }
+  .bp-main .bp-card .bp-card-text { color: var(--ink-2) }
+  .bp-main .bp-card .bp-card-label { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--brand); font-weight: 600 }
+  .bp-main .bp-card ul { margin: 4px 0 0; padding-left: 20px; gap: 8px }
+  .bp-main .bp-card .bp-card-weak { margin-top: 4px; padding-top: 8px; border-top: 1px dashed var(--line); color: var(--ink-2) }
+  .bp-card-weak em { font-style: normal; font-weight: 600; color: #9E1D2E }
+  .bp-main .bp-card .bp-card-foot { font-family: var(--mono); font-size: 13px; color: var(--muted) }
+  .bp-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px }
+  .bp-main .bp-chips span { font-family: var(--mono); font-size: 13px; text-transform: uppercase; color: var(--muted) }
+  .bp-main .bp-chips b { padding: 5px 12px; border-radius: 999px; background: var(--tint-2); color: var(--brand-dark) }
+  .bp-main .bp-legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px }
+  .bp-main .bp-legend li { display: flex; gap: 10px; align-items: flex-start; color: var(--ink-2) }
+  .bp-dot { flex: none; width: 12px; height: 12px; margin-top: 5px; border-radius: 50%; border: 2px solid var(--brand) }
+  .bp-dot-page { background: var(--brand) }
+  .bp-main .bp-cards .bp-cards-note { margin-top: 14px; color: var(--ink) }
+  .bp-cards .bp-cite { font-size: 13px }
+}
+
+/* figures: SVG on wide screens, HTML cards on phones (see the media query in the cards block) */
+.bp-svg { max-width: 100% }
+.bp-main .bp-sources p.bp-also { margin-top: 16px; font-size: 14px; color: var(--muted) }
+
+/* ---------- notes: opinion (full 1px outlines, no one-sided accent borders) ---------- */
+.bp-note { display: block; width: 100%; margin: 24px 0 0; padding: clamp(18px, 3vw, 26px); border-radius: 22px; border: 1px solid var(--lilac); background: linear-gradient(135deg, var(--tint) 0%, #fff 100%) }
+.bp-main .bp-note p { margin: 14px 0 0 }
+.bp-main .bp-note p.bp-note-label { display: inline-block; margin: 0; padding: 5px 12px; border-radius: 999px; font-family: var(--mono); font-size: 12px; line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; background: var(--brand); color: #fff }
+
+/* checklist steps */
+.bp-main ol.bp-steps { list-style: none; padding-left: 0; counter-reset: step; gap: 14px }
+.bp-steps > li { counter-increment: step; position: relative; padding: 18px 20px 18px 68px; border-radius: 18px; background: #fff; border: 1px solid var(--line) }
+.bp-steps > li::before { content: counter(step); position: absolute; left: 18px; top: 14px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--tint-2); color: var(--brand-dark); font-family: var(--serif); font-size: 20px }
+
+.bp-main code { font-family: var(--mono); font-size: .88em; padding: 1px 6px; border-radius: 6px; background: var(--tint-2); color: var(--brand-dark) }
+
+/* ---------- sources ---------- */
+.bp-sources { margin-top: clamp(56px, 7vw, 88px) }
+.bp-sources h2, .bp-made h2 { border-top: 1px solid var(--ink); padding-top: 20px }
+.bp-sources ol { list-style: none; margin: 22px 0 0; padding: 0; border-top: 1px solid var(--line); counter-reset: s; display: block }
+.bp-sources li { counter-increment: s; position: relative; padding: 18px 12px 18px 48px; border-bottom: 1px solid var(--line) }
+.bp-sources li::before { content: counter(s); position: absolute; left: 12px; top: 20px; font-family: var(--mono); font-size: 13px; color: var(--brand) }
+.bp-src-title { font-size: 17px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere }
+.bp-src-by { margin-top: 4px; font-family: var(--mono); font-size: 12px; color: var(--muted) }
+.bp-main .bp-sources p { margin: 8px 0 10px; font-size: 15px; line-height: 1.55 }
+.bp-status { display: inline-block; padding: 3px 9px; border-radius: 6px; font-family: var(--mono); font-size: 11px; line-height: 1.4 }
+.bp-status.ok { background: #E3F4EC; color: #17603F }
+.bp-status.warn { background: #FBF0D9; color: #7A4F00 }
+
+.bp-made { margin-top: clamp(48px, 6vw, 72px) }
+.bp-made h2 { font-size: clamp(28px, 4vw, 40px) }
+.bp-main .bp-made p { margin: 14px 0 0; font-size: 16px; line-height: 1.6 }
+.bp-corr { display: inline-block; margin-top: 16px; font-weight: 500 }
+
+/* ---------- after the article ---------- */
+.bp-after { padding-top: clamp(48px, 7vw, 88px) }
+.bp-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding: clamp(24px, 5vw, 44px); border-radius: 28px; color: #fff; background: var(--ink-2) }
+.bp-cta h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3.6vw, 36px); line-height: 1.1; margin: 0 }
+.bp-cta p { margin: 8px 0 0; font-size: 17px; line-height: 1.5; color: #DDD7EF }
+.bp-cta-btns { display: flex; flex-wrap: wrap; gap: 10px }
+.bp-cta .btn { padding: 14px 22px; font-size: 15px }
+.bp-cta .btn-primary { background: #fff; color: var(--brand-dark); box-shadow: none }
+.bp-cta .btn-primary:hover { background: var(--tint-2); color: var(--brand-dark) }
+.bp-cta .btn-ghost { border-color: var(--lilac); color: #fff }
+.bp-cta .btn-ghost:hover { background: rgba(255,255,255,.12); color: #fff }
+.bp-related { margin-top: 56px }
+.bp-related h2 { font-size: clamp(26px, 3.4vw, 34px) }
+.bp-related ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 14px }
+.bp-related a { display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 18px 20px; border-radius: 18px; background: #fff; border: 1px solid var(--line); color: var(--ink); transition: border-color .3s }
+.bp-related a:hover { border-color: var(--lilac-2); color: var(--ink) }
+.bp-related b { font-family: var(--serif); font-weight: 500; font-size: 20px }
+.bp-related span { font-size: 14px; line-height: 1.45; color: var(--muted) }
+
+@media (max-width: 699px) {
+  .bp-main p, .bp-main li { font-size: 17px }
+  .bp-steps > li { padding: 16px 16px 16px 58px }
+  .bp-steps > li::before { left: 12px }
+  .bp-sources li { padding-left: 40px }
+  .bp-sources li::before { left: 8px }
+  .bp-fig { padding: 6px; border-radius: 16px }
+  .bp-stat span { max-width: none }
+}
+@media print { .bp-rail, .bp-cta, .bp-related { display: none } .bp-layout { display: block } }
