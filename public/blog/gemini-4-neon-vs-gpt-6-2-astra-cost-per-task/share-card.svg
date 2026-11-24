@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">Neon or Astra? Cost your own task before you pick</title>
+  <desc id="d">Share card for the article by Megha Karnwal, last checked 20 November 2026. Gemini 4 Neon and GPT-6.2 Astra: a method for costing your own task. No data plotted.</desc>
+  <rect width="1200" height="630" fill="#2E2263"/>
+  <g fill="none" stroke="#C5B6F0" stroke-opacity=".45"><circle cx="900" cy="300" r="120"/><circle cx="900" cy="300" r="220" stroke-dasharray="4 8"/><circle cx="1090" cy="300" r="120"/><circle cx="1090" cy="300" r="220" stroke-dasharray="4 8"/></g>
+  <circle cx="900" cy="300" r="24" fill="#C5B6F0"/><circle cx="1090" cy="300" r="24" fill="#8E74DD"/>
+  <text x="70" y="200" font-family="Newsreader, Georgia, serif" font-size="86" fill="#fff">Neon or Astra?</text>
+  <text x="70" y="300" font-family="Newsreader, Georgia, serif" font-size="70" fill="#C5B6F0" font-style="italic">Cost your own task</text>
+  <text x="70" y="384" font-family="Newsreader, Georgia, serif" font-size="70" fill="#C5B6F0" font-style="italic">before you pick</text>
+  <text x="70" y="480" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="28" fill="#EEE9FA">Gemini 4 Neon vs GPT-6.2 Astra, with the arithmetic shown.</text>
+  <text x="70" y="568" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="24" fill="#C5B6F0">Megha Karnwal · Last checked 20 Nov 2026</text>
+</svg>
