@@ -3,7 +3,7 @@
 import SiteChrome from "../../SiteChrome";
 import { EMAIL, LINKEDIN, CTA, bookHref, bookTarget } from "../../lib/site";
 import Helper from "./Helper";
-import { SITE_URL, post, heroImage, lead, intro, sections, sources, disclosure, related } from "./post-data";
+import { SITE_URL, post, heroImage, heroImagePhone, diagram, lead, intro, sections, sources, disclosure, related } from "./post-data";
 import "./blog.css";
 
 const url = `${SITE_URL}/blog/${post.slug}`;
@@ -67,12 +67,41 @@ function Table({ b }) {
   );
 }
 
+// Method figure in plain HTML and CSS: real text at 14px or more, so it reads on a phone and
+// to a screen reader. The bars are decorative; the text beside each one carries the number.
+function Diagram() {
+  const d = diagram;
+  return (
+    <figure className="bp-diagram" role="group" aria-label={d.label}>
+      <p className="bp-dg-eq">
+        {d.equation.map((t, i) => (i % 2 ? <span key={i} className="bp-dg-op" aria-hidden="true">{t}</span> : <span key={i} className="bp-dg-term">{t}</span>))}
+      </p>
+      <p className="bp-dg-setup">{d.setup}</p>
+      <ul className="bp-bars">
+        {d.bars.map((b) => (
+          <li key={b.name} className={b.tone ? "bp-bar-" + b.tone : undefined}>
+            <span className="bp-bar-name">{b.name}</span>
+            <span className="bp-bar-row">
+              <span className="bp-bar-track" aria-hidden="true"><span className="bp-bar-fill" style={{ width: (b.cost / d.max) * 100 + "%" }} /></span>
+              <span className="bp-bar-val">{"$" + b.cost.toFixed(2)}</span>
+            </span>
+            <span className="bp-bar-sum">{b.sum}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="bp-dg-result">{d.result}</p>
+      <figcaption>{d.caption}</figcaption>
+    </figure>
+  );
+}
+
 function Block({ b }) {
   switch (b.type) {
     case "p": return <p><Inline text={b.text} /></p>;
     case "ul": return <List as="ul" items={b.items} />;
     case "ol": return <List as="ol" items={b.items} />;
     case "table": return <Table b={b} />;
+    case "diagram": return <Diagram />;
     case "helper": return <Helper />; // replaces the hidden CALCULATOR INSERTION POINT comment
     case "callout":
       return (
@@ -109,7 +138,7 @@ export default function PostPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <main className="bp">
         <article>
-          <header className="bp-hero" style={{ "--hero": `url(${heroImage})` }}>
+          <header className="bp-hero" style={{ "--hero": `url(${heroImage})`, "--hero-phone": `url(${heroImagePhone})` }}>
             <div className="bp-wrap bp-hero-in">
               <h1>{titleA}{titleB && <> <em>{titleB}</em></>}</h1>
               <p className="bp-stand">{post.description}</p>

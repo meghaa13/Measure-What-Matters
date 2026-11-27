@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="640" viewBox="0 0 390 640" role="img" aria-labelledby="t d">
+  <title id="t">Decorative hero background for phones</title>
+  <desc id="d">A level balance with two pans, a price tag on each, drawn in light purple lines on dark purple, sized to fit a phone screen behind the title. Decorative only. It shows no data and makes no claim about which side is heavier.</desc>
+  <defs>
+    <pattern id="g" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#C5B6F0" fill-opacity=".3"/></pattern>
+    <radialGradient id="r" cx="50%" cy="30%" r="60%"><stop offset="0" stop-color="#8E74DD" stop-opacity=".5"/><stop offset="1" stop-color="#2E2263" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="390" height="640" fill="#2E2263"/>
+  <rect width="390" height="640" fill="url(#g)"/>
+  <rect width="390" height="640" fill="url(#r)"/>
+  <g fill="none" stroke="#C5B6F0" stroke-opacity=".7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M195 130 V395"/>
+    <path d="M140 405 H250"/>
+    <path d="M55 130 H335"/>
+    <path d="M55 130 L22 275 M55 130 L88 275"/>
+    <path d="M335 130 L302 275 M335 130 L368 275"/>
+    <path d="M12 275 H98 Q94 308 55 308 Q16 308 12 275 Z" fill="#8E74DD" fill-opacity=".25"/>
+    <path d="M292 275 H378 Q374 308 335 308 Q296 308 292 275 Z" fill="#8E74DD" fill-opacity=".25"/>
+    <path d="M35 273 V235 L47 220 H75 V273"/>
+    <path d="M315 273 V235 L327 220 H355 V273"/>
+  </g>
+  <g fill="#C5B6F0" fill-opacity=".7"><circle cx="195" cy="130" r="10"/><circle cx="47" cy="236" r="4"/><circle cx="327" cy="236" r="4"/></g>
+</svg>

@@ -81,6 +81,25 @@
 .bp-table tbody tr:last-child th, .bp-table tbody tr:last-child td { border-bottom: 0 }
 .bp-table figcaption { padding: 10px 4px 0; font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 720px }
 
+/* ---------- method figure (HTML and CSS) ---------- */
+.bp-diagram { margin: 32px 0 0; padding: clamp(16px, 3vw, 28px); border-radius: 20px; background: #fff; border: 1px solid var(--line) }
+.bp-dg-eq { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0; font-size: 16px; line-height: 1.3 }
+.bp-dg-term { padding: 8px 14px; border-radius: 12px; background: var(--tint); border: 1px solid var(--line); color: var(--ink) }
+.bp-dg-op { font-family: var(--mono); font-size: 18px; color: var(--brand) }
+.bp-diagram .bp-dg-setup { margin: 18px 0 0; max-width: 640px; font-size: 16px; line-height: 1.55; color: var(--ink-2) }
+.bp-bars { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 16px }
+.bp-bars li { display: grid; gap: 6px }
+.bp-bar-name { font-size: 16px; line-height: 1.35; color: var(--ink) }
+.bp-bar-row { display: flex; align-items: center; gap: 12px }
+.bp-bar-track { flex: 1 1 auto; height: 22px; border-radius: 6px; background: var(--tint) }
+.bp-bar-fill { display: block; height: 100%; border-radius: 6px; background: var(--brand-mid) }
+.bp-bar-astra .bp-bar-fill { background: var(--brand-dark) }
+.bp-bar-match .bp-bar-fill { outline: 2px dashed var(--brand-dark); outline-offset: 2px }
+.bp-bar-val { flex: none; min-width: 3.6em; text-align: right; font-size: 18px; font-variant-numeric: tabular-nums; color: var(--ink) }
+.bp-bar-sum { font-family: var(--mono); font-size: 14px; color: var(--muted) }
+.bp-diagram .bp-dg-result { margin: 16px 0 0; font-size: 16px; line-height: 1.5; color: var(--ink) }
+.bp-diagram figcaption { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.5; color: var(--muted) }
+
 /* ---------- opinion note: a full tinted box with its own heading, no side stripe ---------- */
 .bp-note { display: block; margin: 32px 0 0; padding: clamp(20px, 3vw, 28px); border-radius: 20px; border: 1px solid var(--lilac); background: var(--tint-3); max-width: 720px }
 .bp-note h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; line-height: 1.2; margin: 0; color: var(--brand-dark) }
@@ -126,7 +145,8 @@
 
 @media (max-width: 699px) {
   .bp-intro p, .bp-sec > p, .bp-sec > ul > li, .bp-sec > ol > li, .bp-note p { font-size: 17px }
-  .bp-hero { background: linear-gradient(180deg, rgba(30,22,64,.9) 0%, rgba(30,22,64,.84) 100%), var(--hero) 70% center / cover no-repeat, var(--brand-dark) }
+  /* Phone: a separate, narrower balance drawing so the pans and tags sit behind the title and standfirst, above the trust card. */
+  .bp-hero { background: linear-gradient(180deg, rgba(30,22,64,.8) 0%, rgba(30,22,64,.66) 100%), var(--hero-phone) center top / cover no-repeat, var(--brand-dark) }
   .bp-stat { width: 100%; border-right: 0; border-bottom: 1px solid rgba(197,182,240,.4) }
   .bp-facts { gap: 12px 24px }
   .bp-sources li { padding-left: 40px }

@@ -23,6 +23,7 @@ export const post = {
 };
 
 export const heroImage = `${B}hero-bg.svg`;
+export const heroImagePhone = `${B}hero-bg-phone.svg`;
 
 export const lead =
   "Which model is cheaper for a marketing automation, Gemini 4 Neon or GPT-6.2 Astra? On list prices, Neon is cheaper per token: $3 input and $15 output per million tokens against Astra's $8 and $40. [1][2] But you pay per finished task, not per token, and a third-party index shows Astra cheaper per task at every effort level both models share, from $0.66 against $0.75 at low effort to $2.52 against $6.44 at xhigh. [4] Cost your own job on both models before you commit.";
@@ -132,6 +133,7 @@ export const sections = [
         type: "p",
         text: "Now add success rates. Neon costs the same per finished task as Astra when its cost per attempt divided by its success rate equals Astra's. At the figures above, if Astra succeeds 100% of the time, Neon must succeed at least 37.5% of the time to break even ($0.09 / 0.375 = $0.24). At list prices with equal token counts, that lets Neon fail more than six times in ten and still match Astra. That is a wide margin, which is the reason to measure the other thing, token counts, on each model. If Astra writes half the output tokens on your task, the gap narrows. This method also ignores batch, flex and priority tiers and any discounts; it uses standard list prices only.",
       },
+      { type: "diagram" },
     ],
   },
   {
@@ -264,3 +266,20 @@ export const related = [
   { href: "/blog/track-ai-mode-traffic-ga4", title: "Google says AI Mode earns less. What can you measure?", note: "A test you can run on your own GA4 property." },
   { href: "/blog/ai-agent-traffic-how-much-to-plan-for", title: "4 Uber rides from AI agents in Halloween week: what to plan for", note: "Sizing an AI change before you spend on it." },
 ];
+
+// Figure for the method section. Every number is from the article text: the worked example
+// (20,000 input and 2,000 output tokens, Neon $0.09 and Astra $0.24 per attempt) and the break-even
+// arithmetic ($0.09 / 0.375 = $0.24). The bar widths are cost divided by 0.24, so they start at zero.
+export const diagram = {
+  label: "Cost per successful task, worked example: Neon at 100% success costs $0.09. Neon at 37.5% success costs $0.24. Astra at 100% success costs $0.24. Neon breaks even with Astra at 37.5% if Astra always succeeds.",
+  equation: ["Cost per attempt", "/", "Success rate", "=", "Cost per successful task"],
+  setup: "Each attempt: 20,000 input tokens and 2,000 output tokens, nothing cached. Cost per attempt is $0.09 on Neon and $0.24 on Astra, so Astra costs 2.67 times as much per attempt.",
+  max: 0.24,
+  bars: [
+    { name: "Neon at 100% success", sum: "$0.09 / 1", cost: 0.09 },
+    { name: "Neon at 37.5% success", sum: "$0.09 / 0.375", cost: 0.24, tone: "match" },
+    { name: "Astra at 100% success", sum: "$0.24 / 1", cost: 0.24, tone: "astra" },
+  ],
+  result: "The second and third bars are equal: that is the break-even.",
+  caption: "Example with placeholder token counts, not measurements. All bars share one scale that starts at $0.",
+};

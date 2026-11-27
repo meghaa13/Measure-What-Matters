@@ -1,10 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-labelledby="t d">
   <title id="t">Decorative hero background</title>
-  <desc id="d">Two overlapping sets of purple rings and a dot grid. Decorative only. It shows no data.</desc>
-  <defs><pattern id="g" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#C5B6F0" fill-opacity=".3"/></pattern>
-  <radialGradient id="r" cx="72%" cy="45%" r="60%"><stop offset="0" stop-color="#8E74DD" stop-opacity=".5"/><stop offset="1" stop-color="#2E2263" stop-opacity="0"/></radialGradient></defs>
-  <rect width="1600" height="700" fill="#2E2263"/><rect width="1600" height="700" fill="url(#g)"/><rect width="1600" height="700" fill="url(#r)"/>
-  <g fill="none" stroke="#C5B6F0" stroke-opacity=".5"><circle cx="1130" cy="330" r="110"/><circle cx="1130" cy="330" r="200" stroke-dasharray="4 8"/><circle cx="1130" cy="330" r="300"/>
-  <circle cx="1330" cy="330" r="110"/><circle cx="1330" cy="330" r="200" stroke-dasharray="4 8"/><circle cx="1330" cy="330" r="300"/></g>
-  <circle cx="1130" cy="330" r="22" fill="#C5B6F0"/><circle cx="1330" cy="330" r="22" fill="#8E74DD"/>
+  <desc id="d">A level balance with two pans, a price tag on each, drawn in light purple lines on dark purple. Decorative only. It shows no data and makes no claim about which side is heavier.</desc>
+  <defs>
+    <pattern id="g" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#C5B6F0" fill-opacity=".3"/></pattern>
+    <radialGradient id="r" cx="75%" cy="45%" r="55%"><stop offset="0" stop-color="#8E74DD" stop-opacity=".5"/><stop offset="1" stop-color="#2E2263" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="700" fill="#2E2263"/>
+  <rect width="1600" height="700" fill="url(#g)"/>
+  <rect width="1600" height="700" fill="url(#r)"/>
+  <g fill="none" stroke="#C5B6F0" stroke-opacity=".28"><circle cx="1200" cy="360" r="250"/><circle cx="1200" cy="360" r="340" stroke-dasharray="4 8"/></g>
+  <g fill="none" stroke="#C5B6F0" stroke-opacity=".85" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- post, base, beam -->
+    <path d="M1200 190 V570"/>
+    <path d="M1090 590 H1310"/>
+    <path d="M1020 190 H1380"/>
+    <!-- chains -->
+    <path d="M1020 190 L950 390 M1020 190 L1090 390"/>
+    <path d="M1380 190 L1310 390 M1380 190 L1450 390"/>
+    <!-- pans -->
+    <path d="M920 390 H1120 Q1110 455 1020 455 Q930 455 920 390 Z" fill="#8E74DD" fill-opacity=".25"/>
+    <path d="M1280 390 H1480 Q1470 455 1380 455 Q1290 455 1280 390 Z" fill="#8E74DD" fill-opacity=".25"/>
+    <!-- a price tag on each pan -->
+    <path d="M985 388 V332 L1007 308 H1057 V388"/>
+    <path d="M1345 388 V332 L1367 308 H1417 V388"/>
+  </g>
+  <g fill="#C5B6F0"><circle cx="1200" cy="190" r="16"/><circle cx="1007" cy="334" r="6"/><circle cx="1367" cy="334" r="6"/></g>
 </svg>
