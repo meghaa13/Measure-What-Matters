@@ -1,0 +1,164 @@
+/* Blog post styles. Uses tokens from globals.css. Every class starts with bp- because globals.css
+   has generic names (.read, .tag, .cite). Prose rules target direct children of .bp-sec on purpose,
+   so they never reach into the calculator (its own helper.css styles it). */
+.bp { padding-bottom: 72px }
+.bp-wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter) }
+
+/* ---------- hero: title over a brand background; the overlay keeps white text above 11:1 ---------- */
+.bp-hero {
+  position: relative; isolation: isolate; color: #fff;
+  padding: clamp(112px, 15vw, 150px) 0 clamp(36px, 6vw, 60px);
+  background: linear-gradient(90deg, rgba(30,22,64,.94) 0%, rgba(30,22,64,.82) 45%, rgba(30,22,64,.25) 100%), var(--hero) right center / cover no-repeat, var(--brand-dark);
+}
+.bp-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(197,182,240,.35) }
+.bp-hero h1 { max-width: 780px; font-family: var(--serif); font-weight: 400; font-size: clamp(36px, 4.8vw, 64px); line-height: 1.04; letter-spacing: -.025em; margin: 0; color: #fff; text-wrap: balance }
+.bp-hero h1 em { font-style: italic; color: var(--lilac) }
+.bp-stand { max-width: 620px; font-size: clamp(17px, 2vw, 21px); line-height: 1.55; color: #EEE9FA; margin: 22px 0 0; text-wrap: pretty }
+
+/* trust bar */
+.bp-meta { display: flex; flex-wrap: wrap; align-items: stretch; margin-top: clamp(28px, 4vw, 44px); border: 1px solid rgba(197,182,240,.4); border-radius: 18px; background: rgba(30,22,64,.62); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); overflow: hidden }
+.bp-stat { display: flex; align-items: center; gap: 14px; padding: 16px 22px; background: rgba(255,255,255,.1); border-right: 1px solid rgba(197,182,240,.4) }
+.bp-stat b { font-family: var(--serif); font-weight: 400; font-size: 44px; line-height: 1; color: #fff; white-space: nowrap }
+.bp-stat span { font-size: 13px; line-height: 1.4; color: #EEE9FA; max-width: 20ch }
+.bp-facts { display: flex; flex-wrap: wrap; gap: 14px 30px; margin: 0; padding: 16px 24px; flex: 1 1 320px; align-content: center }
+.bp-facts > div { min-width: 0 }
+.bp-facts dt { font-size: 13px; color: var(--lilac) }
+.bp-facts dd { margin: 3px 0 0; font-size: 15px; font-weight: 500; color: #fff }
+.bp-hero a { color: #fff; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--lilac) }
+.bp-hero a:hover { color: var(--lilac) }
+.bp-hero .bp-cite a { color: var(--lilac); text-decoration: none }
+.bp-updates { list-style: none; margin: 16px 0 0; padding: 0; font-size: 14px; color: #EEE9FA }
+
+/* ---------- layout: sticky rail left, reading column right ---------- */
+.bp-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 40px }
+@media (min-width: 1020px) {
+  .bp-layout { grid-template-columns: 250px minmax(0, 1fr); gap: clamp(40px, 5vw, 72px); padding-top: 56px }
+  .bp-rail { position: sticky; top: 96px; align-self: start }
+}
+.bp-main { min-width: 0 }
+
+.bp-rail-h { font-size: 14px; font-weight: 600; color: var(--brand-dark); margin: 0 0 12px }
+.bp-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; border-left: 2px solid var(--line) }
+.bp-toc a { display: block; padding: 8px 0 8px 16px; margin-left: -2px; border-left: 2px solid transparent; font-size: 14px; line-height: 1.35; color: var(--ink-2) }
+.bp-toc a:hover { color: var(--brand-dark); border-left-color: var(--brand) }
+.bp-trust { margin-top: 28px; padding: 18px 18px 20px; border-radius: 16px; background: var(--tint); border: 1px solid var(--line) }
+.bp-trust p:not(.bp-rail-h) { margin: 0 0 8px; font-size: 13.5px; line-height: 1.5; color: var(--ink-2) }
+.bp-trust a { font-size: 13.5px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; display: inline-block; padding: 8px 0 }
+@media (max-width: 1019px) {
+  .bp-toc ol { display: flex; flex-wrap: wrap; gap: 8px; border-left: 0 }
+  .bp-toc a { min-height: 44px; display: flex; align-items: center; padding: 6px 14px; margin: 0; border: 1px solid var(--line); border-radius: 999px; background: #fff }
+  .bp-trust { display: none } /* same facts sit in the hero trust bar and the sources list */
+}
+
+/* ---------- reading column ---------- */
+.bp-lead { padding: clamp(20px, 3vw, 30px); border-radius: 22px; background: var(--tint); border: 1px solid var(--line) }
+.bp-lead p { max-width: 720px; margin: 0; font-size: 20px; line-height: 1.6; color: var(--ink) }
+.bp-intro p, .bp-sec > p, .bp-sec > ul > li, .bp-sec > ol > li, .bp-note p { font-size: 18px; line-height: 1.7; color: var(--ink-2) }
+.bp-intro p, .bp-sec > p { max-width: 720px; margin: 18px 0 0 }
+.bp-sec > ul, .bp-sec > ol { max-width: 720px; margin: 16px 0 0; padding-left: 24px; display: grid; gap: 9px }
+.bp-sec > ul > li::marker, .bp-sec > ol > li::marker { color: var(--brand-mid) }
+.bp-intro a, .bp-sec > p a, .bp-sec > ul a, .bp-sec > ol a { text-decoration: underline; text-underline-offset: 3px }
+.bp-sec { margin-top: clamp(52px, 7vw, 84px) }
+.bp-sec h2, .bp-sources h2, .bp-made h2, .bp-related h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.06; letter-spacing: -.015em; margin: 0; color: var(--ink); text-wrap: balance }
+.bp-sec h2 { max-width: 720px }
+
+/* citations */
+.bp-cite { font-family: var(--mono); font-size: 14px; line-height: 0; margin-left: 4px }
+/* Tap target: about 38x42px. Vertical padding is cancelled by the negative margin so line height is unchanged. */
+.bp-cite a { display: inline-block; line-height: 1; color: var(--brand); text-decoration: none; padding: 14px 6px; margin: -14px 0; border-radius: 8px }
+.bp-cite a:hover { background: var(--tint-2); color: var(--brand-dark) }
+.bp-lead .bp-cite a, .bp-intro .bp-cite a { text-decoration: none }
+:target { scroll-margin-top: 96px }
+.bp-sources li:target { background: var(--tint); border-radius: 12px }
+
+/* ---------- tables ---------- */
+.bp-table { margin: 28px 0 0; padding: 0 }
+.bp-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: #fff }
+.bp-scroll:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px }
+.bp-table table { width: 100%; border-collapse: collapse; font-size: 16px; line-height: 1.45; font-variant-numeric: tabular-nums }
+.bp-table th, .bp-table td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); color: var(--ink-2) }
+.bp-table thead th { font-weight: 600; color: var(--ink); background: var(--tint); font-size: 15px }
+.bp-table tbody th { font-weight: 600; color: var(--ink) }
+.bp-table tbody tr:last-child th, .bp-table tbody tr:last-child td { border-bottom: 0 }
+.bp-table figcaption { padding: 10px 4px 0; font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 720px }
+
+/* ---------- flow diagram: plain HTML boxes, three checks side by side, stacked on phones ---------- */
+.bp-flow { margin: 32px 0 0; padding: 0; max-width: 720px }
+.bp-flow-body { display: grid; gap: 10px; padding: clamp(18px, 3vw, 26px); border: 1px solid var(--line); border-radius: 20px; background: #fff }
+.bp-flow-title { margin: 0 0 4px; font-family: var(--serif); font-weight: 500; font-size: 22px; line-height: 1.2; color: var(--brand-dark) }
+.bp-flow-start, .bp-flow-result { padding: 14px 16px; border-radius: 14px; font-size: 16px; line-height: 1.45 }
+.bp-flow-start { background: var(--tint); color: var(--ink) }
+.bp-flow-result { background: var(--brand-dark); color: #fff }
+.bp-flow-checks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px }
+.bp-flow-checks li { padding: 14px 16px; border: 1px solid var(--lilac); border-radius: 14px; background: var(--tint-3); font-size: 15px; line-height: 1.45; color: var(--ink) }
+.bp-flow-arrow { position: relative; justify-self: center; width: 2px; height: 20px; background: var(--lilac-2) }
+.bp-flow-arrow::after { content: ""; position: absolute; left: 50%; bottom: -1px; transform: translateX(-50%); border: 6px solid transparent; border-bottom: 0; border-top-color: var(--lilac-2) }
+.bp-stack-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+.bp-stack-list li { padding: 14px 16px; border: 1px solid var(--lilac); border-radius: 14px; background: var(--tint-3); font-size: 16px; line-height: 1.45; color: var(--ink) }
+.bp-flow figcaption { padding: 10px 4px 0; font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 720px }
+@media (max-width: 699px) { .bp-flow-checks { grid-template-columns: 1fr } }
+
+/* ---------- opinion note: a full tinted box with its own heading, no side stripe ---------- */
+.bp-note { display: block; margin: 32px 0 0; padding: clamp(20px, 3vw, 28px); border-radius: 20px; border: 1px solid var(--lilac); background: var(--tint-3); max-width: 720px }
+.bp-note h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; line-height: 1.2; margin: 0; color: var(--brand-dark) }
+.bp-note p { margin: 10px 0 0; color: var(--ink) }
+
+/* ---------- sources ---------- */
+.bp-sources { margin-top: clamp(52px, 7vw, 84px) }
+.bp-sources ol { list-style: none; margin: 22px 0 0; padding: 0; border-top: 1px solid var(--line); counter-reset: s; display: block }
+.bp-sources li { counter-increment: s; position: relative; padding: 18px 12px 18px 48px; border-bottom: 1px solid var(--line) }
+.bp-sources li::before { content: counter(s); position: absolute; left: 12px; top: 20px; font-family: var(--mono); font-size: 13px; color: var(--brand) }
+.bp-src-title { font-size: 17px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 3px }
+.bp-src-by { margin-top: 4px; font-size: 14px; color: var(--muted) }
+.bp-sources p { margin: 8px 0 10px; font-size: 15px; line-height: 1.55; color: var(--ink-2) }
+.bp-status { display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 13px; line-height: 1.4 }
+.bp-status.ok { background: #E3F4EC; color: #17603F }
+.bp-status.warn { background: #FBF0D9; color: #7A4F00 }
+
+/* how this was made */
+.bp-made { margin-top: 48px; padding: 24px 26px 28px; border-radius: 22px; background: var(--tint-3); border: 1px dashed var(--lilac-2) }
+.bp-made h2 { font-size: 28px }
+.bp-made p { margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: var(--ink-2) }
+.bp-corr { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px }
+
+/* ---------- after the article ---------- */
+.bp-after { padding-top: clamp(48px, 7vw, 88px) }
+.bp-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding: clamp(24px, 5vw, 44px); border-radius: 28px; color: #fff; background: radial-gradient(circle at 90% 0%, rgba(142,116,221,.55), rgba(142,116,221,0) 55%), var(--brand-dark) }
+.bp-cta h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px); line-height: 1.1; margin: 0 }
+.bp-cta p { margin: 8px 0 0; font-size: 17px; line-height: 1.5; color: var(--tint-2) }
+.bp-cta-btns { display: flex; flex-wrap: wrap; gap: 10px }
+.bp-cta .btn { padding: 14px 22px; font-size: 15px; min-height: 44px }
+.bp-cta .btn-primary { background: #fff; color: var(--brand-dark); box-shadow: none }
+.bp-cta .btn-primary:hover { background: var(--tint-2); color: var(--brand-dark) }
+.bp-cta .btn-ghost { border-color: var(--lilac); color: #fff }
+.bp-cta .btn-ghost:hover { background: rgba(255,255,255,.12); color: #fff }
+
+.bp-related { margin-top: 56px }
+.bp-related h2 { font-size: clamp(26px, 3.4vw, 34px) }
+.bp-related ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 14px }
+.bp-related a { display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 18px 20px; border-radius: 18px; background: #fff; border: 1px solid var(--line); color: var(--ink); transition: border-color .3s }
+.bp-related a:hover { border-color: var(--lilac-2); color: var(--ink) }
+.bp-rel-t { font-family: var(--serif); font-weight: 500; font-size: 20px; line-height: 1.25 }
+.bp-related a span:not(.bp-rel-t) { font-size: 14px; line-height: 1.45; color: var(--muted) }
+
+@media (max-width: 699px) {
+  .bp-intro p, .bp-sec > p, .bp-sec > ul > li, .bp-sec > ol > li, .bp-note p { font-size: 17px }
+  /* phone art: a separate portrait composition so the whole path, gates and tick fit a 390px width */
+  .bp-hero { background: linear-gradient(180deg, rgba(30,22,64,.8) 0%, rgba(30,22,64,.72) 100%), url(/blog/google-agent-allow-then-measure/hero-bg-mobile.svg) center center / cover no-repeat, var(--brand-dark) }
+  .bp-stat { width: 100%; border-right: 0; border-bottom: 1px solid rgba(197,182,240,.4) }
+  .bp-facts { gap: 12px 24px }
+  .bp-sources li { padding-left: 40px }
+  .bp-sources li::before { left: 8px }
+  .bp-table th, .bp-table td { padding: 10px 10px }
+  .bp-table table { font-size: 15px }
+}
+@media print { .bp-rail, .bp-cta, .bp-related { display: none } .bp-layout { display: block } }
+
+/* inline code and the unknown callout */
+.bp code { font-family: var(--mono); font-size: .88em; background: var(--tint-2); padding: 1px 6px; border-radius: 6px; overflow-wrap: anywhere }
+.bp-note-unknown { background: #FBF0D9; border-color: #E5C987 }
+.bp-note-unknown h3 { color: #5C3B00 }
+.bp-note-unknown p, .bp-note-unknown li { color: #3A2800; font-size: 18px; line-height: 1.7 }
+.bp-note ul { margin: 12px 0 0; padding-left: 22px; display: grid; gap: 8px }
+.bp-note-unknown code { background: rgba(255,255,255,.6) }
+@media (max-width: 699px) { .bp-note-unknown li { font-size: 17px } }

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-labelledby="t d">
+  <title id="t">Decorative hero background</title>
+  <desc id="d">Abstract graphic: a dotted path passes through three gate outlines and ends at a circle with a tick. Decorative only. It shows no data and does not show any real traffic.</desc>
+  <defs>
+    <pattern id="g" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#C5B6F0" fill-opacity=".3"/></pattern>
+    <radialGradient id="r" cx="78%" cy="50%" r="55%"><stop offset="0" stop-color="#8E74DD" stop-opacity=".5"/><stop offset="1" stop-color="#2E2263" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="700" fill="#2E2263"/><rect width="1600" height="700" fill="url(#g)"/><rect width="1600" height="700" fill="url(#r)"/>
+  <!-- three gates: arch outlines the path passes through -->
+  <g fill="none" stroke="#C5B6F0" stroke-width="4" stroke-opacity=".85" stroke-linejoin="round">
+    <path d="M900 470 V330 a45 45 0 0 1 90 0 V470"/>
+    <path d="M1085 470 V330 a45 45 0 0 1 90 0 V470"/>
+    <path d="M1270 470 V330 a45 45 0 0 1 90 0 V470"/>
+  </g>
+  <!-- dotted path of a request -->
+  <path d="M760 400 C820 400 850 380 945 400 S1080 420 1130 400 S1230 380 1315 400 S1400 400 1440 400" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 14" stroke-opacity=".9"/>
+  <circle cx="760" cy="400" r="9" fill="#C5B6F0"/>
+  <!-- arrival: circle with a tick -->
+  <circle cx="1500" cy="400" r="52" fill="#8E74DD" fill-opacity=".45" stroke="#C5B6F0" stroke-width="4" stroke-opacity=".9"/>
+  <path d="M1476 402 l17 17 l32 -36" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

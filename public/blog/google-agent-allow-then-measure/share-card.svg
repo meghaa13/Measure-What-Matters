@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">Google-Agent: allow it, then measure it in analytics</title>
+  <desc id="d">Share card with the article title on a dark purple background. Decorative path through three gates to a tick. It shows no data.</desc>
+  <rect width="1200" height="630" fill="#2E2263"/>
+  <g fill="none" stroke="#C5B6F0" stroke-width="4" stroke-opacity=".8" stroke-linejoin="round">
+    <path d="M760 470 V360 a35 35 0 0 1 70 0 V470"/>
+    <path d="M880 470 V360 a35 35 0 0 1 70 0 V470"/>
+    <path d="M1000 470 V360 a35 35 0 0 1 70 0 V470"/>
+  </g>
+  <path d="M640 420 C690 420 720 410 795 420 S860 430 915 420 S980 410 1035 420 S1090 420 1110 420" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 13" stroke-opacity=".85"/>
+  <circle cx="1140" cy="420" r="34" fill="#8E74DD" fill-opacity=".5" stroke="#C5B6F0" stroke-width="4"/>
+  <path d="M1124 421 l11 11 l21 -24" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="70" y="250" font-family="Georgia, serif" font-size="64" fill="#FFFFFF">Google-Agent:</text>
+  <text x="70" y="326" font-family="Georgia, serif" font-size="64" font-style="italic" fill="#C5B6F0">allow it, then measure</text>
+  <text x="70" y="402" font-family="Georgia, serif" font-size="64" font-style="italic" fill="#C5B6F0">it in analytics</text>
+  <text x="70" y="560" font-family="Arial, sans-serif" font-size="28" fill="#EEE9FA">Megha Karnwal</text>
+</svg>
